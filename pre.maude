@@ -1,0 +1,50 @@
+(fmod VARIABLE is 
+    sort Variable .
+endfm)
+
+(fmod VALUE is
+    sort Value .
+    subsort Int < Value .
+---    subsort Bool < Value .
+    op null : -> Value .
+endfm)
+
+(mod MEMORY is
+    inc INT .
+    pr VARIABLE .
+    protecting VALUE .
+
+    sort Pair .
+    op `(_->_`) : Variable Value -> Pair [ctor] .
+
+    sort Memory .
+    op empty : -> Memory [ctor] .
+    subsort Pair < Memory .
+    op _`,_ : Memory Memory -> Memory [ctor assoc comm id: empty] .
+
+    var X : Variable .
+    vars V V' : Value .
+    var M : Memory .
+
+    --- assignment
+    op _`[_:=_`] : Memory Variable Value -> Memory .
+    eq ((X -> V), M)[X := V'] = (X -> V'), M .
+    eq M[X := V'] = (X -> V'), M [owise] .
+
+    --- evaluation
+    op _`[_`] : Memory Variable -> Value .
+    eq ((X -> V), M)[X] = V .
+    eq M[X] = null [owise] .
+endm)
+
+(fmod LOCATION is
+    sort Location .
+endfm)
+
+(omod MODULE is
+    pr LOCATION .
+    pr MEMORY .
+
+    class Module | loc : Location, mem : Memory .
+endom)
+
