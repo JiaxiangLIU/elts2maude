@@ -1,6 +1,6 @@
 system
     module TrafficLightController
-        int x=1, y;
+        int x=1, y=0;
         label t1, t2, t3, t4, t5, t6;
         location RED, GREEN, YELLOW;
 

@@ -3,15 +3,16 @@
 endfm)
 
 (fmod VALUE is
+    protecting BOOL .
+    protecting INT .
     sort Value .
+    subsort Bool < Value .
     subsort Int < Value .
----    subsort Bool < Value .
     op null : -> Value .
 endfm)
 
-(mod MEMORY is
-    inc INT .
-    pr VARIABLE .
+(fmod MEMORY is
+    protecting VARIABLE .
     protecting VALUE .
 
     sort Pair .
@@ -23,28 +24,27 @@ endfm)
     op _`,_ : Memory Memory -> Memory [ctor assoc comm id: empty] .
 
     var X : Variable .
-    vars V V' : Value .
+    vars V V' : Bool .
     var M : Memory .
 
     --- assignment
     op _`[_:=_`] : Memory Variable Value -> Memory .
     eq ((X -> V), M)[X := V'] = (X -> V'), M .
     eq M[X := V'] = (X -> V'), M [owise] .
-
+    
     --- evaluation
     op _`[_`] : Memory Variable -> Value .
     eq ((X -> V), M)[X] = V .
-    eq M[X] = null [owise] .
-endm)
+    eq M[X] = null [owise] . 
+endfm)
 
 (fmod LOCATION is
     sort Location .
 endfm)
 
 (omod MODULE is
-    pr LOCATION .
-    pr MEMORY .
+    protecting LOCATION .
+    protecting MEMORY .
 
     class Module | loc : Location, mem : Memory .
 endom)
-
