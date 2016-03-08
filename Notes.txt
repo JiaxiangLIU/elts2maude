@@ -1,0 +1,15 @@
+----- 20160308 -----
+
+When declaring Bool and Int are both subsorts of Value, the operator _xor_ 
+in BOOL will conflct with _xor in NAT/INT. In order to solve this conflict,
+the built-in file "prelude.maude" is modified, by replacing _xor_ in BOOL 
+with a fresh name _lxor_. This is why the maude files are all put into this 
+directory. 
+
+An alternative solution may be, to wrap Bool, Int and any other supported 
+types into a type Maybe (some_ and none), and then to define all the 
+supported operators (e.g. + - | &) on type Maybe, in which case we have 
+flexibility to define operations on "none" to return an error. For example, 
+some 2 + none = error.
+
+--------------------
