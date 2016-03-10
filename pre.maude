@@ -24,7 +24,7 @@ endfm)
     op _`,_ : Memory Memory -> Memory [ctor assoc comm id: empty] .
 
     var X : Variable .
-    vars V V' : Bool .
+    vars V V' : Value .
     var M : Memory .
 
     --- assignment
