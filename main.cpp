@@ -4,30 +4,32 @@
 
 using namespace std;
 
-string expToMaudeExp (Parse_Expression *exp) {
+string expToMaudeExp (string memName, Parse_Expression *exp) {
     switch (exp->m_op) {
+    case E_NOT :
+        return "(not " + expToMaudeExp(memName, exp->m_operand1) + ")";
     case E_ADD :
-        return "(" + expToMaudeExp(exp->m_operand1) + " + " + expToMaudeExp(exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " + " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_MINUS :
-        return "(" + expToMaudeExp(exp->m_operand1) + " - " + expToMaudeExp(exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " - " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_SLT :
     case E_ULT :
-        return "(" + expToMaudeExp(exp->m_operand1) + " < " + expToMaudeExp(exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " < " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_SLE :
     case E_ULE :
-        return "(" + expToMaudeExp(exp->m_operand1) + " <= " + expToMaudeExp(exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " <= " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_SGT :
     case E_UGT :
-        return "(" + expToMaudeExp(exp->m_operand1) + " > " + expToMaudeExp(exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " > " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_SGE :
     case E_UGE :
-        return "(" + expToMaudeExp(exp->m_operand1) + " >= " + expToMaudeExp(exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " >= " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_CONSTANT :
         return exp->m_constant->m_node;
     case E_VAR :
-        return "(M[" + exp->m_varId->m_node + "])";
+        return "(" + memName + "[" + exp->m_varId->m_node + "])";
     case E_LOR :
-        return "(" + expToMaudeExp(exp->m_operand1) + " | " + expToMaudeExp(exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " | " + expToMaudeExp(memName, exp->m_operand2) + ")";
     default :
         return "";
     }
@@ -45,6 +47,7 @@ int main() {
     cout << "Module Number: " << moduleNum << endl;
 
     vector<string> moduleDeclarations;
+    vector<string> maudeVarDeclarations;
     vector<string> variableDeclarations;
     map<string, string> memoryInitialization;
     vector<string> locationDeclarations;
@@ -66,6 +69,7 @@ int main() {
         // declare ops for module names
         string moduleName = module->m_moduleName->m_node;
         moduleDeclarations.push_back("op " + moduleName + " : -> Oid .");
+        maudeVarDeclarations.push_back("vars " + moduleName + "-M " + moduleName + "-M' : Memory .");
 
         // check variables definitions
         int j;
@@ -118,22 +122,24 @@ int main() {
             ruleDeclarations.push_back("crl ");
 
             ruleDeclarations.push_back("  < " + moduleName + " : Module | loc : " + transition->m_location1Id->m_node
-                    + ", mem : M >");
+                    + ", mem : " + moduleName + "-M >");
             ruleDeclarations.push_back("=> < " + moduleName + " : Module | loc : " + transition->m_location2Id->m_node
-                    + ", mem : M' >");
+                    + ", mem : " + moduleName + "-M' >");
 
-            string modifiedMem = "M";
+            string modifiedMem = moduleName + "-M";
             for (int k = 0; k < transition->m_actionBlock.size(); k++) {
                 action = transition->m_actionBlock[k];
-                modifiedMem += "[" + action->m_varId->m_node + " := " + expToMaudeExp(action->m_value) + "]";
+                modifiedMem += "[" + action->m_varId->m_node + " := " + expToMaudeExp(moduleName + "-M", action->m_value) + "]";
             }
 
             if (transition->m_guard != NULL) {
-                ruleDeclarations.push_back("  if " + expToMaudeExp(transition->m_guard));
-                ruleDeclarations.push_back("     /\\ M' := " + modifiedMem + " .");
+                ruleDeclarations.push_back("  if " + expToMaudeExp(moduleName + "-M", transition->m_guard));
+                ruleDeclarations.push_back("     /\\ " + moduleName + "-M' := " + modifiedMem + " .");
             } else {
-                ruleDeclarations.push_back("  if M' := " + modifiedMem + " .");
+                ruleDeclarations.push_back("  if " + moduleName + "-M' := " + modifiedMem + " .");
             }
+
+            ruleDeclarations.push_back("");
 
         }
     }
@@ -141,12 +147,19 @@ int main() {
     int j = 0;
     for (j = 0; j < moduleDeclarations.size(); j++)
         cout << moduleDeclarations[j] << endl;
+    cout << endl;
     for (j = 0; j < variableDeclarations.size(); j++)
         cout << variableDeclarations[j] << endl;
+    cout << endl;
     for (j = 0; j < locationDeclarations.size(); j++)
             cout << locationDeclarations[j] << endl;
+    cout << endl;
     for (j = 0; j < initialStateDeclaration.size(); j++)
             cout << initialStateDeclaration[j] << endl;
+    cout << endl;
+    for (j = 0; j < maudeVarDeclarations.size(); j++)
+            cout << maudeVarDeclarations[j] << endl;
+    cout << endl;
     for (j = 0; j < ruleDeclarations.size(); j++)
             cout << ruleDeclarations[j] << endl;
     cout << "Init Location: " << initialLocation << endl;
