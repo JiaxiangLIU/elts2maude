@@ -1,0 +1,55 @@
+(omod SYSTEM is
+pr MODULE .
+
+op TrafficLightController : -> Oid .
+
+op x : -> Variable .
+
+op RED : -> Location .
+op GREEN : -> Location .
+op YELLOW : -> Location .
+
+op init-TrafficLightController : -> Object .
+eq init-TrafficLightController = < TrafficLightController : Module | loc : RED, mem : ( empty, ( x -> 0 ) )> .
+op init-state : -> Object .
+eq init-state = none init-TrafficLightController .
+
+vars TrafficLightController-M TrafficLightController-M' : Memory .
+
+crl 
+  < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M >
+=> < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M' >
+  if ((TrafficLightController-M[x]) < 60)
+     /\ TrafficLightController-M' := TrafficLightController-M[x := ((TrafficLightController-M[x]) + 1)] .
+
+crl 
+  < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M >
+=> < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M' >
+  if ((TrafficLightController-M[x]) >= 60)
+     /\ TrafficLightController-M' := TrafficLightController-M[x := 0] .
+
+crl 
+  < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M >
+=> < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M' >
+  if ((TrafficLightController-M[x]) < 60)
+     /\ TrafficLightController-M' := TrafficLightController-M[x := ((TrafficLightController-M[x]) + 1)] .
+
+crl 
+  < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M >
+=> < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M' >
+  if ((TrafficLightController-M[x]) >= 60)
+     /\ TrafficLightController-M' := TrafficLightController-M[x := 0] .
+
+crl 
+  < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M >
+=> < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M' >
+  if ((TrafficLightController-M[x]) < 5)
+     /\ TrafficLightController-M' := TrafficLightController-M[x := ((TrafficLightController-M[x]) + 1)] .
+
+crl 
+  < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M >
+=> < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M' >
+  if ((TrafficLightController-M[x]) > 5)
+     /\ TrafficLightController-M' := TrafficLightController-M[x := 0] .
+
+endom)

@@ -4,6 +4,23 @@
 
 using namespace std;
 
+class MyTransition {
+public:
+    Parse_Transition* transition;
+    string moduleName;
+
+public:
+    MyTransition() {
+        transition = NULL;
+        moduleName = NULL;
+    }
+
+    MyTransition(Parse_Transition* trans, string module) {
+        transition = trans;
+        moduleName = module;
+    }
+};
+
 string strToLower (string str) {
     string result = "";
     for (int i = 0; i < str.size(); i++)
@@ -54,8 +71,8 @@ string expToMaudeExp (string memName, Parse_Expression *exp) {
         return strToLower(exp->m_constant->m_node);
     case E_VAR :
         return "(" + memName + "[" + exp->m_varId->m_node + "])";
-//    case E_VARREF :
-//        return "(" + exp->m_varRef->m_moduleName->m_node + "-M[" + exp->m_varRef->m_varName->m_node + "])";
+    case E_VARREF :
+        return "(" + exp->m_varRef->m_moduleName->m_node + "-M[" + exp->m_varRef->m_varName->m_node + "])";
     default :
         return "";
     }
@@ -73,6 +90,7 @@ int main() {
     cout << "Module Number: " << moduleNum << endl;
 
     vector<string> moduleDeclarations;
+    vector<string> moduleIDs;
     vector<string> maudeVarDeclarations;
     vector<string> variableDeclarations;
     map<string, string> memoryInitialization;
@@ -95,6 +113,7 @@ int main() {
         // declare ops for module names
         string moduleName = module->m_moduleName->m_node;
         moduleDeclarations.push_back("op " + moduleName + " : -> Oid .");
+        moduleIDs.push_back(moduleName);
         maudeVarDeclarations.push_back("vars " + moduleName + "-M " + moduleName + "-M' : Memory .");
 
         // check variables definitions
@@ -128,13 +147,13 @@ int main() {
         }
 
         // now we can define the initial state for this module in Maude
-        initialStateDeclaration.push_back("op init-state : -> Object .");
+        initialStateDeclaration.push_back("op init-" + moduleName + " : -> Object .");
         map<string, string>::iterator iter;
         string initialMemory = "empty";
         for (iter = memoryInitialization.begin(); iter != memoryInitialization.end(); iter++) {
             initialMemory += ", ( " + iter->first + " -> " + iter->second + " )";
         }
-        initialStateDeclaration.push_back("eq init-state = < " + moduleName
+        initialStateDeclaration.push_back("eq init-" + moduleName + " = < " + moduleName
                 + " : Module | loc : " + initialLocation + ", mem : ( " + initialMemory + " )> .");
 
         // check all transitions
@@ -171,6 +190,13 @@ int main() {
     }
 
     int j = 0;
+
+    string initStateVal = "none";
+    for (j = 0; j < moduleIDs.size(); j++)
+        initStateVal += " init-" + moduleIDs[j];
+    initialStateDeclaration.push_back("op init-state : -> Object .");
+    initialStateDeclaration.push_back("eq init-state = " + initStateVal + " .");
+
     for (j = 0; j < moduleDeclarations.size(); j++)
         cout << moduleDeclarations[j] << endl;
     cout << endl;
