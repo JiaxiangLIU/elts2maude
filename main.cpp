@@ -4,10 +4,22 @@
 
 using namespace std;
 
+string strToLower (string str) {
+    string result = "";
+    for (int i = 0; i < str.size(); i++)
+        result.push_back(tolower(str[i]));
+    return result;
+}
+
 string expToMaudeExp (string memName, Parse_Expression *exp) {
     switch (exp->m_op) {
     case E_NOT :
         return "(not " + expToMaudeExp(memName, exp->m_operand1) + ")";
+    case E_MULTIPLE :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " * " + expToMaudeExp(memName, exp->m_operand2) + ")";
+    case E_DIVIDE :
+    case E_UDIVIDE :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " quo " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_ADD :
         return "(" + expToMaudeExp(memName, exp->m_operand1) + " + " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_MINUS :
@@ -24,12 +36,26 @@ string expToMaudeExp (string memName, Parse_Expression *exp) {
     case E_SGE :
     case E_UGE :
         return "(" + expToMaudeExp(memName, exp->m_operand1) + " >= " + expToMaudeExp(memName, exp->m_operand2) + ")";
-    case E_CONSTANT :
-        return exp->m_constant->m_node;
-    case E_VAR :
-        return "(" + memName + "[" + exp->m_varId->m_node + "])";
+    case E_CE :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " == " + expToMaudeExp(memName, exp->m_operand2) + ")";
+    case E_NE :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " =/= " + expToMaudeExp(memName, exp->m_operand2) + ")";
+    case E_LAND :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " & " + expToMaudeExp(memName, exp->m_operand2) + ")";
+    case E_LXOR :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " xor " + expToMaudeExp(memName, exp->m_operand2) + ")";
     case E_LOR :
         return "(" + expToMaudeExp(memName, exp->m_operand1) + " | " + expToMaudeExp(memName, exp->m_operand2) + ")";
+    case E_AND :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " and " + expToMaudeExp(memName, exp->m_operand2) + ")";
+    case E_OR :
+        return "(" + expToMaudeExp(memName, exp->m_operand1) + " or " + expToMaudeExp(memName, exp->m_operand2) + ")";
+    case E_CONSTANT :
+        return strToLower(exp->m_constant->m_node);
+    case E_VAR :
+        return "(" + memName + "[" + exp->m_varId->m_node + "])";
+//    case E_VARREF :
+//        return "(" + exp->m_varRef->m_moduleName->m_node + "-M[" + exp->m_varRef->m_varName->m_node + "])";
     default :
         return "";
     }
@@ -78,7 +104,7 @@ int main() {
             variableDeclarations.push_back("op " + var->m_varName->m_node + " : -> Variable .");
 
             if(var->m_value != NULL) {
-                memoryInitialization[var->m_varName->m_node] = var->m_value->to_string();
+                memoryInitialization[var->m_varName->m_node] = strToLower(var->m_value->to_string());
             }
         }
 
@@ -98,7 +124,7 @@ int main() {
         Parse_Action *action;
         for (j = 0; j < module->m_initialActionBlock.size(); j++) {
             action = module->m_initialActionBlock[j];
-            memoryInitialization[action->m_varId->m_node] = action->m_value->to_string();
+            memoryInitialization[action->m_varId->m_node] = strToLower(action->m_value->to_string());
         }
 
         // now we can define the initial state for this module in Maude
