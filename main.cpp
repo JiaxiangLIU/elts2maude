@@ -4,6 +4,18 @@
 
 using namespace std;
 
+class Rule {
+public:
+    vector<string> redexs;
+    vector<string> reducts;
+    vector<string> conditions;
+    vector<string> assigments;
+
+public:
+    Rule() {
+    }
+};
+
 class MyTransition {
 public:
     Parse_Transition* transition;
@@ -12,7 +24,7 @@ public:
 public:
     MyTransition() {
         transition = NULL;
-        moduleName = NULL;
+        moduleName = "";
     }
 
     MyTransition(Parse_Transition* trans, string module) {
@@ -79,6 +91,56 @@ string expToMaudeExp (string memName, Parse_Expression *exp) {
     return NULL;
 }
 
+vector<Rule> getRules(map<string, vector<Parse_Transition*>>* transitions,
+        map<string, vector<Parse_Transition*>>::iterator start) {
+    vector<Rule> rules;
+    if (start != transitions->end()) {
+        string moduleName = start->first;
+        int i, j, k;
+        Parse_Transition* transition;
+        Parse_Action* action;
+        map<string, vector<Parse_Transition*>>::iterator current = start++;
+        vector<Rule> recResult = getRules(transitions, start);
+        for (i = 0; i < current->second.size(); i++) {
+            transition = current->second[i];
+            for (j = 0; j < recResult.size(); j++) {
+                Rule rule, tmpRule;
+                tmpRule = recResult[j];
+
+                tmpRule.redexs.insert(tmpRule.redexs.begin(),
+                        "< " + moduleName + " : Module | loc : " + transition->m_location1Id->m_node
+                        + ", mem : " + moduleName + "-M >");
+                rule.redexs = tmpRule.redexs;
+
+                tmpRule.reducts.insert(tmpRule.reducts.begin(),
+                        "< " + moduleName + " : Module | loc : " + transition->m_location2Id->m_node
+                        + ", mem : " + moduleName + "-M' >");
+                rule.reducts = tmpRule.reducts;
+
+                if (transition->m_guard != NULL)
+                    tmpRule.conditions.push_back(expToMaudeExp(moduleName + "-M", transition->m_guard));
+                else
+                    tmpRule.conditions.push_back("True");
+                rule.conditions = tmpRule.conditions;
+
+                string modifiedMem = moduleName + "-M";
+                for (k = 0; k < transition->m_actionBlock.size(); k++) {
+                    action = transition->m_actionBlock[k];
+                    modifiedMem += "[" + action->m_varId->m_node + " := " + expToMaudeExp(moduleName + "-M", action->m_value) + "]";
+                }
+                tmpRule.assigments.push_back(moduleName + "-M' := " + modifiedMem);
+                rule.assigments = tmpRule.assigments;
+
+                rules.push_back(rule);
+            }
+        }
+    } else {
+        Rule rule;
+        rules.push_back(rule);
+    }
+
+    return rules;
+}
 
 int main() {
     GrammarManager *manager = new GrammarManager();
@@ -98,6 +160,8 @@ int main() {
     string initialLocation;
     vector<string> initialStateDeclaration;
     vector<string> ruleDeclarations;
+
+    map<string, map<string, vector<Parse_Transition*>>> allTransitions;
 
 
     int i = 0;
@@ -164,6 +228,8 @@ int main() {
             // if (transition->m_guard == NULL)
             //    ruleDeclarations.push_back("rl :");
             //else
+
+            /*
             ruleDeclarations.push_back("crl ");
 
             ruleDeclarations.push_back("  < " + moduleName + " : Module | loc : " + transition->m_location1Id->m_node
@@ -185,17 +251,65 @@ int main() {
             }
 
             ruleDeclarations.push_back("");
+            */
 
+            // new things
+            for (int k = 0; k < transition->m_labelIds.size(); k++) {
+                allTransitions[transition->m_labelIds[k]->m_node][moduleName].push_back(transition);
+            }
         }
     }
 
-    int j = 0;
+    int j = 0, k;
 
     string initStateVal = "none";
     for (j = 0; j < moduleIDs.size(); j++)
         initStateVal += " init-" + moduleIDs[j];
     initialStateDeclaration.push_back("op init-state : -> Object .");
     initialStateDeclaration.push_back("eq init-state = " + initStateVal + " .");
+
+    // computing all rules
+    map<string, map<string, vector<Parse_Transition*>>>::iterator iteri;
+    map<string, vector<Parse_Transition*>>::iterator iterj;
+    int iterk;
+    for (iteri = allTransitions.begin(); iteri != allTransitions.end(); iteri++) {
+        vector<Rule> rules = getRules(&(iteri->second), iteri->second.begin());
+        for (j = 0; j < rules.size(); j++) {
+            ruleDeclarations.push_back("crl [" + iteri->first + "-" + std::to_string(j) + "] :");
+            for (k = 0; k < rules[j].redexs.size(); k++) {
+                ruleDeclarations.push_back("  " + rules[j].redexs[k]);
+            }
+            for (k = 0; k < rules[j].reducts.size(); k++) {
+                if (k == 0)
+                    ruleDeclarations.push_back("=> " + rules[j].reducts[k]);
+                else
+                    ruleDeclarations.push_back("   " + rules[j].reducts[k]);
+            }
+            for (k = 0; k < rules[j].conditions.size(); k++) {
+                if (k == 0)
+                    ruleDeclarations.push_back("if " + rules[j].conditions[k]);
+                else
+                    ruleDeclarations.push_back("   /\\" + rules[j].conditions[k]);
+            }
+            for (k = 0; k < rules[j].assigments.size(); k++) {
+                if (k != rules[j].assigments.size()-1)
+                    ruleDeclarations.push_back("   /\\" + rules[j].assigments[k]);
+                else
+                    ruleDeclarations.push_back("   /\\" + rules[j].assigments[k] + " .");
+            }
+            ruleDeclarations.push_back("");
+        }
+
+
+        /*
+        for (iterj = iteri->second.begin(); iterj != iteri->second.end(); iterj++) {
+            for (iterk = 0; iterk < iterj->second.size(); iterk++) {
+                cout << iteri->first << " : " << iterj->first << " : " << iterj->second[iterk]->m_location1Id->m_node
+                        << " to " << iterj->second[iterk]->m_location2Id->m_node << endl;
+            }
+        }*/
+    }
+
 
     for (j = 0; j < moduleDeclarations.size(); j++)
         cout << moduleDeclarations[j] << endl;
@@ -219,12 +333,26 @@ int main() {
     map<string, string>::iterator iter;
     cout << "Memory Begin: " << endl;
     for (iter = memoryInitialization.begin(); iter != memoryInitialization.end(); iter++) {
-            cout << "( " << iter->first << " -> " << iter->second << " )" << endl;
+        cout << "( " << iter->first << " -> " << iter->second << " )" << endl;
     }
     cout << "Memory End" << endl;
 
     cout << result << endl;
-    cout << "done 2nd" << endl;
+    cout << "done" << endl;
+
+
+    /*
+    map<string, map<string, vector<Parse_Transition*>>>::iterator iteri;
+    map<string, vector<Parse_Transition*>>::iterator iterj;
+    int iterk;
+    for (iteri = allTransitions.begin(); iteri != allTransitions.end(); iteri++) {
+        for (iterj = iteri->second.begin(); iterj != iteri->second.end(); iterj++) {
+            for (iterk = 0; iterk < iterj->second.size(); iterk++) {
+                cout << iteri->first << " : " << iterj->first << " : " << iterj->second[iterk]->m_location1Id->m_node
+                        << " to " << iterj->second[iterk]->m_location2Id->m_node << endl;
+            }
+        }
+    }*/
 
 
     return 0;

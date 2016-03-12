@@ -1,5 +1,17 @@
 system
-    module TrafficLightController
+    module Controller1
+        int x;
+        label t1, t2, t3, t4, t5, t6;
+        location RED, GREEN, YELLOW;
+        init RED do {x=0;};
+        from RED to RED on t1 provided x<60 do {x=x+1;};
+        from RED to GREEN on t2 provided x>=60 do {x=0;};
+        from GREEN to GREEN on t3 provided x<60 do {x=x+1;};
+        from GREEN to YELLOW on t4 provided x>=60 do {x=0;};
+        from YELLOW to YELLOW on t5 provided x<5 do {x=x+1;};
+        from YELLOW to RED on t6 provided x>5 do {x=0;};
+    end
+    module Controller2
         int x;
         label t1, t2, t3, t4, t5, t6;
         location RED, GREEN, YELLOW;
