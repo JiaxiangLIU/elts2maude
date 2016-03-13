@@ -1,21 +1,22 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "GrammarManager.h"
 
 using namespace std;
 
 class Rule {
 public:
-    vector<string> redexs;
+    vector<string> redexes;
     vector<string> reducts;
     vector<string> conditions;
-    vector<string> assigments;
+    vector<string> assignments;
 
 public:
-    Rule() {
-    }
+    Rule() {}
 };
 
+/*
 class MyTransition {
 public:
     Parse_Transition* transition;
@@ -32,6 +33,7 @@ public:
         moduleName = module;
     }
 };
+*/
 
 string strToLower (string str) {
     string result = "";
@@ -40,49 +42,49 @@ string strToLower (string str) {
     return result;
 }
 
-string expToMaudeExp (string memName, Parse_Expression *exp) {
+string expToMaudeExp (string mem, Parse_Expression *exp) {
     switch (exp->m_op) {
     case E_NOT :
-        return "(not " + expToMaudeExp(memName, exp->m_operand1) + ")";
+        return "(not " + expToMaudeExp(mem, exp->m_operand1) + ")";
     case E_MULTIPLE :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " * " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " * " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_DIVIDE :
     case E_UDIVIDE :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " quo " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " quo " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_ADD :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " + " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " + " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_MINUS :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " - " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " - " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_SLT :
     case E_ULT :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " < " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " < " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_SLE :
     case E_ULE :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " <= " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " <= " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_SGT :
     case E_UGT :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " > " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " > " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_SGE :
     case E_UGE :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " >= " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " >= " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_CE :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " == " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " == " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_NE :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " =/= " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " =/= " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_LAND :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " & " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " & " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_LXOR :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " xor " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " xor " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_LOR :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " | " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " | " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_AND :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " and " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " and " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_OR :
-        return "(" + expToMaudeExp(memName, exp->m_operand1) + " or " + expToMaudeExp(memName, exp->m_operand2) + ")";
+        return "(" + expToMaudeExp(mem, exp->m_operand1) + " or " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_CONSTANT :
         return strToLower(exp->m_constant->m_node);
     case E_VAR :
-        return "(" + memName + "[" + exp->m_varId->m_node + "])";
+        return "(" + mem + "[" + exp->m_varId->m_node + "])";
     case E_VARREF :
         return "(" + exp->m_varRef->m_moduleName->m_node + "-M[" + exp->m_varRef->m_varName->m_node + "])";
     default :
@@ -91,52 +93,58 @@ string expToMaudeExp (string memName, Parse_Expression *exp) {
     return NULL;
 }
 
-vector<Rule> getRules(map<string, vector<Parse_Transition*>>* transitions,
+// extract rules of type _Rule_, recursively, from all the transitions with a same label
+//   transitions: maps module names to the transitions in this module
+//   start: the current point in the _transitions_, indicating the ones before _start_ are not cared
+vector<Rule> extractRules(map<string, vector<Parse_Transition*>>* transitions,
         map<string, vector<Parse_Transition*>>::iterator start) {
     vector<Rule> rules;
-    if (start != transitions->end()) {
+    if (start == transitions->end()) {
+        // added an empty rule as a fixed point
+        Rule rule;
+        rules.push_back(rule);
+    } else { // recursive step
         string moduleName = start->first;
         int i, j, k;
         Parse_Transition* transition;
         Parse_Action* action;
-        map<string, vector<Parse_Transition*>>::iterator current = start++;
-        vector<Rule> recResult = getRules(transitions, start);
+        map<string, vector<Parse_Transition*>>::iterator current = start;
+
+        // recursion
+        start++;
+        vector<Rule> recResult = extractRules(transitions, start);
+	
         for (i = 0; i < current->second.size(); i++) {
             transition = current->second[i];
             for (j = 0; j < recResult.size(); j++) {
-                Rule rule, tmpRule;
-                tmpRule = recResult[j];
+                Rule rule = recResult[j];
 
-                tmpRule.redexs.insert(tmpRule.redexs.begin(),
+                rule.redexes.insert(rule.redexes.begin(),
                         "< " + moduleName + " : Module | loc : " + transition->m_location1Id->m_node
                         + ", mem : " + moduleName + "-M >");
-                rule.redexs = tmpRule.redexs;
 
-                tmpRule.reducts.insert(tmpRule.reducts.begin(),
+                rule.reducts.insert(rule.reducts.begin(),
                         "< " + moduleName + " : Module | loc : " + transition->m_location2Id->m_node
                         + ", mem : " + moduleName + "-M' >");
-                rule.reducts = tmpRule.reducts;
 
                 if (transition->m_guard != NULL)
-                    tmpRule.conditions.push_back(expToMaudeExp(moduleName + "-M", transition->m_guard));
+                    rule.conditions.insert(rule.conditions.begin(),
+                            expToMaudeExp(moduleName + "-M", transition->m_guard));
                 else
-                    tmpRule.conditions.push_back("True");
-                rule.conditions = tmpRule.conditions;
+                    rule.conditions.insert(rule.conditions.begin(), "true");
 
                 string modifiedMem = moduleName + "-M";
                 for (k = 0; k < transition->m_actionBlock.size(); k++) {
                     action = transition->m_actionBlock[k];
-                    modifiedMem += "[" + action->m_varId->m_node + " := " + expToMaudeExp(moduleName + "-M", action->m_value) + "]";
+                    modifiedMem += "[" + action->m_varId->m_node + " := "
+                            + expToMaudeExp(moduleName + "-M", action->m_value) + "]";
                 }
-                tmpRule.assigments.push_back(moduleName + "-M' := " + modifiedMem);
-                rule.assigments = tmpRule.assigments;
+                rule.assignments.insert(rule.assignments.begin(), moduleName + "-M' := " + modifiedMem);
 
+                // add to the returned vector of rules
                 rules.push_back(rule);
             }
         }
-    } else {
-        Rule rule;
-        rules.push_back(rule);
     }
 
     return rules;
@@ -273,11 +281,11 @@ int main() {
     map<string, vector<Parse_Transition*>>::iterator iterj;
     int iterk;
     for (iteri = allTransitions.begin(); iteri != allTransitions.end(); iteri++) {
-        vector<Rule> rules = getRules(&(iteri->second), iteri->second.begin());
+        vector<Rule> rules = extractRules(&(iteri->second), iteri->second.begin());
         for (j = 0; j < rules.size(); j++) {
-            ruleDeclarations.push_back("crl [" + iteri->first + "-" + std::to_string(j) + "] :");
-            for (k = 0; k < rules[j].redexs.size(); k++) {
-                ruleDeclarations.push_back("  " + rules[j].redexs[k]);
+            ruleDeclarations.push_back("crl [" + iteri->first + "-" + to_string(j) + "] :");
+            for (k = 0; k < rules[j].redexes.size(); k++) {
+                ruleDeclarations.push_back("  " + rules[j].redexes[k]);
             }
             for (k = 0; k < rules[j].reducts.size(); k++) {
                 if (k == 0)
@@ -289,13 +297,13 @@ int main() {
                 if (k == 0)
                     ruleDeclarations.push_back("if " + rules[j].conditions[k]);
                 else
-                    ruleDeclarations.push_back("   /\\" + rules[j].conditions[k]);
+                    ruleDeclarations.push_back("   /\\ " + rules[j].conditions[k]);
             }
-            for (k = 0; k < rules[j].assigments.size(); k++) {
-                if (k != rules[j].assigments.size()-1)
-                    ruleDeclarations.push_back("   /\\" + rules[j].assigments[k]);
+            for (k = 0; k < rules[j].assignments.size(); k++) {
+                if (k != rules[j].assignments.size()-1)
+                    ruleDeclarations.push_back("   /\\ " + rules[j].assignments[k]);
                 else
-                    ruleDeclarations.push_back("   /\\" + rules[j].assigments[k] + " .");
+                    ruleDeclarations.push_back("   /\\ " + rules[j].assignments[k] + " .");
             }
             ruleDeclarations.push_back("");
         }
