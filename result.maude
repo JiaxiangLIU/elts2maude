@@ -1,55 +1,118 @@
 (omod SYSTEM is
 pr MODULE .
 
-op TrafficLightController : -> Oid .
+op Controller1 : -> Oid .
+op Controller2 : -> Oid .
+op Controller3 : -> Oid .
 
+op x : -> Variable .
+op x : -> Variable .
 op x : -> Variable .
 
 op RED : -> Location .
 op GREEN : -> Location .
 op YELLOW : -> Location .
+op RED : -> Location .
+op GREEN : -> Location .
+op YELLOW : -> Location .
+op RED : -> Location .
+op GREEN : -> Location .
+op YELLOW : -> Location .
 
-op init-TrafficLightController : -> Object .
-eq init-TrafficLightController = < TrafficLightController : Module | loc : RED, mem : ( empty, ( x -> 0 ) )> .
+op init-Controller1 : -> Object .
+eq init-Controller1 = < Controller1 : Module | loc : RED, mem : ( empty, ( x -> 0 ) )> .
+op init-Controller2 : -> Object .
+eq init-Controller2 = < Controller2 : Module | loc : RED, mem : ( empty, ( x -> 0 ) )> .
+op init-Controller3 : -> Object .
+eq init-Controller3 = < Controller3 : Module | loc : RED, mem : ( empty, ( x -> 0 ) )> .
 op init-state : -> Object .
-eq init-state = none init-TrafficLightController .
+eq init-state = none init-Controller1 init-Controller2 init-Controller3 .
 
-vars TrafficLightController-M TrafficLightController-M' : Memory .
+vars Controller1-M Controller1-M' : Memory .
+vars Controller2-M Controller2-M' : Memory .
+vars Controller3-M Controller3-M' : Memory .
 
-crl 
-  < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M >
-=> < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M' >
-  if ((TrafficLightController-M[x]) < 60)
-     /\ TrafficLightController-M' := TrafficLightController-M[x := ((TrafficLightController-M[x]) + 1)] .
+crl [t1-0] :
+  < Controller1 : Module | loc : RED, mem : Controller1-M >
+  < Controller2 : Module | loc : RED, mem : Controller2-M >
+  < Controller3 : Module | loc : RED, mem : Controller3-M >
+=> < Controller1 : Module | loc : RED, mem : Controller1-M' >
+   < Controller2 : Module | loc : RED, mem : Controller2-M' >
+   < Controller3 : Module | loc : RED, mem : Controller3-M' >
+if ((Controller1-M[x]) < 60)
+   /\ ((Controller2-M[x]) < 60)
+   /\ ((Controller3-M[x]) < 60)
+   /\ Controller1-M' := Controller1-M[x := ((Controller1-M[x]) + 1)]
+   /\ Controller2-M' := Controller2-M[x := ((Controller2-M[x]) + 1)]
+   /\ Controller3-M' := Controller3-M[x := ((Controller3-M[x]) + 1)] .
 
-crl 
-  < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M >
-=> < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M' >
-  if ((TrafficLightController-M[x]) >= 60)
-     /\ TrafficLightController-M' := TrafficLightController-M[x := 0] .
+crl [t2-0] :
+  < Controller1 : Module | loc : RED, mem : Controller1-M >
+  < Controller2 : Module | loc : RED, mem : Controller2-M >
+  < Controller3 : Module | loc : RED, mem : Controller3-M >
+=> < Controller1 : Module | loc : GREEN, mem : Controller1-M' >
+   < Controller2 : Module | loc : GREEN, mem : Controller2-M' >
+   < Controller3 : Module | loc : GREEN, mem : Controller3-M' >
+if ((Controller1-M[x]) >= 60)
+   /\ ((Controller2-M[x]) >= 60)
+   /\ ((Controller3-M[x]) >= 60)
+   /\ Controller1-M' := Controller1-M[x := 0]
+   /\ Controller2-M' := Controller2-M[x := 0]
+   /\ Controller3-M' := Controller3-M[x := 0] .
 
-crl 
-  < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M >
-=> < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M' >
-  if ((TrafficLightController-M[x]) < 60)
-     /\ TrafficLightController-M' := TrafficLightController-M[x := ((TrafficLightController-M[x]) + 1)] .
+crl [t3-0] :
+  < Controller1 : Module | loc : GREEN, mem : Controller1-M >
+  < Controller2 : Module | loc : GREEN, mem : Controller2-M >
+  < Controller3 : Module | loc : GREEN, mem : Controller3-M >
+=> < Controller1 : Module | loc : GREEN, mem : Controller1-M' >
+   < Controller2 : Module | loc : GREEN, mem : Controller2-M' >
+   < Controller3 : Module | loc : GREEN, mem : Controller3-M' >
+if ((Controller1-M[x]) < 60)
+   /\ ((Controller2-M[x]) < 60)
+   /\ ((Controller3-M[x]) < 60)
+   /\ Controller1-M' := Controller1-M[x := ((Controller1-M[x]) + 1)]
+   /\ Controller2-M' := Controller2-M[x := ((Controller2-M[x]) + 1)]
+   /\ Controller3-M' := Controller3-M[x := ((Controller3-M[x]) + 1)] .
 
-crl 
-  < TrafficLightController : Module | loc : GREEN, mem : TrafficLightController-M >
-=> < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M' >
-  if ((TrafficLightController-M[x]) >= 60)
-     /\ TrafficLightController-M' := TrafficLightController-M[x := 0] .
+crl [t4-0] :
+  < Controller1 : Module | loc : GREEN, mem : Controller1-M >
+  < Controller2 : Module | loc : GREEN, mem : Controller2-M >
+  < Controller3 : Module | loc : GREEN, mem : Controller3-M >
+=> < Controller1 : Module | loc : YELLOW, mem : Controller1-M' >
+   < Controller2 : Module | loc : YELLOW, mem : Controller2-M' >
+   < Controller3 : Module | loc : YELLOW, mem : Controller3-M' >
+if ((Controller1-M[x]) >= 60)
+   /\ ((Controller2-M[x]) >= 60)
+   /\ ((Controller3-M[x]) >= 60)
+   /\ Controller1-M' := Controller1-M[x := 0]
+   /\ Controller2-M' := Controller2-M[x := 0]
+   /\ Controller3-M' := Controller3-M[x := 0] .
 
-crl 
-  < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M >
-=> < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M' >
-  if ((TrafficLightController-M[x]) < 5)
-     /\ TrafficLightController-M' := TrafficLightController-M[x := ((TrafficLightController-M[x]) + 1)] .
+crl [t5-0] :
+  < Controller1 : Module | loc : YELLOW, mem : Controller1-M >
+  < Controller2 : Module | loc : YELLOW, mem : Controller2-M >
+  < Controller3 : Module | loc : YELLOW, mem : Controller3-M >
+=> < Controller1 : Module | loc : YELLOW, mem : Controller1-M' >
+   < Controller2 : Module | loc : YELLOW, mem : Controller2-M' >
+   < Controller3 : Module | loc : YELLOW, mem : Controller3-M' >
+if ((Controller1-M[x]) < 5)
+   /\ ((Controller2-M[x]) < 5)
+   /\ ((Controller3-M[x]) < 5)
+   /\ Controller1-M' := Controller1-M[x := ((Controller1-M[x]) + 1)]
+   /\ Controller2-M' := Controller2-M[x := ((Controller2-M[x]) + 1)]
+   /\ Controller3-M' := Controller3-M[x := ((Controller3-M[x]) + 1)] .
 
-crl 
-  < TrafficLightController : Module | loc : YELLOW, mem : TrafficLightController-M >
-=> < TrafficLightController : Module | loc : RED, mem : TrafficLightController-M' >
-  if ((TrafficLightController-M[x]) > 5)
-     /\ TrafficLightController-M' := TrafficLightController-M[x := 0] .
-
+crl [t6-0] :
+  < Controller1 : Module | loc : YELLOW, mem : Controller1-M >
+  < Controller2 : Module | loc : YELLOW, mem : Controller2-M >
+  < Controller3 : Module | loc : YELLOW, mem : Controller3-M >
+=> < Controller1 : Module | loc : RED, mem : Controller1-M' >
+   < Controller2 : Module | loc : RED, mem : Controller2-M' >
+   < Controller3 : Module | loc : RED, mem : Controller3-M' >
+if ((Controller1-M[x]) >= 5)
+   /\ ((Controller2-M[x]) >= 5)
+   /\ ((Controller3-M[x]) >= 5)
+   /\ Controller1-M' := Controller1-M[x := 0]
+   /\ Controller2-M' := Controller2-M[x := 0]
+   /\ Controller3-M' := Controller3-M[x := 0] .
 endom)
