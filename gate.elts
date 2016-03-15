@@ -1,0 +1,46 @@
+system
+    module mp
+        int tp;
+        label start, finish;
+        location INIT, MOVE;
+        init INIT do {tp=120;};
+        from INIT to MOVE on start;
+        from MOVE to INIT on finish;
+    end
+    module g1
+        bool dir;
+        int cp;
+        label syncp, move;
+        location INIT;
+        init INIT do {cp=0; dir=true;};
+        from INIT to INIT on syncp;
+        from INIT to INIT on move provided dir do {
+            cp = cp + 1; //note: cp is plus by previous dir
+            dir = gc.dir;
+        };
+        from INIT to INIT on move provided !dir do {
+            cp = cp - 1; //note: cp is plus by previous dir
+            dir = gc.dir;
+        };
+    end
+    module gc
+        int cp;
+        int tp;
+        bool dir;
+        label start, finish, syncp, move;
+        location INIT, READY, BEGIN, MOVE;
+        init INIT do {cp=0;};
+        from INIT to READY on start do {tp=mp.tp;};
+        from READY to BEGIN on syncp provided tp>cp do {
+            cp = g1.cp;
+            dir = true;
+        };
+        from READY to BEGIN on syncp provided tp<=cp do {
+            cp = g1.cp;
+            dir = false;
+        };
+        from BEGIN to MOVE on move provided (cp<tp&&dir)||(cp>tp&&!dir);
+        from MOVE to BEGIN on syncp do {cp=g1.cp;};
+        from BEGIN to INIT on finish provided (cp>=tp&&dir)||(cp<=tp&&!dir);
+    end
+end
