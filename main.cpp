@@ -71,15 +71,15 @@ string expToMaudeExp (string mem, Parse_Expression *exp) {
         return "(" + expToMaudeExp(mem, exp->m_operand1) + " == " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_NE :
         return "(" + expToMaudeExp(mem, exp->m_operand1) + " =/= " + expToMaudeExp(mem, exp->m_operand2) + ")";
-    case E_LAND :
+    case E_LAND :   // bit operation, "&" in C-like language
         return "(" + expToMaudeExp(mem, exp->m_operand1) + " & " + expToMaudeExp(mem, exp->m_operand2) + ")";
-    case E_LXOR :
+    case E_LXOR :   // bit operation, "^" in C-like language
         return "(" + expToMaudeExp(mem, exp->m_operand1) + " xor " + expToMaudeExp(mem, exp->m_operand2) + ")";
-    case E_LOR :
+    case E_LOR :    // bit operation, "|" in C-like language
         return "(" + expToMaudeExp(mem, exp->m_operand1) + " | " + expToMaudeExp(mem, exp->m_operand2) + ")";
-    case E_AND :
+    case E_AND :    // "&&" in C-like language
         return "(" + expToMaudeExp(mem, exp->m_operand1) + " and " + expToMaudeExp(mem, exp->m_operand2) + ")";
-    case E_OR :
+    case E_OR :     // "||" in C-like language
         return "(" + expToMaudeExp(mem, exp->m_operand1) + " or " + expToMaudeExp(mem, exp->m_operand2) + ")";
     case E_CONSTANT :
         return strToLower(exp->m_constant->m_node);
@@ -150,7 +150,7 @@ vector<Rule> extractRules(map<string, vector<Parse_Transition*>>* transitions,
 
 int main() {
     GrammarManager* manager = new GrammarManager();
-    manager->ProcessFile("example.elts");
+    manager->ProcessFile("gate.elts");
     string result = manager->GetGrammarModel()->getString();
 
     Grammar_Model* model = manager->GetGrammarModel();
@@ -217,6 +217,7 @@ int main() {
         for (iteri = memoryInitialization.begin(); iteri != memoryInitialization.end(); iteri++) {
             initialMemory += ", ( " + iteri->first + " -> " + iteri->second + " )";
         }
+        memoryInitialization.clear();
         initialStateDeclaration.push_back("eq init-" + moduleName + " = < " + moduleName
                 + " : Module | loc : " + initialLocation + ", mem : ( " + initialMemory + " )> .");
 
