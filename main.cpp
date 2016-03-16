@@ -134,8 +134,10 @@ vector<Rule> extractRules(map<string, vector<Parse_Transition*>>* transitions,
                 string modifiedMem = moduleName + "-M";
                 for (k = 0; k < transition->m_actionBlock.size(); k++) {
                     action = transition->m_actionBlock[k];
+                    // the use of modifiedMem instead of moduleName-M in _expToMaudeExp_
+                    // indicates that the actions in an action block are executed sequentially.
                     modifiedMem += "[" + action->m_varId->m_node + " := "
-                            + expToMaudeExp(moduleName + "-M", action->m_value) + "]";
+                            + expToMaudeExp(modifiedMem, action->m_value) + "]";
                 }
                 rule.assignments.push_back(moduleName + "-M' := " + modifiedMem);
 
@@ -150,7 +152,7 @@ vector<Rule> extractRules(map<string, vector<Parse_Transition*>>* transitions,
 
 int main() {
     GrammarManager* manager = new GrammarManager();
-    manager->ProcessFile("gate.elts");
+    manager->ProcessFile("example.elts");
     string result = manager->GetGrammarModel()->getString();
 
     Grammar_Model* model = manager->GetGrammarModel();
