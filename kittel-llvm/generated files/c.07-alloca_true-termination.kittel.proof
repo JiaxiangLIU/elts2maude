@@ -1,0 +1,40 @@
+Initial termination problem:
+1:	eval_test_fun_start(v_i, v_j, v_k, v_tmp) -> eval_test_fun_entry_in(v_k)
+	eval_test_fun_entry_in(v_k) -> eval_test_fun_while.cond_in(v_k)
+	eval_test_fun_while.cond_in(v_k) -> eval_test_fun_land.rhs_in(v_k)
+	eval_test_fun_while.cond_in(v_k) -> eval_test_fun_while.end_in()
+	eval_test_fun_land.rhs_in(v_k) -> eval_test_fun_while.body_in(v_k)
+	eval_test_fun_land.rhs_in(v_k) -> eval_test_fun_while.end_in()
+	eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.cond_in(v_k)
+	eval_test_fun_while.end_in() -> eval_test_fun_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_test_fun_while.cond_in(v_k) -> eval_test_fun_land.rhs_in(v_k)
+	eval_test_fun_land.rhs_in(v_k) -> eval_test_fun_while.body_in(v_k)
+	eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.cond_in(v_k)
+
+By chaining the rule eval_test_fun_while.cond_in(v_k) -> eval_test_fun_land.rhs_in(v_k) with all rule in problem 2, the following new rules are obtained:
+	eval_test_fun_while.cond_in(v_k) -> eval_test_fun_while.body_in(v_k)
+We thus obtain the following problem:
+3:	eval_test_fun_land.rhs_in(v_k) -> eval_test_fun_while.body_in(v_k)
+	eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.cond_in(v_k)
+	eval_test_fun_while.cond_in(v_k) -> eval_test_fun_while.body_in(v_k)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.cond_in(v_k)
+	eval_test_fun_while.cond_in(v_k) -> eval_test_fun_while.body_in(v_k)
+
+By chaining the rule eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.cond_in(v_k) with all rule in problem 4, the following new rules are obtained:
+	eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.body_in(v_k)
+We thus obtain the following problem:
+5:	eval_test_fun_while.cond_in(v_k) -> eval_test_fun_while.body_in(v_k)
+	eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.body_in(v_k)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.body_in(v_k)
+
+The following termination problem could not be handled:
+eval_test_fun_while.body_in(v_k) -> eval_test_fun_while.body_in(v_k)
+
+Time: 0.420 sec (SMT: 0.406 sec)

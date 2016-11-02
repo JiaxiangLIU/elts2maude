@@ -1,0 +1,101 @@
+Initial termination problem:
+1:	eval_fact_start(v_n) -> eval_fact_entry_in(v_n)
+	eval_fact_entry_in(v_n) -> eval_fact_return_in() [ v_n <= 0 ]
+	eval_fact_entry_in(v_n) -> eval_fact_if.else_in(v_n) [ v_n > 0 ]
+	eval_fact_if.else_in(v_n) -> eval_fact_start(v_n - 1)
+	eval_fact_if.else_in(v_n) -> eval_fact_return_in()
+	eval_fact_return_in() -> eval_fact_stop()
+	eval_binomialCoefficient_start(v_n, v_k) -> eval_binomialCoefficient_stop()
+	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_for.end.17_in()
+	eval_main_entry_in() -> eval_main_if.end_in(nondef.0) [ nondef.0 >= 0 ]
+	eval_main_if.end_in(v_call) -> eval_main_for.end.17_in()
+	eval_main_if.end_in(v_call) -> eval_main_if.end.4_in(v_call)
+	eval_main_if.end.4_in(v_call) -> eval_main_for.cond_in(v_call, 0)
+	eval_main_for.cond_in(v_call, v_n.0) -> eval_main_for.cond.7_in(v_call, v_n.0, 0) [ v_n.0 <= v_call ]
+	eval_main_for.cond_in(v_call, v_n.0) -> eval_main_for.end.17_in() [ v_n.0 > v_call ]
+	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.body.9_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_call ]
+	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_call ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.then.11_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_n.0 ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.else_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_n.0 ]
+	eval_main_if.then.11_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_if.else_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_for.inc_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond.7_in(v_call, v_n.0, v_k.0 + 1)
+	eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond_in(v_call, v_n.0 + 1)
+	eval_main_for.end.17_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_fact_start(v_n) -> eval_fact_entry_in(v_n)
+	eval_fact_entry_in(v_n) -> eval_fact_if.else_in(v_n) [ v_n > 0 ]
+	eval_fact_if.else_in(v_n) -> eval_fact_start(v_n - 1)
+
+3:	eval_main_for.cond_in(v_call, v_n.0) -> eval_main_for.cond.7_in(v_call, v_n.0, 0) [ v_n.0 <= v_call ]
+	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.body.9_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_call ]
+	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_call ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.then.11_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_n.0 ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.else_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_n.0 ]
+	eval_main_if.then.11_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_if.else_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_for.inc_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond.7_in(v_call, v_n.0, v_k.0 + 1)
+	eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond_in(v_call, v_n.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_fact_start) = 3*X_1 - 1
+	Pol(eval_fact_entry_in) = 3*X_1 - 2
+	Pol(eval_fact_if.else_in) = 3*X_1 - 3
+removes the following rule from problem 2:
+	eval_fact_entry_in(v_n) -> eval_fact_if.else_in(v_n) [ v_n > 0 ]
+We thus obtain the following problem:
+4:	eval_fact_start(v_n) -> eval_fact_entry_in(v_n)
+	eval_fact_if.else_in(v_n) -> eval_fact_start(v_n - 1)
+
+The termination graph of problem 4 contains no nontrivial SCC.
+
+A polynomial interpretation with
+	Pol(eval_main_for.cond_in) = 2*X_1 - 2*X_2 + 1
+	Pol(eval_main_for.cond.7_in) = 2*X_1 - 2*X_2 - 1
+	Pol(eval_main_for.body.9_in) = 2*X_1 - 2*X_2 - 1
+	Pol(eval_main_for.inc.15_in) = 2*X_1 - 2*X_2 - 1
+	Pol(eval_main_if.then.11_in) = 2*X_1 - 2*X_2 - 1
+	Pol(eval_main_if.else_in) = 2*X_1 - 2*X_2 - 1
+	Pol(eval_main_for.inc_in) = 2*X_1 - 2*X_2 - 1
+removes the following rule from problem 3:
+	eval_main_for.cond_in(v_call, v_n.0) -> eval_main_for.cond.7_in(v_call, v_n.0, 0) [ v_n.0 <= v_call ]
+We thus obtain the following problem:
+5:	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.body.9_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_call ]
+	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_call ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.then.11_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_n.0 ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.else_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_n.0 ]
+	eval_main_if.then.11_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_if.else_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_for.inc_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond.7_in(v_call, v_n.0, v_k.0 + 1)
+	eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond_in(v_call, v_n.0 + 1)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.body.9_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_call ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.then.11_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_n.0 ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.else_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_n.0 ]
+	eval_main_if.then.11_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_if.else_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_for.inc_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond.7_in(v_call, v_n.0, v_k.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_for.cond.7_in) = 5*X_1 - 5*X_3 + 2
+	Pol(eval_main_for.body.9_in) = 5*X_1 - 5*X_3 + 1
+	Pol(eval_main_if.then.11_in) = 5*X_1 - 5*X_3 - 1
+	Pol(eval_main_if.else_in) = 5*X_1 - 5*X_3
+	Pol(eval_main_for.inc_in) = 5*X_1 - 5*X_3 - 2
+removes the following rule from problem 6:
+	eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.body.9_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_call ]
+We thus obtain the following problem:
+7:	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.then.11_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_n.0 ]
+	eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.else_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_n.0 ]
+	eval_main_if.then.11_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_if.else_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+	eval_main_for.inc_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond.7_in(v_call, v_n.0, v_k.0 + 1)
+
+The termination graph of problem 7 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.772 sec (SMT: 0.755 sec)

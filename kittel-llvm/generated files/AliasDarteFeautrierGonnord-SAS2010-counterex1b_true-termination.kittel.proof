@@ -1,0 +1,92 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.2, nondef.1)
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.0) [ v_x.0 >= 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0) -> eval_main_while.end.17_in() [ v_x.0 < 0 ]
+	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 >= 0 ]
+	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 < 0 ]
+	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1 - 1)
+	eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_x.0 - 1, v_y.1)
+	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) [ v_y.2 <= v_call ]
+	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond_in(v_call, v_y.2, v_sub8) [ v_y.2 > v_call ]
+	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2)
+	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond_in(v_call, v_y.2, v_sub8)
+	eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2 + 1)
+	eval_main_while.end.17_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_call, v_y.0, v_x.0) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.0) [ v_x.0 >= 0 ]
+	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 >= 0 ]
+	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 < 0 ]
+	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1 - 1)
+	eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_x.0 - 1, v_y.1)
+	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) [ v_y.2 <= v_call ]
+	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond_in(v_call, v_y.2, v_sub8) [ v_y.2 > v_call ]
+	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2)
+	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond_in(v_call, v_y.2, v_sub8)
+	eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = 2*X_3
+	Pol(eval_main_while.cond.3_in) = 2*X_3 - 2
+	Pol(eval_main_land.rhs_in) = 2*X_3 - 2
+	Pol(eval_main_while.end_in) = 2*X_3 - 2
+	Pol(eval_main_while.body.7_in) = 2*X_3 - 2
+	Pol(eval_main_while.cond.9_in) = 2*X_5
+	Pol(eval_main_land.rhs.11_in) = 2*X_5
+	Pol(eval_main_while.body.15_in) = 2*X_5
+removes the following rule from problem 2:
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.0) [ v_x.0 >= 0 ]
+We thus obtain the following problem:
+3:	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 >= 0 ]
+	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 < 0 ]
+	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1 - 1)
+	eval_main_while.end_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_x.0 - 1, v_y.1)
+	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) [ v_y.2 <= v_call ]
+	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond_in(v_call, v_y.2, v_sub8) [ v_y.2 > v_call ]
+	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2)
+	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond_in(v_call, v_y.2, v_sub8)
+	eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2 + 1)
+
+The termination graph of problem 3 contains 2 nontrivial SCCs:
+4:	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) [ v_y.2 <= v_call ]
+	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2)
+	eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2 + 1)
+
+5:	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 >= 0 ]
+	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1 - 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.9_in) = 3*X_1 - 3*X_6 + 1
+	Pol(eval_main_land.rhs.11_in) = 3*X_1 - 3*X_6
+	Pol(eval_main_while.body.15_in) = 3*X_1 - 3*X_6 - 1
+removes the following rule from problem 4:
+	eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) [ v_y.2 <= v_call ]
+We thus obtain the following problem:
+6:	eval_main_land.rhs.11_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2)
+	eval_main_while.body.15_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2) -> eval_main_while.cond.9_in(v_call, v_y.0, v_x.0, v_y.1, v_sub8, v_y.2 + 1)
+
+The termination graph of problem 6 contains no nontrivial SCC.
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.3_in) = 3*X_4
+	Pol(eval_main_land.rhs_in) = 3*X_4 - 1
+	Pol(eval_main_while.body.7_in) = 3*X_4 - 2
+removes the following rule from problem 5:
+	eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) [ v_y.1 >= 0 ]
+We thus obtain the following problem:
+7:	eval_main_land.rhs_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1)
+	eval_main_while.body.7_in(v_call, v_y.0, v_x.0, v_y.1) -> eval_main_while.cond.3_in(v_call, v_y.0, v_x.0, v_y.1 - 1)
+
+The termination graph of problem 7 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.592 sec (SMT: 0.576 sec)

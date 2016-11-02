@@ -1,0 +1,351 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.2, nondef.3, nondef.1, nondef.0)
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.end_in() [ v_call2 > v_i.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.end_in() [ v_call3 < v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 /\ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 /\ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0 + 1) [ nondef.4 < 0 /\ nondef.4 = 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0 + 1) [ nondef.4 > 0 /\ nondef.4 = 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ nondef.4 = 0 /\ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ nondef.4 = 0 /\ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1) [ nondef.4 = 0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 /\ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 /\ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0 + 1) [ nondef.4 < 0 /\ nondef.4 = 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0 + 1) [ nondef.4 > 0 /\ nondef.4 = 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ nondef.4 = 0 /\ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ nondef.4 = 0 /\ nondef.4 > 0 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.2, nondef.3, nondef.1, nondef.0)
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.end_in() [ v_call2 > v_i.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.end_in() [ v_call3 < v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1) [ nondef.4 = 0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1) [ nondef.4 = 0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = 2*X_2 - 2*X_3
+	Pol(eval_main_while.body_in) = 2*X_2 - 2*X_3
+	Pol(eval_main_lor.lhs.false_in) = 2*X_2 - 2*X_3
+	Pol(eval_main_lor.rhs_in) = 2*X_2 - 2*X_3
+	Pol(eval_main_if.then_in) = 2*X_2 - 2*X_3
+	Pol(eval_main_if.else.17_in) = 2*X_2 - 2*X_3
+	Pol(eval_main_if.then.21_in) = 2*X_2 - 2*X_3
+	Pol(eval_main_if.else.23_in) = 2*X_2 - 2*X_3
+removes the following rule from problem 3:
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+We thus obtain the following problem:
+4:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1) [ nondef.4 = 0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1) [ nondef.4 = 0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = X_1 + 3*X_2 - 3*X_3 - X_4 + 1
+	Pol(eval_main_while.body_in) = X_1 + 3*X_2 - 3*X_3 - X_4 + 1
+	Pol(eval_main_lor.lhs.false_in) = X_1 + 3*X_2 - 3*X_3 - X_4 + 1
+	Pol(eval_main_lor.rhs_in) = X_1 + 3*X_2 - 3*X_3 - X_4 + 1
+	Pol(eval_main_if.then_in) = X_1 + 3*X_2 - 3*X_3 - X_4
+	Pol(eval_main_if.else.17_in) = X_1 + 3*X_2 - 3*X_3 - X_4 + 1
+	Pol(eval_main_if.then.21_in) = X_1 + 3*X_2 - 3*X_3 - X_4 + 1
+	Pol(eval_main_if.else.23_in) = X_1 + 3*X_2 - 3*X_3 - X_4 + 1
+removes the following rule from problem 5:
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+We thus obtain the following problem:
+6:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 < 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0 + 1, v_i.0) [ nondef.4 > 0 ]
+	eval_main_if.then_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1) [ nondef.4 = 0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = 3*X_1 - 3*X_2 + 3*X_3 - 3*X_4 + 1
+	Pol(eval_main_lor.lhs.false_in) = 3*X_1 - 3*X_2 + 3*X_3 - 3*X_4 + 1
+	Pol(eval_main_while.body_in) = 3*X_1 - 3*X_2 + 3*X_3 - 3*X_4 + 1
+	Pol(eval_main_lor.rhs_in) = 3*X_1 - 3*X_2 + 3*X_3 - 3*X_4 + 1
+	Pol(eval_main_if.else.17_in) = 3*X_1 - 3*X_2 + 3*X_3 - 3*X_4 + 1
+	Pol(eval_main_if.then.21_in) = 3*X_1 - 3*X_2 + 3*X_3 - 3*X_4
+	Pol(eval_main_if.else.23_in) = 3*X_1 - 3*X_2 + 3*X_3 - 3*X_4 + 1
+removes the following rule from problem 7:
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+We thus obtain the following problem:
+8:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.then.21_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0 + 1)
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+
+By chaining the rule eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ] with all rules in problem 9, the following new rules are obtained:
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 /\ v_call3 > v_j.0 ]
+We thus obtain the following problem:
+10:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 /\ v_call3 > v_j.0 ]
+
+The termination graph of problem 10 contains 1 nontrivial SCC:
+11:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+
+By chaining the rule eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ] with all rules in problem 11, the following new rules are obtained:
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 < v_i.0 ]
+We thus obtain the following problem:
+12:	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.lhs.false_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 < v_i.0 ]
+
+The termination graph of problem 12 contains 1 nontrivial SCC:
+13:	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+
+By chaining the rule eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 ] with all rules in problem 13, the following new rules are obtained:
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call2 < v_i.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call3 < v_j.0 ]
+We thus obtain the following problem:
+14:	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call2 < v_i.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call3 < v_j.0 ]
+
+The termination graph of problem 14 contains 1 nontrivial SCC:
+15:	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call2 < v_i.0 ]
+
+By chaining the rule eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ] with all rules in problem 15, the following new rules are obtained:
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call3 > v_j.0 ]
+We thus obtain the following problem:
+16:	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 > v_j.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 > v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 >= v_i.0 /\ v_call3 <= v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call2 < v_i.0 ]
+	eval_main_while.body_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 /\ v_call3 > v_j.0 ]
+
+The termination graph of problem 16 contains 1 nontrivial SCC:
+17:	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call2 < v_i.0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.else.17_in) = 1
+	Pol(eval_main_if.else.23_in) = 0
+	Pol(eval_main_while.cond_in) = 4*X_2 - 4*X_3 + 3
+	Pol(eval_main_lor.rhs_in) = 4*X_2 - 4*X_3 + 2
+removes the following rules from problem 17:
+	eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+	eval_main_if.else.23_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call3 < v_j.0 ]
+	eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_if.else.17_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 <= v_i.0 /\ v_call3 >= v_j.0 /\ v_call2 < v_i.0 ]
+We thus obtain the following problem:
+18:	eval_main_while.cond_in(v_call2, v_call3, v_j.0, v_i.0) -> eval_main_lor.rhs_in(v_call2, v_call3, v_j.0, v_i.0) [ v_call2 < v_i.0 ]
+
+The termination graph of problem 18 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 4.227 sec (SMT: 2.933 sec)

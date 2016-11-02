@@ -1,0 +1,14 @@
+///*** 1_mult ***///
+eval_mult_start(v_n, v_m) -> eval_mult_entry_in(v_n, v_m)
+eval_mult_entry_in(v_n, v_m) -> eval_mult_if.then_in(v_n, v_m) [ v_m < 0 ]
+eval_mult_entry_in(v_n, v_m) -> eval_mult_if.end_in(v_n, v_m) [ v_m >= 0 ]
+eval_mult_if.then_in(v_n, v_m) -> eval_mult_start(v_n, -v_m)
+eval_mult_if.then_in(v_n, v_m) -> eval_mult_return_in()
+eval_mult_if.end_in(v_n, v_m) -> eval_mult_return_in() [ v_m = 0 ]
+eval_mult_if.end_in(v_n, v_m) -> eval_mult_if.end.3_in(v_n, v_m) [ v_m < 0 ]
+eval_mult_if.end_in(v_n, v_m) -> eval_mult_if.end.3_in(v_n, v_m) [ v_m > 0 ]
+eval_mult_if.end.3_in(v_n, v_m) -> eval_mult_start(v_n, v_m - 1)
+eval_mult_if.end.3_in(v_n, v_m) -> eval_mult_return_in()
+eval_mult_return_in() -> eval_mult_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

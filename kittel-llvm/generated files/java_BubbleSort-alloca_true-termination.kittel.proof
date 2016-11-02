@@ -1,0 +1,68 @@
+Initial termination problem:
+1:	eval_sort_start(v_n) -> eval_sort_entry_in(v_n)
+	eval_sort_entry_in(v_n) -> eval_sort_for.cond_in(v_n, 1)
+	eval_sort_for.cond_in(v_n, v_pass.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, 0) [ v_pass.0 < v_n ]
+	eval_sort_for.cond_in(v_n, v_pass.0) -> eval_sort_for.end.19_in() [ v_pass.0 >= v_n ]
+	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) [ v_i.0 < v_n - v_pass.0 ]
+	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc.17_in(v_n, v_pass.0, v_i.0) [ v_i.0 >= v_n - v_pass.0 ]
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_if.then_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_if.then_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.inc_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0 + 1)
+	eval_sort_for.inc.17_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond_in(v_n, v_pass.0 + 1)
+	eval_sort_for.end.19_in() -> eval_sort_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_sort_for.cond_in(v_n, v_pass.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, 0) [ v_pass.0 < v_n ]
+	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) [ v_i.0 < v_n - v_pass.0 ]
+	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc.17_in(v_n, v_pass.0, v_i.0) [ v_i.0 >= v_n - v_pass.0 ]
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_if.then_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_if.then_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.inc_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0 + 1)
+	eval_sort_for.inc.17_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond_in(v_n, v_pass.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_sort_for.cond_in) = 2*X_1 - 2*X_2 + 1
+	Pol(eval_sort_for.cond.1_in) = 2*X_1 - 2*X_2
+	Pol(eval_sort_for.body.3_in) = 2*X_1 - 2*X_2
+	Pol(eval_sort_for.inc.17_in) = 2*X_1 - 2*X_2
+	Pol(eval_sort_if.then_in) = 2*X_1 - 2*X_2
+	Pol(eval_sort_for.inc_in) = 2*X_1 - 2*X_2
+removes the following rule from problem 2:
+	eval_sort_for.cond_in(v_n, v_pass.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, 0) [ v_pass.0 < v_n ]
+We thus obtain the following problem:
+3:	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) [ v_i.0 < v_n - v_pass.0 ]
+	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc.17_in(v_n, v_pass.0, v_i.0) [ v_i.0 >= v_n - v_pass.0 ]
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_if.then_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_if.then_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.inc_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0 + 1)
+	eval_sort_for.inc.17_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond_in(v_n, v_pass.0 + 1)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) [ v_i.0 < v_n - v_pass.0 ]
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_if.then_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_if.then_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.inc_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_sort_for.cond.1_in) = 4*X_1 - 4*X_2 - 4*X_3 + 2
+	Pol(eval_sort_for.body.3_in) = 4*X_1 - 4*X_2 - 4*X_3 + 1
+	Pol(eval_sort_if.then_in) = 4*X_1 - 4*X_2 - 4*X_3
+	Pol(eval_sort_for.inc_in) = 4*X_1 - 4*X_2 - 4*X_3 - 1
+removes the following rule from problem 4:
+	eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) [ v_i.0 < v_n - v_pass.0 ]
+We thus obtain the following problem:
+5:	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_if.then_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.body.3_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_if.then_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.inc_in(v_n, v_pass.0, v_i.0)
+	eval_sort_for.inc_in(v_n, v_pass.0, v_i.0) -> eval_sort_for.cond.1_in(v_n, v_pass.0, v_i.0 + 1)
+
+The termination graph of problem 5 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.416 sec (SMT: 0.406 sec)

@@ -1,0 +1,24 @@
+///*** 1_lock ***///
+eval_lock_start(v_'LOCK) -> eval_lock_stop()
+///*** 2_unlock ***///
+eval_unlock_start(v_'LOCK) -> eval_unlock_stop()
+///*** 3_main ***///
+eval_main_start(v_'LOCK) -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_do.body_in()
+eval_main_entry_in() -> eval_main_do.body.10_in(0)
+eval_main_do.body_in() -> eval_main_if.then.3_in()
+eval_main_do.body_in() -> eval_main_if.end_in(0)
+eval_main_if.then.3_in() -> eval_main_if.end_in(1)
+eval_main_if.end_in(v_got_lock.0) -> eval_main_if.then.5_in(v_got_lock.0) [ v_got_lock.0 < 0 ]
+eval_main_if.end_in(v_got_lock.0) -> eval_main_if.then.5_in(v_got_lock.0) [ v_got_lock.0 > 0 ]
+eval_main_if.end_in(v_got_lock.0) -> eval_main_do.cond_in(v_got_lock.0) [ v_got_lock.0 = 0 ]
+eval_main_if.then.5_in(v_got_lock.0) -> eval_main_do.cond_in(v_got_lock.0)
+eval_main_do.cond_in(v_got_lock.0) -> eval_main_do.body_in()
+eval_main_do.cond_in(v_got_lock.0) -> eval_main_do.body.10_in(0)
+eval_main_do.body.10_in(v_new.0) -> eval_main_if.then.13_in(v_new.0)
+eval_main_do.body.10_in(v_new.0) -> eval_main_do.cond.16_in(v_new.0, v_new.0)
+eval_main_if.then.13_in(v_new.0) -> eval_main_do.cond.16_in(v_new.0, v_new.0 + 1)
+eval_main_do.cond.16_in(v_new.0, v_new.1) -> eval_main_do.body.10_in(v_new.1) [ v_new.1 < v_new.0 ]
+eval_main_do.cond.16_in(v_new.0, v_new.1) -> eval_main_do.body.10_in(v_new.1) [ v_new.1 > v_new.0 ]
+eval_main_do.cond.16_in(v_new.0, v_new.1) -> eval_main_do.end.17_in() [ v_new.1 = v_new.0 ]
+eval_main_do.end.17_in() -> eval_main_stop()

@@ -1,0 +1,45 @@
+Initial termination problem:
+1:	eval_strlen_start() -> eval_strlen_entry_in()
+	eval_strlen_entry_in() -> eval_strlen_for.cond_in()
+	eval_strlen_entry_in() -> eval_strlen_return_in()
+	eval_strlen_for.cond_in() -> eval_strlen_for.body_in()
+	eval_strlen_for.cond_in() -> eval_strlen_return_in()
+	eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+	eval_strlen_return_in() -> eval_strlen_stop()
+	eval_strcat_start() -> eval_strcat_entry_in()
+	eval_strcat_entry_in() -> eval_strcat_for.cond_in()
+	eval_strcat_for.cond_in() -> eval_strcat_if.end_in()
+	eval_strcat_for.cond_in() -> eval_strcat_for.end_in()
+	eval_strcat_if.end_in() -> eval_strcat_if.end.4_in()
+	eval_strcat_if.end_in() -> eval_strcat_for.end_in()
+	eval_strcat_if.end.4_in() -> eval_strcat_if.end.9_in()
+	eval_strcat_if.end.4_in() -> eval_strcat_for.end_in()
+	eval_strcat_if.end.9_in() -> eval_strcat_if.end.14_in()
+	eval_strcat_if.end.9_in() -> eval_strcat_for.end_in()
+	eval_strcat_if.end.14_in() -> eval_strcat_for.cond_in()
+	eval_strcat_for.end_in() -> eval_strcat_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_strlen_for.cond_in() -> eval_strlen_for.body_in()
+	eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+
+3:	eval_strcat_for.cond_in() -> eval_strcat_if.end_in()
+	eval_strcat_if.end_in() -> eval_strcat_if.end.4_in()
+	eval_strcat_if.end.4_in() -> eval_strcat_if.end.9_in()
+	eval_strcat_if.end.9_in() -> eval_strcat_if.end.14_in()
+	eval_strcat_if.end.14_in() -> eval_strcat_for.cond_in()
+
+By chaining the rule eval_strlen_for.cond_in() -> eval_strlen_for.body_in() with all rule in problem 2, the following new rules are obtained:
+	eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+We thus obtain the following problem:
+4:	eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+	eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+
+The following termination problem could not be handled:
+eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+
+Time: 0.688 sec (SMT: 0.676 sec)

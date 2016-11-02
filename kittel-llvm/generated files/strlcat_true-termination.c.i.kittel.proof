@@ -1,0 +1,115 @@
+Initial termination problem:
+1:	eval_strlen_start() -> eval_strlen_entry_in()
+	eval_strlen_entry_in() -> eval_strlen_for.cond_in()
+	eval_strlen_entry_in() -> eval_strlen_return_in()
+	eval_strlen_for.cond_in() -> eval_strlen_for.body_in()
+	eval_strlen_for.cond_in() -> eval_strlen_return_in()
+	eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+	eval_strlen_return_in() -> eval_strlen_stop()
+	eval_strlcat_start(v_siz) -> eval_strlcat_entry_in(v_siz)
+	eval_strlcat_entry_in(v_siz) -> eval_strlcat_while.cond_in(v_siz, v_siz)
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ nondef.0 > 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ nondef.0 > 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ nondef.0 < 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ nondef.0 < 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ nondef.0 < 0 /\ nondef.0 = 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ v_n.0 = 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ nondef.0 > 0 /\ nondef.0 = 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 < 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 < 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 > 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 > 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ nondef.0 = 0 ]
+	eval_strlcat_while.body_in(v_siz, v_n.0, v_n.1) -> eval_strlcat_while.cond_in(v_siz, v_n.1)
+	eval_strlcat_while.end_in(v_siz) -> eval_strlcat_if.then_in() [ v_siz - nondef.1 + nondef.2 = 0 ]
+	eval_strlcat_while.end_in(v_siz) -> eval_strlcat_while.cond.6_in(v_siz - nondef.1 + nondef.2) [ v_siz - nondef.1 + nondef.2 < 0 ]
+	eval_strlcat_while.end_in(v_siz) -> eval_strlcat_while.cond.6_in(v_siz - nondef.1 + nondef.2) [ v_siz - nondef.1 + nondef.2 > 0 ]
+	eval_strlcat_if.then_in() -> eval_strlcat_return_in()
+	eval_strlcat_while.cond.6_in(v_n.2) -> eval_strlcat_while.body.10_in(v_n.2)
+	eval_strlcat_while.cond.6_in(v_n.2) -> eval_strlcat_while.end.18_in()
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.then.13_in(v_n.2) [ v_n.2 < 1 ]
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.then.13_in(v_n.2) [ v_n.2 > 1 ]
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.end.16_in(v_n.2, v_n.2) [ v_n.2 = 1 ]
+	eval_strlcat_if.then.13_in(v_n.2) -> eval_strlcat_if.end.16_in(v_n.2, v_n.2 - 1)
+	eval_strlcat_if.end.16_in(v_n.2, v_n.3) -> eval_strlcat_while.cond.6_in(v_n.3)
+	eval_strlcat_while.end.18_in() -> eval_strlcat_return_in()
+	eval_strlcat_return_in() -> eval_strlcat_stop()
+	eval_main_start() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ nondef.0 > 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ nondef.0 > 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ nondef.0 < 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ nondef.0 < 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ nondef.0 < 0 /\ nondef.0 = 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ nondef.0 > 0 /\ nondef.0 = 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 < 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 < 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 > 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0) [ nondef.0 = 0 /\ nondef.0 > 0 /\ v_n.0 > 0 ]
+We thus obtain the following problem:
+2:	eval_strlen_start() -> eval_strlen_entry_in()
+	eval_strlen_entry_in() -> eval_strlen_for.cond_in()
+	eval_strlen_entry_in() -> eval_strlen_return_in()
+	eval_strlen_for.cond_in() -> eval_strlen_for.body_in()
+	eval_strlen_for.cond_in() -> eval_strlen_return_in()
+	eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+	eval_strlen_return_in() -> eval_strlen_stop()
+	eval_strlcat_start(v_siz) -> eval_strlcat_entry_in(v_siz)
+	eval_strlcat_entry_in(v_siz) -> eval_strlcat_while.cond_in(v_siz, v_siz)
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ v_n.0 = 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.end_in(v_siz) [ nondef.0 = 0 ]
+	eval_strlcat_while.body_in(v_siz, v_n.0, v_n.1) -> eval_strlcat_while.cond_in(v_siz, v_n.1)
+	eval_strlcat_while.end_in(v_siz) -> eval_strlcat_if.then_in() [ v_siz - nondef.1 + nondef.2 = 0 ]
+	eval_strlcat_while.end_in(v_siz) -> eval_strlcat_while.cond.6_in(v_siz - nondef.1 + nondef.2) [ v_siz - nondef.1 + nondef.2 < 0 ]
+	eval_strlcat_while.end_in(v_siz) -> eval_strlcat_while.cond.6_in(v_siz - nondef.1 + nondef.2) [ v_siz - nondef.1 + nondef.2 > 0 ]
+	eval_strlcat_if.then_in() -> eval_strlcat_return_in()
+	eval_strlcat_while.cond.6_in(v_n.2) -> eval_strlcat_while.body.10_in(v_n.2)
+	eval_strlcat_while.cond.6_in(v_n.2) -> eval_strlcat_while.end.18_in()
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.then.13_in(v_n.2) [ v_n.2 < 1 ]
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.then.13_in(v_n.2) [ v_n.2 > 1 ]
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.end.16_in(v_n.2, v_n.2) [ v_n.2 = 1 ]
+	eval_strlcat_if.then.13_in(v_n.2) -> eval_strlcat_if.end.16_in(v_n.2, v_n.2 - 1)
+	eval_strlcat_if.end.16_in(v_n.2, v_n.3) -> eval_strlcat_while.cond.6_in(v_n.3)
+	eval_strlcat_while.end.18_in() -> eval_strlcat_return_in()
+	eval_strlcat_return_in() -> eval_strlcat_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 2 contains 3 nontrivial SCCs:
+3:	eval_strlen_for.cond_in() -> eval_strlen_for.body_in()
+	eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+
+4:	eval_strlcat_while.cond.6_in(v_n.2) -> eval_strlcat_while.body.10_in(v_n.2)
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.then.13_in(v_n.2) [ v_n.2 < 1 ]
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.then.13_in(v_n.2) [ v_n.2 > 1 ]
+	eval_strlcat_while.body.10_in(v_n.2) -> eval_strlcat_if.end.16_in(v_n.2, v_n.2) [ v_n.2 = 1 ]
+	eval_strlcat_if.then.13_in(v_n.2) -> eval_strlcat_if.end.16_in(v_n.2, v_n.2 - 1)
+	eval_strlcat_if.end.16_in(v_n.2, v_n.3) -> eval_strlcat_while.cond.6_in(v_n.3)
+
+5:	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 < 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ v_n.0 < 0 ]
+	eval_strlcat_while.cond_in(v_siz, v_n.0) -> eval_strlcat_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ nondef.0 > 0 /\ v_n.0 > 0 ]
+	eval_strlcat_while.body_in(v_siz, v_n.0, v_n.1) -> eval_strlcat_while.cond_in(v_siz, v_n.1)
+
+By chaining the rule eval_strlen_for.cond_in() -> eval_strlen_for.body_in() with all rule in problem 3, the following new rules are obtained:
+	eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+We thus obtain the following problem:
+6:	eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+	eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+
+The following termination problem could not be handled:
+eval_strlen_for.cond_in() -> eval_strlen_for.cond_in()
+
+Time: 1.738 sec (SMT: 1.707 sec)

@@ -1,0 +1,123 @@
+Initial termination problem:
+1:	eval_a_start(v_m, v_n) -> eval_a_entry_in(v_m, v_n)
+	eval_a_entry_in(v_m, v_n) -> eval_a_if.then_in() [ v_m <= 0 ]
+	eval_a_entry_in(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+	eval_a_if.then_in() -> eval_a_return_in()
+	eval_a_if.else_in(v_m, v_n) -> eval_a_if.then.2_in(v_m, v_n, v_m - 1) [ v_n <= 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_if.else.3_in(v_m, v_n, v_m - 1) [ v_n > 0 ]
+	eval_a_if.then.2_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, 1)
+	eval_a_if.then.2_in(v_m, v_n, v_sub) -> eval_a_return_in()
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_m, v_n - 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, nondef.1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_return_in()
+	eval_a_return_in() -> eval_a_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_a_start(v_m, v_n) -> eval_a_entry_in(v_m, v_n)
+	eval_a_entry_in(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_if.then.2_in(v_m, v_n, v_m - 1) [ v_n <= 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_if.else.3_in(v_m, v_n, v_m - 1) [ v_n > 0 ]
+	eval_a_if.then.2_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_m, v_n - 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, nondef.1)
+
+By chaining the rule eval_a_start(v_m, v_n) -> eval_a_entry_in(v_m, v_n) with all rule in problem 2, the following new rules are obtained:
+	eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+We thus obtain the following problem:
+3:	eval_a_entry_in(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_if.then.2_in(v_m, v_n, v_m - 1) [ v_n <= 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_if.else.3_in(v_m, v_n, v_m - 1) [ v_n > 0 ]
+	eval_a_if.then.2_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_m, v_n - 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, nondef.1)
+	eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_a_if.else_in(v_m, v_n) -> eval_a_if.then.2_in(v_m, v_n, v_m - 1) [ v_n <= 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_if.else.3_in(v_m, v_n, v_m - 1) [ v_n > 0 ]
+	eval_a_if.then.2_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_m, v_n - 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, nondef.1)
+	eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+
+By chaining the rule eval_a_if.else_in(v_m, v_n) -> eval_a_if.then.2_in(v_m, v_n, v_m - 1) [ v_n <= 0 ] with all rule in problem 4, the following new rules are obtained:
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_n <= 0 ]
+We thus obtain the following problem:
+5:	eval_a_if.else_in(v_m, v_n) -> eval_a_if.else.3_in(v_m, v_n, v_m - 1) [ v_n > 0 ]
+	eval_a_if.then.2_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_m, v_n - 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, nondef.1)
+	eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_n <= 0 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_a_if.else_in(v_m, v_n) -> eval_a_if.else.3_in(v_m, v_n, v_m - 1) [ v_n > 0 ]
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_m, v_n - 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, nondef.1)
+	eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_n <= 0 ]
+
+By chaining the rule eval_a_if.else_in(v_m, v_n) -> eval_a_if.else.3_in(v_m, v_n, v_m - 1) [ v_n > 0 ] with all rules in problem 6, the following new rules are obtained:
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_n > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_n > 0 ]
+We thus obtain the following problem:
+7:	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_m, v_n - 1)
+	eval_a_if.else.3_in(v_m, v_n, v_sub) -> eval_a_start(v_sub, nondef.1)
+	eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_n <= 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_n > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_n > 0 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_n <= 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_n > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_n > 0 ]
+
+By chaining the rule eval_a_start(v_m, v_n) -> eval_a_if.else_in(v_m, v_n) [ v_m > 0 ] with all rules in problem 8, the following new rules are obtained:
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_m > 0 /\ v_n <= 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_m > 0 /\ v_n > 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_m > 0 /\ v_n > 0 ]
+We thus obtain the following problem:
+9:	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_n <= 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_n > 0 ]
+	eval_a_if.else_in(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_n > 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_m > 0 /\ v_n <= 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_m > 0 /\ v_n > 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_m > 0 /\ v_n > 0 ]
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_m > 0 /\ v_n <= 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_m > 0 /\ v_n > 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_m > 0 /\ v_n > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_a_start) = X_1
+removes the following rule from problem 10:
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, 1) [ v_m > 0 /\ v_n <= 0 ]
+We thus obtain the following problem:
+11:	eval_a_start(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_m > 0 /\ v_n > 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_m > 0 /\ v_n > 0 ]
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_a_start(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_m > 0 /\ v_n > 0 ]
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_m > 0 /\ v_n > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_a_start) = X_1
+removes the following rule from problem 12:
+	eval_a_start(v_m, v_n) -> eval_a_start(v_m - 1, nondef.1) [ v_m > 0 /\ v_n > 0 ]
+We thus obtain the following problem:
+13:	eval_a_start(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_m > 0 /\ v_n > 0 ]
+
+The termination graph of problem 13 contains 1 nontrivial SCC:
+14:	eval_a_start(v_m, v_n) -> eval_a_start(v_m, v_n - 1) [ v_m > 0 /\ v_n > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_a_start) = X_2
+removes all rules from problem 14.
+
+Termination successfully shown!
+
+Time: 1.116 sec (SMT: 1.074 sec)

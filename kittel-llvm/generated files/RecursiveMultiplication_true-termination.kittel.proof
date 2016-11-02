@@ -1,0 +1,57 @@
+Initial termination problem:
+1:	eval_mult_start(v_n, v_m) -> eval_mult_entry_in(v_n, v_m)
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.then_in(v_n, v_m) [ v_m < 0 ]
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.end_in(v_n, v_m) [ v_m >= 0 ]
+	eval_mult_if.then_in(v_n, v_m) -> eval_mult_start(v_n, -v_m)
+	eval_mult_if.then_in(v_n, v_m) -> eval_mult_return_in()
+	eval_mult_if.end_in(v_n, v_m) -> eval_mult_return_in() [ v_m = 0 ]
+	eval_mult_if.end_in(v_n, v_m) -> eval_mult_if.end.3_in(v_n, v_m) [ v_m < 0 ]
+	eval_mult_if.end_in(v_n, v_m) -> eval_mult_if.end.3_in(v_n, v_m) [ v_m > 0 ]
+	eval_mult_if.end.3_in(v_n, v_m) -> eval_mult_start(v_n, v_m - 1)
+	eval_mult_if.end.3_in(v_n, v_m) -> eval_mult_return_in()
+	eval_mult_return_in() -> eval_mult_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_mult_start(v_n, v_m) -> eval_mult_entry_in(v_n, v_m)
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.then_in(v_n, v_m) [ v_m < 0 ]
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.end_in(v_n, v_m) [ v_m >= 0 ]
+	eval_mult_if.then_in(v_n, v_m) -> eval_mult_start(v_n, -v_m)
+	eval_mult_if.end_in(v_n, v_m) -> eval_mult_if.end.3_in(v_n, v_m) [ v_m > 0 ]
+	eval_mult_if.end.3_in(v_n, v_m) -> eval_mult_start(v_n, v_m - 1)
+
+A polynomial interpretation with
+	Pol(eval_mult_start) = 3*X_2^2 + 1
+	Pol(eval_mult_entry_in) = 3*X_2^2 + 1
+	Pol(eval_mult_if.then_in) = 3*X_2^2 + 1
+	Pol(eval_mult_if.end_in) = 3*X_2^2
+	Pol(eval_mult_if.end.3_in) = -6*X_2 + 3*X_2^2 + 5
+removes the following rules from problem 2:
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.end_in(v_n, v_m) [ v_m >= 0 ]
+	eval_mult_if.end_in(v_n, v_m) -> eval_mult_if.end.3_in(v_n, v_m) [ v_m > 0 ]
+We thus obtain the following problem:
+3:	eval_mult_start(v_n, v_m) -> eval_mult_entry_in(v_n, v_m)
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.then_in(v_n, v_m) [ v_m < 0 ]
+	eval_mult_if.then_in(v_n, v_m) -> eval_mult_start(v_n, -v_m)
+	eval_mult_if.end.3_in(v_n, v_m) -> eval_mult_start(v_n, v_m - 1)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_mult_start(v_n, v_m) -> eval_mult_entry_in(v_n, v_m)
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.then_in(v_n, v_m) [ v_m < 0 ]
+	eval_mult_if.then_in(v_n, v_m) -> eval_mult_start(v_n, -v_m)
+
+A polynomial interpretation with
+	Pol(eval_mult_start) = -X_2
+	Pol(eval_mult_entry_in) = -X_2
+	Pol(eval_mult_if.then_in) = X_2
+removes the following rule from problem 4:
+	eval_mult_entry_in(v_n, v_m) -> eval_mult_if.then_in(v_n, v_m) [ v_m < 0 ]
+We thus obtain the following problem:
+5:	eval_mult_start(v_n, v_m) -> eval_mult_entry_in(v_n, v_m)
+	eval_mult_if.then_in(v_n, v_m) -> eval_mult_start(v_n, -v_m)
+
+The termination graph of problem 5 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.484 sec (SMT: 0.469 sec)

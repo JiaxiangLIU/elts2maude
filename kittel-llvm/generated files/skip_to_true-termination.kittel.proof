@@ -1,0 +1,40 @@
+Initial termination problem:
+1:	eval_skip_to_start() -> eval_skip_to_entry_in()
+	eval_skip_to_entry_in() -> eval_skip_to_for.cond_in()
+	eval_skip_to_for.cond_in() -> eval_skip_to_land.rhs_in()
+	eval_skip_to_for.cond_in() -> eval_skip_to_for.end_in()
+	eval_skip_to_land.rhs_in() -> eval_skip_to_for.inc_in()
+	eval_skip_to_land.rhs_in() -> eval_skip_to_for.end_in()
+	eval_skip_to_for.inc_in() -> eval_skip_to_for.cond_in()
+	eval_skip_to_for.end_in() -> eval_skip_to_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_skip_to_for.cond_in() -> eval_skip_to_land.rhs_in()
+	eval_skip_to_land.rhs_in() -> eval_skip_to_for.inc_in()
+	eval_skip_to_for.inc_in() -> eval_skip_to_for.cond_in()
+
+By chaining the rule eval_skip_to_for.cond_in() -> eval_skip_to_land.rhs_in() with all rule in problem 2, the following new rules are obtained:
+	eval_skip_to_for.cond_in() -> eval_skip_to_for.inc_in()
+We thus obtain the following problem:
+3:	eval_skip_to_land.rhs_in() -> eval_skip_to_for.inc_in()
+	eval_skip_to_for.inc_in() -> eval_skip_to_for.cond_in()
+	eval_skip_to_for.cond_in() -> eval_skip_to_for.inc_in()
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_skip_to_for.inc_in() -> eval_skip_to_for.cond_in()
+	eval_skip_to_for.cond_in() -> eval_skip_to_for.inc_in()
+
+By chaining the rule eval_skip_to_for.inc_in() -> eval_skip_to_for.cond_in() with all rule in problem 4, the following new rules are obtained:
+	eval_skip_to_for.inc_in() -> eval_skip_to_for.inc_in()
+We thus obtain the following problem:
+5:	eval_skip_to_for.cond_in() -> eval_skip_to_for.inc_in()
+	eval_skip_to_for.inc_in() -> eval_skip_to_for.inc_in()
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_skip_to_for.inc_in() -> eval_skip_to_for.inc_in()
+
+The following termination problem could not be handled:
+eval_skip_to_for.inc_in() -> eval_skip_to_for.inc_in()
+
+Time: 0.418 sec (SMT: 0.405 sec)

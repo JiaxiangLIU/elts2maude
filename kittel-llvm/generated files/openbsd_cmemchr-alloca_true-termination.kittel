@@ -1,0 +1,15 @@
+///*** 1_cmemchr ***///
+eval_cmemchr_start(v_c, v_n) -> eval_cmemchr_entry_in(v_c, v_n)
+eval_cmemchr_entry_in(v_c, v_n) -> eval_cmemchr_if.then_in(v_c, v_n) [ v_n < 0 ]
+eval_cmemchr_entry_in(v_c, v_n) -> eval_cmemchr_if.then_in(v_c, v_n) [ v_n > 0 ]
+eval_cmemchr_entry_in(v_c, v_n) -> eval_cmemchr_return_in() [ v_n = 0 ]
+eval_cmemchr_if.then_in(v_c, v_n) -> eval_cmemchr_do.body_in(v_c, v_n)
+eval_cmemchr_do.body_in(v_conv2, v_n.addr.0) -> eval_cmemchr_if.then.5_in()
+eval_cmemchr_do.body_in(v_conv2, v_n.addr.0) -> eval_cmemchr_do.cond_in(v_conv2, v_n.addr.0)
+eval_cmemchr_if.then.5_in() -> eval_cmemchr_return_in()
+eval_cmemchr_do.cond_in(v_conv2, v_n.addr.0) -> eval_cmemchr_do.body_in(v_conv2, v_n.addr.0 - 1) [ v_n.addr.0 - 1 < 0 ]
+eval_cmemchr_do.cond_in(v_conv2, v_n.addr.0) -> eval_cmemchr_do.body_in(v_conv2, v_n.addr.0 - 1) [ v_n.addr.0 - 1 > 0 ]
+eval_cmemchr_do.cond_in(v_conv2, v_n.addr.0) -> eval_cmemchr_return_in() [ v_n.addr.0 - 1 = 0 ]
+eval_cmemchr_return_in() -> eval_cmemchr_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

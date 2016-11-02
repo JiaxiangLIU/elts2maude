@@ -1,0 +1,9 @@
+///*** 1_foo ***///
+eval_foo_start(v_'x) -> eval_foo_stop()
+///*** 2_main ***///
+eval_main_start(v_'x) -> eval_main_entry_in(v_'x)
+eval_main_entry_in(v_'x) -> eval_main_while.cond_in(nondef.0)
+eval_main_while.cond_in(v_'x) -> eval_main_while.body_in(v_'x) [ v_'x > 0 ]
+eval_main_while.cond_in(v_'x) -> eval_main_while.end_in() [ v_'x <= 0 ]
+eval_main_while.body_in(v_'x) -> eval_main_while.cond_in(nondef.2)
+eval_main_while.end_in() -> eval_main_stop()

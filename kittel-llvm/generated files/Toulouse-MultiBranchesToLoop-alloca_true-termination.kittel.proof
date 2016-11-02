@@ -1,0 +1,75 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_if.then_in()
+	eval_main_entry_in() -> eval_main_if.else_in()
+	eval_main_if.then_in() -> eval_main_if.end_in()
+	eval_main_if.else_in() -> eval_main_if.end_in()
+	eval_main_if.end_in() -> eval_main_if.then.1_in()
+	eval_main_if.end_in() -> eval_main_if.else.2_in()
+	eval_main_if.then.1_in() -> eval_main_if.end.3_in()
+	eval_main_if.else.2_in() -> eval_main_if.end.3_in()
+	eval_main_if.end.3_in() -> eval_main_if.then.5_in()
+	eval_main_if.end.3_in() -> eval_main_if.else.7_in()
+	eval_main_if.then.5_in() -> eval_main_if.end.9_in()
+	eval_main_if.else.7_in() -> eval_main_if.end.9_in()
+	eval_main_if.end.9_in() -> eval_main_if.then.11_in()
+	eval_main_if.end.9_in() -> eval_main_if.else.13_in()
+	eval_main_if.then.11_in() -> eval_main_if.end.15_in()
+	eval_main_if.else.13_in() -> eval_main_if.end.15_in()
+	eval_main_if.end.15_in() -> eval_main_if.then.17_in()
+	eval_main_if.end.15_in() -> eval_main_if.else.19_in()
+	eval_main_if.then.17_in() -> eval_main_if.end.21_in()
+	eval_main_if.else.19_in() -> eval_main_if.end.21_in()
+	eval_main_if.end.21_in() -> eval_main_if.then.23_in()
+	eval_main_if.end.21_in() -> eval_main_if.else.25_in()
+	eval_main_if.then.23_in() -> eval_main_if.end.27_in()
+	eval_main_if.else.25_in() -> eval_main_if.end.27_in()
+	eval_main_if.end.27_in() -> eval_main_if.then.29_in()
+	eval_main_if.end.27_in() -> eval_main_if.else.31_in()
+	eval_main_if.then.29_in() -> eval_main_if.end.33_in()
+	eval_main_if.else.31_in() -> eval_main_if.end.33_in()
+	eval_main_if.end.33_in() -> eval_main_if.then.35_in()
+	eval_main_if.end.33_in() -> eval_main_if.else.37_in()
+	eval_main_if.then.35_in() -> eval_main_if.end.39_in()
+	eval_main_if.else.37_in() -> eval_main_if.end.39_in()
+	eval_main_if.end.39_in() -> eval_main_if.then.41_in()
+	eval_main_if.end.39_in() -> eval_main_if.else.43_in()
+	eval_main_if.then.41_in() -> eval_main_if.end.45_in()
+	eval_main_if.else.43_in() -> eval_main_if.end.45_in()
+	eval_main_if.end.45_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_land.rhs_in()
+	eval_main_while.cond_in() -> eval_main_while.end_in()
+	eval_main_land.rhs_in() -> eval_main_while.body_in()
+	eval_main_land.rhs_in() -> eval_main_while.end_in()
+	eval_main_while.body_in() -> eval_main_while.cond_in()
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in() -> eval_main_land.rhs_in()
+	eval_main_land.rhs_in() -> eval_main_while.body_in()
+	eval_main_while.body_in() -> eval_main_while.cond_in()
+
+By chaining the rule eval_main_while.cond_in() -> eval_main_land.rhs_in() with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in() -> eval_main_while.body_in()
+We thus obtain the following problem:
+3:	eval_main_land.rhs_in() -> eval_main_while.body_in()
+	eval_main_while.body_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.body_in()
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.body_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.body_in()
+
+By chaining the rule eval_main_while.body_in() -> eval_main_while.cond_in() with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.body_in() -> eval_main_while.body_in()
+We thus obtain the following problem:
+5:	eval_main_while.cond_in() -> eval_main_while.body_in()
+	eval_main_while.body_in() -> eval_main_while.body_in()
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.body_in() -> eval_main_while.body_in()
+
+The following termination problem could not be handled:
+eval_main_while.body_in() -> eval_main_while.body_in()
+
+Time: 1.568 sec (SMT: 1.542 sec)

@@ -1,0 +1,38 @@
+Initial termination problem:
+1:	eval_fibonacci_start(v_n) -> eval_fibonacci_entry_in(v_n)
+	eval_fibonacci_entry_in(v_n) -> eval_fibonacci_return_in() [ v_n < 1 ]
+	eval_fibonacci_entry_in(v_n) -> eval_fibonacci_if.else_in(v_n) [ v_n >= 1 ]
+	eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_return_in() [ v_n = 1 ]
+	eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_if.else.3_in(v_n) [ v_n < 1 ]
+	eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_if.else.3_in(v_n) [ v_n > 1 ]
+	eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 1)
+	eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 2)
+	eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_return_in()
+	eval_fibonacci_return_in() -> eval_fibonacci_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_fibonacci_start(v_n) -> eval_fibonacci_entry_in(v_n)
+	eval_fibonacci_entry_in(v_n) -> eval_fibonacci_if.else_in(v_n) [ v_n >= 1 ]
+	eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_if.else.3_in(v_n) [ v_n > 1 ]
+	eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 1)
+	eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 2)
+
+A polynomial interpretation with
+	Pol(eval_fibonacci_start) = 4*X_1 - 1
+	Pol(eval_fibonacci_entry_in) = 4*X_1 - 2
+	Pol(eval_fibonacci_if.else_in) = 4*X_1 - 3
+	Pol(eval_fibonacci_if.else.3_in) = 4*X_1 - 4
+removes the following rules from problem 2:
+	eval_fibonacci_entry_in(v_n) -> eval_fibonacci_if.else_in(v_n) [ v_n >= 1 ]
+	eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_if.else.3_in(v_n) [ v_n > 1 ]
+We thus obtain the following problem:
+3:	eval_fibonacci_start(v_n) -> eval_fibonacci_entry_in(v_n)
+	eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 1)
+	eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 2)
+
+The termination graph of problem 3 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.373 sec (SMT: 0.368 sec)

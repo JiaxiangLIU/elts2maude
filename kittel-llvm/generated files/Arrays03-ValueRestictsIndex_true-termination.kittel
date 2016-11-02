@@ -1,0 +1,13 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_if.then_in(nondef.0) [ nondef.0 >= 0 /\ nondef.0 < 1048 ]
+eval_main_entry_in() -> eval_main_if.end.9_in()
+eval_main_if.then_in(v_call) -> eval_main_land.lhs.true.3_in(v_call)
+eval_main_if.then_in(v_call) -> eval_main_if.end.9_in()
+eval_main_land.lhs.true.3_in(v_call) -> eval_main_if.then.6_in(v_call)
+eval_main_land.lhs.true.3_in(v_call) -> eval_main_if.end.9_in()
+eval_main_if.then.6_in(v_call) -> eval_main_while.cond_in(v_call, nondef.3)
+eval_main_while.cond_in(v_call, v_x.0) -> eval_main_while.body_in(v_call, v_x.0) [ v_x.0 >= 0 ]
+eval_main_while.cond_in(v_call, v_x.0) -> eval_main_if.end.9_in() [ v_x.0 < 0 ]
+eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 - v_call)
+eval_main_if.end.9_in() -> eval_main_stop()

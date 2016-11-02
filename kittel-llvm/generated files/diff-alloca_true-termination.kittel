@@ -1,0 +1,27 @@
+///*** 1_diff ***///
+eval_diff_start(v_Alen, v_Blen) -> eval_diff_entry_in(v_Alen, v_Blen)
+eval_diff_entry_in(v_Alen, v_Blen) -> eval_diff_while.cond_in(v_Alen, v_Blen, 0)
+eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) [ v_i.0 < v_Alen ]
+eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.end.16_in() [ v_i.0 >= v_Alen ]
+eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, nondef.0, 0, 0)
+eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 < v_Blen /\ v_found.0 = 0 ]
+eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 >= v_Blen ]
+eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0) [ v_0 = nondef.1 /\ v_0 = nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0 + 1) [ v_0 = nondef.1 /\ v_0 < nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0 + 1) [ v_0 = nondef.1 /\ v_0 > nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_0 < nondef.1 /\ v_0 = nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_0 > nondef.1 /\ v_0 = nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 /\ v_0 < nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 /\ v_0 > nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 /\ v_0 < nondef.1 ]
+eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 /\ v_0 > nondef.1 ]
+eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 = 0 ]
+eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0)
+eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0 + 1)
+eval_diff_while.end.16_in() -> eval_diff_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

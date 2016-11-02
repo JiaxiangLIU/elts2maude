@@ -1,0 +1,107 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0, nondef.2) [ nondef.0 <= 10000 /\ nondef.0 >= -10000 /\ nondef.1 <= 10000 /\ nondef.2 <= 10000 ]
+	eval_main_entry_in() -> eval_main_if.end_in()
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.body_in(v_y.0, v_x.0, v_z.0) [ v_y.0 >= 1 ]
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_if.end_in() [ v_y.0 < 1 ]
+	eval_main_while.body_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0)
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1)
+	eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+	eval_main_if.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.body_in(v_y.0, v_x.0, v_z.0) [ v_y.0 >= 1 ]
+	eval_main_while.body_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0)
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1)
+	eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+
+By chaining the rule eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.body_in(v_y.0, v_x.0, v_z.0) [ v_y.0 >= 1 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0)
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1)
+	eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1)
+	eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ]
+
+By chaining the rule eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 < v_z.1 ] with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1)
+	eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+
+By chaining the rule eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ] with all rule in problem 6, the following new rules are obtained:
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+We thus obtain the following problem:
+7:	eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+
+By chaining the rule eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 ] with all rules in problem 8, the following new rules are obtained:
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0, v_z.0 - 1) [ v_y.0 >= 1 /\ v_y.0 < v_z.0 ]
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond_in(v_x.0 + v_y.0 - 1, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 /\ v_y.0 >= v_z.0 ]
+We thus obtain the following problem:
+9:	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0, v_z.0 - 1) [ v_y.0 >= 1 /\ v_y.0 < v_z.0 ]
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond_in(v_x.0 + v_y.0 - 1, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 /\ v_y.0 >= v_z.0 ]
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0, v_z.0 - 1) [ v_y.0 >= 1 /\ v_y.0 < v_z.0 ]
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond_in(v_x.0 + v_y.0 - 1, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 /\ v_y.0 >= v_z.0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.9_in) = 2*X_1 + X_5
+	Pol(eval_main_while.cond_in) = 3*X_3 - 2
+removes the following rule from problem 10:
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0, v_z.0 - 1) [ v_y.0 >= 1 /\ v_y.0 < v_z.0 ]
+We thus obtain the following problem:
+11:	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond_in(v_x.0 + v_y.0 - 1, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 /\ v_y.0 >= v_z.0 ]
+
+The termination graph of problem 11 contains 2 nontrivial SCCs:
+12:	eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond_in(v_x.0 + v_y.0 - 1, v_x.0 - 1, v_z.0) [ v_y.0 >= 1 /\ v_y.0 >= v_z.0 ]
+
+13:	eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1) [ v_y.0 < v_z.1 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = 2*X_1 - 2*X_3 + X_2^2
+removes all rules from problem 12.
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.9_in) = -X_1 + X_5
+removes all rules from problem 13.
+
+Termination successfully shown!
+
+Time: 0.970 sec (SMT: 0.887 sec)

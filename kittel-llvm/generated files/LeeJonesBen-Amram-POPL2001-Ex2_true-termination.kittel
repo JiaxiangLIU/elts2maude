@@ -1,0 +1,13 @@
+///*** 1_f_g ***///
+eval_f_start(v_i, v_x) -> eval_f_entry_in(v_i, v_x)
+eval_f_entry_in(v_i, v_x) -> eval_f_return_in() [ v_i = 0 ]
+eval_f_entry_in(v_i, v_x) -> eval_f_if.else_in(v_i, v_x) [ v_i < 0 ]
+eval_f_entry_in(v_i, v_x) -> eval_f_if.else_in(v_i, v_x) [ v_i > 0 ]
+eval_f_if.else_in(v_i, v_x) -> eval_g_start(v_i - 1, v_x, v_i)
+eval_f_if.else_in(v_i, v_x) -> eval_f_return_in()
+eval_f_return_in() -> eval_f_stop()
+eval_g_start(v_a, v_b, v_c) -> eval_g_entry_in(v_a, v_b, v_c)
+eval_g_entry_in(v_a, v_b, v_c) -> eval_f_start(v_a, v_b + v_c)
+eval_g_entry_in(v_a, v_b, v_c) -> eval_g_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

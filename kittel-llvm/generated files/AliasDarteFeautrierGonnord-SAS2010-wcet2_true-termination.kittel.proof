@@ -1,0 +1,71 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0)
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond.2_in(v_i.0, 0) [ v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.end.7_in() [ v_i.0 >= 5 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.body.5_in(v_i.0, v_j.0) [ v_i.0 > 2 /\ v_j.0 <= 9 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_i.0 <= 2 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_j.0 > 9 ]
+	eval_main_while.body.5_in(v_i.0, v_j.0) -> eval_main_while.cond.2_in(v_i.0, v_j.0 + 1)
+	eval_main_while.end_in(v_i.0, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+	eval_main_while.end.7_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond.2_in(v_i.0, 0) [ v_i.0 < 5 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.body.5_in(v_i.0, v_j.0) [ v_i.0 > 2 /\ v_j.0 <= 9 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_i.0 <= 2 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_j.0 > 9 ]
+	eval_main_while.body.5_in(v_i.0, v_j.0) -> eval_main_while.cond.2_in(v_i.0, v_j.0 + 1)
+	eval_main_while.end_in(v_i.0, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -4*X_1 + 8
+	Pol(eval_main_while.cond.2_in) = -4*X_1 + 8
+	Pol(eval_main_while.body.5_in) = -4*X_1 + 8
+	Pol(eval_main_while.end_in) = -4*X_1 + 4
+removes the following rule from problem 2:
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_i.0 <= 2 ]
+We thus obtain the following problem:
+3:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond.2_in(v_i.0, 0) [ v_i.0 < 5 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.body.5_in(v_i.0, v_j.0) [ v_i.0 > 2 /\ v_j.0 <= 9 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_j.0 > 9 ]
+	eval_main_while.body.5_in(v_i.0, v_j.0) -> eval_main_while.cond.2_in(v_i.0, v_j.0 + 1)
+	eval_main_while.end_in(v_i.0, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond.2_in(v_i.0, 0) [ v_i.0 < 5 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.body.5_in(v_i.0, v_j.0) [ v_i.0 > 2 /\ v_j.0 <= 9 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_j.0 > 9 ]
+	eval_main_while.body.5_in(v_i.0, v_j.0) -> eval_main_while.cond.2_in(v_i.0, v_j.0 + 1)
+	eval_main_while.end_in(v_i.0, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -X_1 + 4
+	Pol(eval_main_while.cond.2_in) = -X_1 + 3
+	Pol(eval_main_while.body.5_in) = -X_1 + 3
+	Pol(eval_main_while.end_in) = -X_1 + 3
+removes the following rule from problem 4:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond.2_in(v_i.0, 0) [ v_i.0 < 5 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.body.5_in(v_i.0, v_j.0) [ v_i.0 > 2 /\ v_j.0 <= 9 ]
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.end_in(v_i.0, v_j.0) [ v_j.0 > 9 ]
+	eval_main_while.body.5_in(v_i.0, v_j.0) -> eval_main_while.cond.2_in(v_i.0, v_j.0 + 1)
+	eval_main_while.end_in(v_i.0, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.body.5_in(v_i.0, v_j.0) [ v_i.0 > 2 /\ v_j.0 <= 9 ]
+	eval_main_while.body.5_in(v_i.0, v_j.0) -> eval_main_while.cond.2_in(v_i.0, v_j.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.2_in) = -2*X_2 + 18
+	Pol(eval_main_while.body.5_in) = -2*X_2 + 17
+removes the following rule from problem 6:
+	eval_main_while.cond.2_in(v_i.0, v_j.0) -> eval_main_while.body.5_in(v_i.0, v_j.0) [ v_i.0 > 2 /\ v_j.0 <= 9 ]
+We thus obtain the following problem:
+7:	eval_main_while.body.5_in(v_i.0, v_j.0) -> eval_main_while.cond.2_in(v_i.0, v_j.0 + 1)
+
+The termination graph of problem 7 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.376 sec (SMT: 0.367 sec)

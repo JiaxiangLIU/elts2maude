@@ -1,0 +1,28 @@
+///*** 1_parts ***///
+eval_parts_start(v_p, v_q) -> eval_parts_entry_in(v_p, v_q)
+eval_parts_entry_in(v_p, v_q) -> eval_parts_return_in() [ v_p <= 0 ]
+eval_parts_entry_in(v_p, v_q) -> eval_parts_if.else_in(v_p, v_q) [ v_p > 0 ]
+eval_parts_if.else_in(v_p, v_q) -> eval_parts_return_in() [ v_q <= 0 ]
+eval_parts_if.else_in(v_p, v_q) -> eval_parts_if.else.3_in(v_p, v_q) [ v_q > 0 ]
+eval_parts_if.else.3_in(v_p, v_q) -> eval_parts_if.then.5_in(v_p, v_q) [ v_q > v_p ]
+eval_parts_if.else.3_in(v_p, v_q) -> eval_parts_if.else.6_in(v_p, v_q) [ v_q <= v_p ]
+eval_parts_if.then.5_in(v_p, v_q) -> eval_parts_start(v_p, v_p)
+eval_parts_if.then.5_in(v_p, v_q) -> eval_parts_return_in()
+eval_parts_if.else.6_in(v_p, v_q) -> eval_parts_start(v_p - v_q, v_q)
+eval_parts_if.else.6_in(v_p, v_q) -> eval_parts_start(v_p, v_q - 1)
+eval_parts_if.else.6_in(v_p, v_q) -> eval_parts_return_in()
+eval_parts_return_in() -> eval_parts_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_for.end.13_in()
+eval_main_entry_in() -> eval_main_if.end_in(nondef.0) [ nondef.0 >= 0 ]
+eval_main_if.end_in(v_call) -> eval_main_for.end.13_in()
+eval_main_if.end_in(v_call) -> eval_main_if.end.4_in(v_call)
+eval_main_if.end.4_in(v_call) -> eval_main_for.cond_in(v_call, 0)
+eval_main_for.cond_in(v_call, v_p.0) -> eval_main_for.cond.7_in(v_call, v_p.0, 0) [ v_p.0 <= v_call ]
+eval_main_for.cond_in(v_call, v_p.0) -> eval_main_for.end.13_in() [ v_p.0 > v_call ]
+eval_main_for.cond.7_in(v_call, v_p.0, v_q.0) -> eval_main_for.body.9_in(v_call, v_p.0, v_q.0) [ v_q.0 <= v_call ]
+eval_main_for.cond.7_in(v_call, v_p.0, v_q.0) -> eval_main_for.inc.11_in(v_call, v_p.0, v_q.0) [ v_q.0 > v_call ]
+eval_main_for.body.9_in(v_call, v_p.0, v_q.0) -> eval_main_for.cond.7_in(v_call, v_p.0, v_q.0 + 1)
+eval_main_for.inc.11_in(v_call, v_p.0, v_q.0) -> eval_main_for.cond_in(v_call, v_p.0 + 1)
+eval_main_for.end.13_in() -> eval_main_stop()

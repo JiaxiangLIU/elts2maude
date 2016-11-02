@@ -1,0 +1,21 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.2, nondef.1, 1)
+eval_main_while.cond_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_while.body_in(v_call, v_call2, v_y.0, v_flag.0) [ v_y.0 < v_call2 /\ v_flag.0 > 0 ]
+eval_main_while.cond_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_while.end_in() [ v_y.0 >= v_call2 ]
+eval_main_while.cond_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_while.end_in() [ v_flag.0 <= 0 ]
+eval_main_while.body_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.then_in(v_call, v_call2, v_y.0, v_flag.0) [ v_y.0 > 0 /\ v_call > 1 ]
+eval_main_while.body_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) [ v_y.0 <= 0 ]
+eval_main_while.body_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) [ v_call <= 1 ]
+eval_main_if.then_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_call*v_y.0, v_flag.0)
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, -v_call*v_y.0, v_flag.0) [ v_y.0 > 0 /\ v_call < -1 /\ v_y.0 > 0 /\ v_call < -1 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, -v_call*v_y.0, 0) [ v_y.0 > 0 /\ v_call < -1 /\ v_y.0 <= 0 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, -v_call*v_y.0, 0) [ v_y.0 > 0 /\ v_call < -1 /\ v_call >= -1 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_y.0, v_flag.0) [ v_y.0 <= 0 /\ v_y.0 > 0 /\ v_call < -1 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_y.0, v_flag.0) [ v_call >= -1 /\ v_y.0 > 0 /\ v_call < -1 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_y.0, 0) [ v_y.0 <= 0 /\ v_y.0 <= 0 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_y.0, 0) [ v_y.0 <= 0 /\ v_call >= -1 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_y.0, 0) [ v_call >= -1 /\ v_y.0 <= 0 ]
+eval_main_if.else_in(v_call, v_call2, v_y.0, v_flag.0) -> eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_y.0, 0) [ v_call >= -1 /\ v_call >= -1 ]
+eval_main_if.end.12_in(v_call, v_call2, v_y.0, v_flag.0, v_y.2, v_flag.2) -> eval_main_while.cond_in(v_call, v_call2, v_y.2, v_flag.2)
+eval_main_while.end_in() -> eval_main_stop()

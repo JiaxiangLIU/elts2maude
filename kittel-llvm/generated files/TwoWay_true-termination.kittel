@@ -1,0 +1,13 @@
+///*** 1_twoWay ***///
+eval_twoWay_start(v_terminate, v_n) -> eval_twoWay_entry_in(v_terminate, v_n)
+eval_twoWay_entry_in(v_terminate, v_n) -> eval_twoWay_return_in() [ v_n < 0 ]
+eval_twoWay_entry_in(v_terminate, v_n) -> eval_twoWay_if.else_in(v_terminate, v_n) [ v_n >= 0 ]
+eval_twoWay_if.else_in(v_terminate, v_n) -> eval_twoWay_start(v_terminate, v_n - 1) [ v_terminate < 0 ]
+eval_twoWay_if.else_in(v_terminate, v_n) -> eval_twoWay_start(v_terminate, v_n - 1) [ v_terminate > 0 ]
+eval_twoWay_if.else_in(v_terminate, v_n) -> eval_twoWay_return_in() [ v_terminate < 0 ]
+eval_twoWay_if.else_in(v_terminate, v_n) -> eval_twoWay_return_in() [ v_terminate > 0 ]
+eval_twoWay_if.else_in(v_terminate, v_n) -> eval_twoWay_start(v_terminate, v_n + 1) [ v_terminate = 0 ]
+eval_twoWay_if.else_in(v_terminate, v_n) -> eval_twoWay_return_in() [ v_terminate = 0 ]
+eval_twoWay_return_in() -> eval_twoWay_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

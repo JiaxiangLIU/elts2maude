@@ -1,0 +1,64 @@
+Initial termination problem:
+1:	eval_test_fun_start(v_x, v_y, v_z) -> eval_test_fun_entry_in()
+	eval_test_fun_entry_in() -> eval_test_fun_while.cond_in(nondef.0, nondef.1)
+	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_land.rhs_in(v_8, v_9)
+	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.end.6_in()
+	eval_test_fun_land.rhs_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_land.rhs_in(v_8, v_9) -> eval_test_fun_while.end.6_in()
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.body.4_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9)
+	eval_test_fun_while.body.4_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.end.6_in() -> eval_test_fun_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_land.rhs_in(v_8, v_9)
+	eval_test_fun_land.rhs_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.body.4_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9)
+	eval_test_fun_while.body.4_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+By chaining the rule eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_land.rhs_in(v_8, v_9) with all rule in problem 2, the following new rules are obtained:
+	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+We thus obtain the following problem:
+3:	eval_test_fun_land.rhs_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.body.4_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9)
+	eval_test_fun_while.body.4_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.body.4_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9)
+	eval_test_fun_while.body.4_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+By chaining the rule eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.body.4_in(v_8, v_9) with all rule in problem 4, the following new rules are obtained:
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+We thus obtain the following problem:
+5:	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9)
+	eval_test_fun_while.body.4_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9)
+	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+By chaining the rule eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9) with all rule in problem 6, the following new rules are obtained:
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+We thus obtain the following problem:
+7:	eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+	eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+The following termination problem could not be handled:
+eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+eval_test_fun_while.cond.2_in(v_8, v_9) -> eval_test_fun_while.cond.2_in(v_8, v_9)
+
+Time: 0.651 sec (SMT: 0.627 sec)

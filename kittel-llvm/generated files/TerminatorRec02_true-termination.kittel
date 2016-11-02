@@ -1,0 +1,9 @@
+///*** 1_fact ***///
+eval_fact_start(v_x) -> eval_fact_entry_in(v_x)
+eval_fact_entry_in(v_x) -> eval_fact_if.then_in(v_x) [ v_x > 1 ]
+eval_fact_entry_in(v_x) -> eval_fact_return_in() [ v_x <= 1 ]
+eval_fact_if.then_in(v_x) -> eval_fact_start(v_x - 1)
+eval_fact_if.then_in(v_x) -> eval_fact_return_in()
+eval_fact_return_in() -> eval_fact_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

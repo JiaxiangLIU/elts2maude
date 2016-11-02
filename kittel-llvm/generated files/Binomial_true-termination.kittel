@@ -1,0 +1,27 @@
+///*** 1_fact ***///
+eval_fact_start(v_n) -> eval_fact_entry_in(v_n)
+eval_fact_entry_in(v_n) -> eval_fact_return_in() [ v_n <= 0 ]
+eval_fact_entry_in(v_n) -> eval_fact_if.else_in(v_n) [ v_n > 0 ]
+eval_fact_if.else_in(v_n) -> eval_fact_start(v_n - 1)
+eval_fact_if.else_in(v_n) -> eval_fact_return_in()
+eval_fact_return_in() -> eval_fact_stop()
+///*** 2_binomialCoefficient ***///
+eval_binomialCoefficient_start(v_n, v_k) -> eval_binomialCoefficient_stop()
+///*** 3_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_for.end.17_in()
+eval_main_entry_in() -> eval_main_if.end_in(nondef.0) [ nondef.0 >= 0 ]
+eval_main_if.end_in(v_call) -> eval_main_for.end.17_in()
+eval_main_if.end_in(v_call) -> eval_main_if.end.4_in(v_call)
+eval_main_if.end.4_in(v_call) -> eval_main_for.cond_in(v_call, 0)
+eval_main_for.cond_in(v_call, v_n.0) -> eval_main_for.cond.7_in(v_call, v_n.0, 0) [ v_n.0 <= v_call ]
+eval_main_for.cond_in(v_call, v_n.0) -> eval_main_for.end.17_in() [ v_n.0 > v_call ]
+eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.body.9_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_call ]
+eval_main_for.cond.7_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_call ]
+eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.then.11_in(v_call, v_n.0, v_k.0) [ v_k.0 <= v_n.0 ]
+eval_main_for.body.9_in(v_call, v_n.0, v_k.0) -> eval_main_if.else_in(v_call, v_n.0, v_k.0) [ v_k.0 > v_n.0 ]
+eval_main_if.then.11_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+eval_main_if.else_in(v_call, v_n.0, v_k.0) -> eval_main_for.inc_in(v_call, v_n.0, v_k.0)
+eval_main_for.inc_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond.7_in(v_call, v_n.0, v_k.0 + 1)
+eval_main_for.inc.15_in(v_call, v_n.0, v_k.0) -> eval_main_for.cond_in(v_call, v_n.0 + 1)
+eval_main_for.end.17_in() -> eval_main_stop()

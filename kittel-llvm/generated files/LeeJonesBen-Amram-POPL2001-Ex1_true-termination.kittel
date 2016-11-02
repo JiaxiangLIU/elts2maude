@@ -1,0 +1,12 @@
+///*** 1_r1 ***///
+eval_r1_start(v_ls, v_a) -> eval_r1_entry_in(v_ls, v_a)
+eval_r1_entry_in(v_ls, v_a) -> eval_r1_return_in() [ v_ls = 0 ]
+eval_r1_entry_in(v_ls, v_a) -> eval_r1_if.else_in(v_ls, v_a) [ v_ls < 0 ]
+eval_r1_entry_in(v_ls, v_a) -> eval_r1_if.else_in(v_ls, v_a) [ v_ls > 0 ]
+eval_r1_if.else_in(v_ls, v_a) -> eval_r1_start(v_ls - 1, v_ls + v_a + 1)
+eval_r1_if.else_in(v_ls, v_a) -> eval_r1_return_in()
+eval_r1_return_in() -> eval_r1_stop()
+///*** 2_rev ***///
+eval_rev_start(v_ls) -> eval_rev_stop()
+///*** 3_main ***///
+eval_main_start() -> eval_main_stop()

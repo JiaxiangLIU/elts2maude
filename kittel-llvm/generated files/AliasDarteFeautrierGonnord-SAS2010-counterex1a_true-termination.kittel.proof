@@ -1,0 +1,283 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.3, nondef.2, nondef.1)
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.end_in() [ v_x.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.end_in() [ 0 > v_y.0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.end_in() [ v_y.0 > v_call ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 = 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 < 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, 1)
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0)
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, v_b.0) [ nondef.5 < 0 /\ nondef.5 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, v_b.0) [ nondef.5 > 0 /\ nondef.5 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, 0) [ nondef.5 = 0 /\ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, 0) [ nondef.5 = 0 /\ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, v_b.0) [ nondef.5 < 0 /\ nondef.5 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, v_b.0) [ nondef.5 > 0 /\ nondef.5 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, 0) [ nondef.5 = 0 /\ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, 0) [ nondef.5 = 0 /\ nondef.5 > 0 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.3, nondef.2, nondef.1)
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.end_in() [ v_x.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.end_in() [ 0 > v_y.0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.end_in() [ v_y.0 > v_call ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 = 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 < 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, 1)
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0)
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 = 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 < 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, 1)
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0)
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+
+By chaining the rule eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call ] with all rules in problem 3, the following new rules are obtained:
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+We thus obtain the following problem:
+4:	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 = 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 < 0 ]
+	eval_main_while.body_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, 1)
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0)
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, 1)
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0)
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+
+By chaining the rule eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, 1) with all rules in problem 5, the following new rules are obtained:
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 = 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 < 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+We thus obtain the following problem:
+6:	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0)
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 = 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 < 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0)
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+
+By chaining the rule eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 + 1, v_x.0, v_b.0) with all rules in problem 7, the following new rules are obtained:
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 < 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 > 0 ]
+We thus obtain the following problem:
+8:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 < 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 > 0 ]
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+
+By chaining the rule eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 ] with all rules in problem 9, the following new rules are obtained:
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 > 0 ]
+We thus obtain the following problem:
+10:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 > 0 ]
+
+The termination graph of problem 10 contains 1 nontrivial SCC:
+11:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.else_in) = X_1 + X_3
+	Pol(eval_main_while.cond_in) = X_1 + X_3
+	Pol(eval_main_if.then_in) = X_1 + X_3
+removes the following rule from problem 11:
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 < 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+We thus obtain the following problem:
+12:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+
+The termination graph of problem 12 contains 1 nontrivial SCC:
+13:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+
+By chaining the rule eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 ] with all rules in problem 13, the following new rules are obtained:
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 > 0 ]
+We thus obtain the following problem:
+14:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 < 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 > 0 ]
+
+The termination graph of problem 14 contains 1 nontrivial SCC:
+15:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.else_in) = X_1 + X_3
+	Pol(eval_main_while.cond_in) = X_1 + X_3
+	Pol(eval_main_if.then_in) = X_1 + X_3
+removes the following rule from problem 15:
+	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 - 1, v_x.0 - 1, 0) [ nondef.5 > 0 /\ v_x.0 - 1 >= 0 /\ 0 <= v_y.0 - 1 /\ v_y.0 - 1 <= v_call /\ 0 = 0 ]
+We thus obtain the following problem:
+16:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+
+The termination graph of problem 16 contains 1 nontrivial SCC:
+17:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.else_in) = X_1 + X_3 - 3*X_4 + 1
+	Pol(eval_main_while.cond_in) = X_1 + X_3 - 3*X_4 + 1
+	Pol(eval_main_if.then_in) = X_1 + X_3
+removes the following rule from problem 17:
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 = 0 ]
+We thus obtain the following problem:
+18:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0 + 1, v_x.0, 1) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ 1 > 0 ]
+	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+
+The termination graph of problem 18 contains 2 nontrivial SCCs:
+19:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+
+20:	eval_main_if.then_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.then_in(v_call, v_y.0 + 1, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 + 1 /\ v_y.0 + 1 <= v_call /\ v_b.0 = 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.else_in) = 2*X_2 + X_3 - 2*X_4 - 3
+	Pol(eval_main_while.cond_in) = 2*X_2 + X_3 - 2*X_4 - 2
+removes the following rule from problem 19:
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 < 0 ]
+We thus obtain the following problem:
+21:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+
+The termination graph of problem 21 contains 1 nontrivial SCC:
+22:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.else_in) = X_1 + 2*X_2 + X_3 + X_4 - 1
+	Pol(eval_main_while.cond_in) = X_1 + 2*X_2 + X_3 + X_4
+removes the following rule from problem 22:
+	eval_main_while.cond_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) [ v_x.0 >= 0 /\ 0 <= v_y.0 /\ v_y.0 <= v_call /\ v_b.0 > 0 ]
+We thus obtain the following problem:
+23:	eval_main_if.else_in(v_call, v_y.0, v_x.0, v_b.0) -> eval_main_while.cond_in(v_call, v_y.0 - 1, v_x.0, v_b.0) [ nondef.5 = 0 ]
+
+The termination graph of problem 23 contains no nontrivial SCC.
+
+A polynomial interpretation with
+	Pol(eval_main_if.then_in) = X_1 - X_2
+removes all rules from problem 20.
+
+Termination successfully shown!
+
+Time: 4.243 sec (SMT: 3.594 sec)

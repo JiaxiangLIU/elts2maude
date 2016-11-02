@@ -1,0 +1,127 @@
+Initial termination problem:
+1:	eval_lis_start(v_N) -> eval_lis_entry_in(v_N)
+	eval_lis_entry_in(v_N) -> eval_lis_for.cond_in(v_N, 0)
+	eval_lis_for.cond_in(v_N, v_i.0) -> eval_lis_for.body_in(v_N, v_i.0) [ v_i.0 < v_N ]
+	eval_lis_for.cond_in(v_N, v_i.0) -> eval_lis_for.cond.6_in(v_N, 1) [ v_i.0 >= v_N ]
+	eval_lis_for.body_in(v_N, v_i.0) -> eval_lis_for.cond_in(v_N, v_i.0 + 1)
+	eval_lis_for.cond.6_in(v_N, v_i.1) -> eval_lis_for.body.9_in(v_N, v_i.1) [ v_i.1 < v_N ]
+	eval_lis_for.cond.6_in(v_N, v_i.1) -> eval_lis_for.cond.39_in(v_N, 0, 0) [ v_i.1 >= v_N ]
+	eval_lis_for.body.9_in(v_N, v_i.1) -> eval_lis_for.cond.10_in(v_N, v_i.1, nondef.0, 0)
+	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 < v_i.1 ]
+	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.36_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 >= v_i.1 ]
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0 + 1)
+	eval_lis_for.inc.36_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.6_in(v_N, v_i.1 + 1)
+	eval_lis_for.cond.39_in(v_N, v_max.0, v_i.2) -> eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) [ v_i.2 < v_N ]
+	eval_lis_for.cond.39_in(v_N, v_max.0, v_i.2) -> eval_lis_for.end.53_in() [ v_i.2 >= v_N ]
+	eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) -> eval_lis_if.then.47_in(v_N, v_max.0, v_i.2)
+	eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) -> eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, v_max.0)
+	eval_lis_if.then.47_in(v_N, v_max.0, v_i.2) -> eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, nondef.6)
+	eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, v_max.1) -> eval_lis_for.cond.39_in(v_N, v_max.1, v_i.2 + 1)
+	eval_lis_for.end.53_in() -> eval_lis_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 3 nontrivial SCCs:
+2:	eval_lis_for.cond.39_in(v_N, v_max.0, v_i.2) -> eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) [ v_i.2 < v_N ]
+	eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) -> eval_lis_if.then.47_in(v_N, v_max.0, v_i.2)
+	eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) -> eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, v_max.0)
+	eval_lis_if.then.47_in(v_N, v_max.0, v_i.2) -> eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, nondef.6)
+	eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, v_max.1) -> eval_lis_for.cond.39_in(v_N, v_max.1, v_i.2 + 1)
+
+3:	eval_lis_for.cond.6_in(v_N, v_i.1) -> eval_lis_for.body.9_in(v_N, v_i.1) [ v_i.1 < v_N ]
+	eval_lis_for.body.9_in(v_N, v_i.1) -> eval_lis_for.cond.10_in(v_N, v_i.1, nondef.0, 0)
+	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 < v_i.1 ]
+	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.36_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 >= v_i.1 ]
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0 + 1)
+	eval_lis_for.inc.36_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.6_in(v_N, v_i.1 + 1)
+
+4:	eval_lis_for.cond_in(v_N, v_i.0) -> eval_lis_for.body_in(v_N, v_i.0) [ v_i.0 < v_N ]
+	eval_lis_for.body_in(v_N, v_i.0) -> eval_lis_for.cond_in(v_N, v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_lis_for.cond.39_in) = X_1 - X_3
+	Pol(eval_lis_for.body.42_in) = X_1 - X_3 - 1
+	Pol(eval_lis_if.then.47_in) = X_1 - X_3 - 1
+	Pol(eval_lis_for.inc.51_in) = X_1 - X_3 - 1
+removes the following rule from problem 2:
+	eval_lis_for.cond.39_in(v_N, v_max.0, v_i.2) -> eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) [ v_i.2 < v_N ]
+We thus obtain the following problem:
+5:	eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) -> eval_lis_if.then.47_in(v_N, v_max.0, v_i.2)
+	eval_lis_for.body.42_in(v_N, v_max.0, v_i.2) -> eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, v_max.0)
+	eval_lis_if.then.47_in(v_N, v_max.0, v_i.2) -> eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, nondef.6)
+	eval_lis_for.inc.51_in(v_N, v_max.0, v_i.2, v_max.1) -> eval_lis_for.cond.39_in(v_N, v_max.1, v_i.2 + 1)
+
+The termination graph of problem 5 contains no nontrivial SCC.
+
+A polynomial interpretation with
+	Pol(eval_lis_for.cond.6_in) = 4*X_1 - 4*X_2 + 3
+	Pol(eval_lis_for.body.9_in) = 4*X_1 - 4*X_2 + 2
+	Pol(eval_lis_for.cond.10_in) = 4*X_1 - 4*X_2 + 1
+	Pol(eval_lis_for.body.13_in) = 4*X_1 - 4*X_2 + 1
+	Pol(eval_lis_for.inc.36_in) = 4*X_1 - 4*X_2
+	Pol(eval_lis_land.lhs.true_in) = 4*X_1 - 4*X_2 + 1
+	Pol(eval_lis_for.inc.33_in) = 4*X_1 - 4*X_2 + 1
+	Pol(eval_lis_if.then_in) = 4*X_1 - 4*X_2 + 1
+removes the following rule from problem 3:
+	eval_lis_for.cond.6_in(v_N, v_i.1) -> eval_lis_for.body.9_in(v_N, v_i.1) [ v_i.1 < v_N ]
+We thus obtain the following problem:
+6:	eval_lis_for.body.9_in(v_N, v_i.1) -> eval_lis_for.cond.10_in(v_N, v_i.1, nondef.0, 0)
+	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 < v_i.1 ]
+	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.36_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 >= v_i.1 ]
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0 + 1)
+	eval_lis_for.inc.36_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.6_in(v_N, v_i.1 + 1)
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 < v_i.1 ]
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_lis_for.cond.10_in) = 2*X_2 - 2*X_4
+	Pol(eval_lis_for.body.13_in) = 2*X_2 - 2*X_4 - 1
+	Pol(eval_lis_land.lhs.true_in) = 2*X_2 - 2*X_4 - 1
+	Pol(eval_lis_for.inc.33_in) = 2*X_2 - 2*X_4 - 2
+	Pol(eval_lis_if.then_in) = 2*X_2 - 2*X_4 - 2
+removes the following rule from problem 7:
+	eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) [ v_j.0 < v_i.1 ]
+We thus obtain the following problem:
+8:	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.body.13_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_land.lhs.true_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_if.then_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0)
+	eval_lis_for.inc.33_in(v_N, v_i.1, v_4, v_j.0) -> eval_lis_for.cond.10_in(v_N, v_i.1, v_4, v_j.0 + 1)
+
+The termination graph of problem 8 contains no nontrivial SCC.
+
+A polynomial interpretation with
+	Pol(eval_lis_for.cond_in) = 2*X_1 - 2*X_2
+	Pol(eval_lis_for.body_in) = 2*X_1 - 2*X_2 - 1
+removes the following rule from problem 4:
+	eval_lis_for.cond_in(v_N, v_i.0) -> eval_lis_for.body_in(v_N, v_i.0) [ v_i.0 < v_N ]
+We thus obtain the following problem:
+9:	eval_lis_for.body_in(v_N, v_i.0) -> eval_lis_for.cond_in(v_N, v_i.0 + 1)
+
+The termination graph of problem 9 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.859 sec (SMT: 0.837 sec)

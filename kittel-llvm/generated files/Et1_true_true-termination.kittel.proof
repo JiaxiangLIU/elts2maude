@@ -1,0 +1,50 @@
+Initial termination problem:
+1:	eval_loop_start(v_a, v_b) -> eval_loop_entry_in(v_a, v_b)
+	eval_loop_entry_in(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+	eval_loop_entry_in(v_a, v_b) -> eval_loop_if.end_in() [ v_a <= v_b ]
+	eval_loop_if.then_in(v_a, v_b) -> eval_loop_start(v_a + 1, v_b + v_a)
+	eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.end_in()
+	eval_loop_if.end_in() -> eval_loop_stop()
+	eval_random_start() -> eval_random_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_loop_start(v_a, v_b) -> eval_loop_entry_in(v_a, v_b)
+	eval_loop_entry_in(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+	eval_loop_if.then_in(v_a, v_b) -> eval_loop_start(v_a + 1, v_b + v_a)
+
+By chaining the rule eval_loop_start(v_a, v_b) -> eval_loop_entry_in(v_a, v_b) with all rule in problem 2, the following new rules are obtained:
+	eval_loop_start(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+We thus obtain the following problem:
+3:	eval_loop_entry_in(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+	eval_loop_if.then_in(v_a, v_b) -> eval_loop_start(v_a + 1, v_b + v_a)
+	eval_loop_start(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_loop_if.then_in(v_a, v_b) -> eval_loop_start(v_a + 1, v_b + v_a)
+	eval_loop_start(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+
+By chaining the rule eval_loop_if.then_in(v_a, v_b) -> eval_loop_start(v_a + 1, v_b + v_a) with all rule in problem 4, the following new rules are obtained:
+	eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.then_in(v_a + 1, v_b + v_a) [ v_a + 1 > v_b + v_a ]
+We thus obtain the following problem:
+5:	eval_loop_start(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+	eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.then_in(v_a + 1, v_b + v_a) [ v_a + 1 > v_b + v_a ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.then_in(v_a + 1, v_b + v_a) [ v_a + 1 > v_b + v_a ]
+
+By chaining the rule eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.then_in(v_a + 1, v_b + v_a) [ v_a + 1 > v_b + v_a ] with all rule in problem 6, the following new rules are obtained:
+	eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.then_in(v_a + 2, v_b + 2*v_a + 1) [ v_a + 1 > v_b + v_a /\ v_a + 2 > v_b + 2*v_a + 1 ]
+We thus obtain the following problem:
+7:	eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.then_in(v_a + 2, v_b + 2*v_a + 1) [ v_a + 1 > v_b + v_a /\ v_a + 2 > v_b + 2*v_a + 1 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.then_in(v_a + 2, v_b + 2*v_a + 1) [ v_a + 1 > v_b + v_a /\ v_a + 2 > v_b + 2*v_a + 1 ]
+
+A polynomial interpretation with
+	Pol(eval_loop_if.then_in) = -2*X_1 - 2*X_2 + X_1^2
+removes all rules from problem 8.
+
+Termination successfully shown!
+
+Time: 0.461 sec (SMT: 0.436 sec)

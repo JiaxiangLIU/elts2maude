@@ -1,0 +1,44 @@
+Initial termination problem:
+1:	eval_cstrcmp_start() -> eval_cstrcmp_entry_in()
+	eval_cstrcmp_entry_in() -> eval_cstrcmp_while.cond_in()
+	eval_cstrcmp_while.cond_in() -> eval_cstrcmp_land.rhs_in()
+	eval_cstrcmp_while.cond_in() -> eval_cstrcmp_while.end_in()
+	eval_cstrcmp_land.rhs_in() -> eval_cstrcmp_while.body_in()
+	eval_cstrcmp_land.rhs_in() -> eval_cstrcmp_while.end_in()
+	eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.cond_in()
+	eval_cstrcmp_while.end_in() -> eval_cstrcmp_cond.end_in()
+	eval_cstrcmp_while.end_in() -> eval_cstrcmp_cond.false_in(nondef.3, nondef.4) [ nondef.3 >= nondef.4 ]
+	eval_cstrcmp_cond.false_in(v_3, v_4) -> eval_cstrcmp_cond.end_in() [ v_3 <= v_4 ]
+	eval_cstrcmp_cond.false_in(v_3, v_4) -> eval_cstrcmp_cond.end_in() [ v_3 > v_4 ]
+	eval_cstrcmp_cond.end_in() -> eval_cstrcmp_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_cstrcmp_while.cond_in() -> eval_cstrcmp_land.rhs_in()
+	eval_cstrcmp_land.rhs_in() -> eval_cstrcmp_while.body_in()
+	eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.cond_in()
+
+By chaining the rule eval_cstrcmp_while.cond_in() -> eval_cstrcmp_land.rhs_in() with all rule in problem 2, the following new rules are obtained:
+	eval_cstrcmp_while.cond_in() -> eval_cstrcmp_while.body_in()
+We thus obtain the following problem:
+3:	eval_cstrcmp_land.rhs_in() -> eval_cstrcmp_while.body_in()
+	eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.cond_in()
+	eval_cstrcmp_while.cond_in() -> eval_cstrcmp_while.body_in()
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.cond_in()
+	eval_cstrcmp_while.cond_in() -> eval_cstrcmp_while.body_in()
+
+By chaining the rule eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.cond_in() with all rule in problem 4, the following new rules are obtained:
+	eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.body_in()
+We thus obtain the following problem:
+5:	eval_cstrcmp_while.cond_in() -> eval_cstrcmp_while.body_in()
+	eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.body_in()
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.body_in()
+
+The following termination problem could not be handled:
+eval_cstrcmp_while.body_in() -> eval_cstrcmp_while.body_in()
+
+Time: 0.573 sec (SMT: 0.558 sec)

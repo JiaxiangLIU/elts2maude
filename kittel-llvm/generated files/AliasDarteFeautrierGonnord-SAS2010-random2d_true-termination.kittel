@@ -1,0 +1,26 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.cond_in(0)
+eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 10 ]
+eval_main_while.cond_in(v_i.0) -> eval_main_while.end_in() [ v_i.0 >= 10 ]
+eval_main_while.body_in(v_i.0) -> eval_main_if.then_in(v_i.0, v_i.0 + 1, nondef.0) [ nondef.0 >= 0 /\ nondef.0 <= 3 ]
+eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 + 1)
+eval_main_if.then_in(v_i.0, v_add, v_call) -> eval_main_NodeBlock.5_in(v_i.0, v_add, v_call)
+eval_main_NodeBlock.5_in(v_i.0, v_add, v_call) -> eval_main_NodeBlock_in(v_i.0, v_add, v_call) [ v_call < 2 ]
+eval_main_NodeBlock.5_in(v_i.0, v_add, v_call) -> eval_main_NodeBlock.3_in(v_i.0, v_add, v_call) [ v_call >= 2 ]
+eval_main_NodeBlock_in(v_i.0, v_add, v_call) -> eval_main_LeafBlock_in(v_i.0, v_add, v_call) [ v_call < 1 ]
+eval_main_NodeBlock_in(v_i.0, v_add, v_call) -> eval_main_if.then.7_in(v_i.0, v_add, v_call) [ v_call >= 1 ]
+eval_main_LeafBlock_in(v_i.0, v_add, v_call) -> eval_main_if.then.4_in(v_i.0, v_add, v_call) [ v_call = 0 ]
+eval_main_LeafBlock_in(v_i.0, v_add, v_call) -> eval_main_NewDefault_in(v_i.0, v_add, v_call) [ v_call < 0 ]
+eval_main_LeafBlock_in(v_i.0, v_add, v_call) -> eval_main_NewDefault_in(v_i.0, v_add, v_call) [ v_call > 0 ]
+eval_main_if.then.4_in(v_i.0, v_add, v_call) -> eval_main_while.cond_in(v_add)
+eval_main_if.then.7_in(v_i.0, v_add, v_call) -> eval_main_while.cond_in(v_add)
+eval_main_NodeBlock.3_in(v_i.0, v_add, v_call) -> eval_main_if.then.10_in(v_i.0, v_add, v_call) [ v_call < 3 ]
+eval_main_NodeBlock.3_in(v_i.0, v_add, v_call) -> eval_main_LeafBlock.1_in(v_i.0, v_add, v_call) [ v_call >= 3 ]
+eval_main_if.then.10_in(v_i.0, v_add, v_call) -> eval_main_while.cond_in(v_add)
+eval_main_LeafBlock.1_in(v_i.0, v_add, v_call) -> eval_main_if.then.14_in(v_i.0, v_add, v_call) [ v_call = 3 ]
+eval_main_LeafBlock.1_in(v_i.0, v_add, v_call) -> eval_main_NewDefault_in(v_i.0, v_add, v_call) [ v_call < 3 ]
+eval_main_LeafBlock.1_in(v_i.0, v_add, v_call) -> eval_main_NewDefault_in(v_i.0, v_add, v_call) [ v_call > 3 ]
+eval_main_if.then.14_in(v_i.0, v_add, v_call) -> eval_main_while.cond_in(v_add)
+eval_main_NewDefault_in(v_i.0, v_add, v_call) -> eval_main_while.cond_in(v_add)
+eval_main_while.end_in() -> eval_main_stop()

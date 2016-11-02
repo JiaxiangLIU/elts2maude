@@ -1,0 +1,22 @@
+///*** 1_cstrncmp ***///
+eval_cstrncmp_start(v_n) -> eval_cstrncmp_entry_in(v_n)
+eval_cstrncmp_entry_in(v_n) -> eval_cstrncmp_return_in() [ v_n = 0 ]
+eval_cstrncmp_entry_in(v_n) -> eval_cstrncmp_while.cond_in(v_n) [ v_n < 0 ]
+eval_cstrncmp_entry_in(v_n) -> eval_cstrncmp_while.cond_in(v_n) [ v_n > 0 ]
+eval_cstrncmp_while.cond_in(v_n.addr.0) -> eval_cstrncmp_land.rhs_in(v_n.addr.0, v_n.addr.0 - 1) [ v_n.addr.0 > 0 ]
+eval_cstrncmp_while.cond_in(v_n.addr.0) -> eval_cstrncmp_while.end_in() [ v_n.addr.0 <= 0 ]
+eval_cstrncmp_land.rhs_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.body_in(v_n.addr.0, v_dec)
+eval_cstrncmp_land.rhs_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.end_in()
+eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_return_in() [ v_dec = 0 ]
+eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec < 0 ]
+eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec > 0 ]
+eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) -> eval_cstrncmp_return_in()
+eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) -> eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec)
+eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.cond_in(v_dec)
+eval_cstrncmp_while.end_in() -> eval_cstrncmp_return_in()
+eval_cstrncmp_while.end_in() -> eval_cstrncmp_cond.false_in(nondef.3, nondef.4) [ nondef.3 >= nondef.4 ]
+eval_cstrncmp_cond.false_in(v_3, v_4) -> eval_cstrncmp_return_in() [ v_3 <= v_4 ]
+eval_cstrncmp_cond.false_in(v_3, v_4) -> eval_cstrncmp_return_in() [ v_3 > v_4 ]
+eval_cstrncmp_return_in() -> eval_cstrncmp_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

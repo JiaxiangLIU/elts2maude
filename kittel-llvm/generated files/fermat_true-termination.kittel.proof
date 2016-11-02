@@ -1,0 +1,197 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(1, 1, 1)
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.end_in() [ v_a.0^3 = v_b.0^3 + v_c.0^3 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.end_in() [ v_c.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, v_a.0 + 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 > 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 <= 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, v_a.0 + 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 > 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 /\ v_b.0 > 1000 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(1, 1, 1)
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.end_in() [ v_a.0^3 = v_b.0^3 + v_c.0^3 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.end_in() [ v_c.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+By chaining the rule eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ] with all rules in problem 3, the following new rules are obtained:
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+We thus obtain the following problem:
+4:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -999*X_3 + 999000
+	Pol(eval_main_while.body_in) = -999*X_3 + 999000
+removes the following rule from problem 5:
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+We thus obtain the following problem:
+6:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -2000*X_1 - 2000001*X_3 + X_1^2 + 2002001000
+	Pol(eval_main_while.body_in) = -2000*X_1 - 2000001*X_3 + X_1^2 + 2002001000
+removes the following rule from problem 7:
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+We thus obtain the following problem:
+8:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -1996004000*X_1 - 2000*X_2 - 1994009992004*X_3 + 998002*X_1^2 + X_2^2 + 1995007995003999
+	Pol(eval_main_while.body_in) = -1996004000*X_1 - 2000*X_2 - 1994009992004*X_3 + 998002*X_1^2 + X_2^2 + 1995007995003998
+removes the following rule from problem 9:
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 < v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+We thus obtain the following problem:
+10:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+The termination graph of problem 10 contains 1 nontrivial SCC:
+11:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+By chaining the rule eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.body_in(v_b.0, v_a.0, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 ] with all rules in problem 11, the following new rules are obtained:
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+We thus obtain the following problem:
+12:	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.body_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, v_a.0 + 1, v_c.0 + 1) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+The termination graph of problem 12 contains 1 nontrivial SCC:
+13:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -X_3 + 1000
+removes the following rule from problem 13:
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(1, 1, v_c.0 + 1) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 > 1000 ]
+We thus obtain the following problem:
+14:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+The termination graph of problem 14 contains 1 nontrivial SCC:
+15:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -3000*X_1 + 2997000
+removes the following rule from problem 15:
+	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0 + 1, 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 > 1000 /\ v_b.0 + 1 <= 1000 ]
+We thus obtain the following problem:
+16:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+The termination graph of problem 16 contains 1 nontrivial SCC:
+17:	eval_main_while.cond_in(v_b.0, v_a.0, v_c.0) -> eval_main_while.cond_in(v_b.0, v_a.0 + 1, v_c.0) [ v_a.0^3 > v_b.0^3 + v_c.0^3 /\ v_c.0 <= 1000 /\ v_a.0 + 1 <= 1000 /\ v_b.0 <= 1000 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -X_2 + 999
+removes all rules from problem 17.
+
+Termination successfully shown!
+
+Time: 3.637 sec (SMT: 3.507 sec)

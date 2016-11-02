@@ -1,0 +1,28 @@
+Initial termination problem:
+1:	eval_strcpy_start() -> eval_strcpy_entry_in()
+	eval_strcpy_entry_in() -> eval_strcpy_while.cond_in()
+	eval_strcpy_while.cond_in() -> eval_strcpy_while.cond_in()
+	eval_strcpy_while.cond_in() -> eval_strcpy_while.end_in()
+	eval_strcpy_while.end_in() -> eval_strcpy_stop()
+	eval_strchr_start(v_c) -> eval_strchr_entry_in(v_c)
+	eval_strchr_entry_in(v_c) -> eval_strchr_for.cond_in(v_c)
+	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_return_in()
+	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end_in(v_conv2)
+	eval_strchr_if.end_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+	eval_strchr_if.end_in(v_conv2) -> eval_strchr_return_in()
+	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_for.cond_in(v_conv2)
+	eval_strchr_return_in() -> eval_strchr_stop()
+	eval_build_fullname_start() -> eval_build_fullname_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_strcpy_while.cond_in() -> eval_strcpy_while.cond_in()
+
+3:	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end_in(v_conv2)
+	eval_strchr_if.end_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_for.cond_in(v_conv2)
+
+The following termination problem could not be handled:
+eval_strcpy_while.cond_in() -> eval_strcpy_while.cond_in()
+
+Time: 0.441 sec (SMT: 0.434 sec)

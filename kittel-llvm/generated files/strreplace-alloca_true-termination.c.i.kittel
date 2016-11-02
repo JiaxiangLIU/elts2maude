@@ -1,0 +1,12 @@
+///*** 1_cstrreplace ***///
+eval_cstrreplace_start(v_old, v_new) -> eval_cstrreplace_entry_in(v_old)
+eval_cstrreplace_entry_in(v_old) -> eval_cstrreplace_while.cond_in(v_old)
+eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.body_in(v_conv3)
+eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.end_in()
+eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+eval_cstrreplace_while.end_in() -> eval_cstrreplace_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

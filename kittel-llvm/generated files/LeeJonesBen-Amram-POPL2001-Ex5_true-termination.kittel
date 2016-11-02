@@ -1,0 +1,15 @@
+///*** 1_f ***///
+eval_f_start(v_x, v_y) -> eval_f_entry_in(v_x, v_y)
+eval_f_entry_in(v_x, v_y) -> eval_f_return_in() [ v_y = 0 ]
+eval_f_entry_in(v_x, v_y) -> eval_f_if.else_in(v_x, v_y) [ v_y < 0 ]
+eval_f_entry_in(v_x, v_y) -> eval_f_if.else_in(v_x, v_y) [ v_y > 0 ]
+eval_f_if.else_in(v_x, v_y) -> eval_f_if.then.2_in(v_x, v_y) [ v_x = 0 ]
+eval_f_if.else_in(v_x, v_y) -> eval_f_if.else.3_in(v_x, v_y) [ v_x < 0 ]
+eval_f_if.else_in(v_x, v_y) -> eval_f_if.else.3_in(v_x, v_y) [ v_x > 0 ]
+eval_f_if.then.2_in(v_x, v_y) -> eval_f_start(v_y, v_y - 1)
+eval_f_if.then.2_in(v_x, v_y) -> eval_f_return_in()
+eval_f_if.else.3_in(v_x, v_y) -> eval_f_start(v_y, v_x - 1)
+eval_f_if.else.3_in(v_x, v_y) -> eval_f_return_in()
+eval_f_return_in() -> eval_f_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

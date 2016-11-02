@@ -1,0 +1,166 @@
+Initial termination problem:
+1:	eval_strchr_start(v_c) -> eval_strchr_entry_in(v_c)
+	eval_strchr_entry_in(v_c) -> eval_strchr_for.cond_in(v_c, v_c, v_c, v_c)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_return_in()
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_return_in() -> eval_strchr_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 2, the following new rules are obtained:
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+3:	eval_strchr_if.end_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 4, the following new rules are obtained:
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+5:	eval_strchr_if.end.11_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 6, the following new rules are obtained:
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+7:	eval_strchr_if.end.21_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 8, the following new rules are obtained:
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+9:	eval_strchr_if.end.31_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 10, the following new rules are obtained:
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+11:	eval_strchr_for.cond_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 12, the following new rules are obtained:
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+13:	eval_strchr_if.end.14_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 13 contains 1 nontrivial SCC:
+14:	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 14, the following new rules are obtained:
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+15:	eval_strchr_if.end.34_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 15 contains 1 nontrivial SCC:
+16:	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+By chaining the rule eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) with all rule in problem 16, the following new rules are obtained:
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+We thus obtain the following problem:
+17:	eval_strchr_if.end.24_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The termination graph of problem 17 contains 1 nontrivial SCC:
+18:	eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+The following termination problem could not be handled:
+eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27) -> eval_strchr_if.end.5_in(v_conv2, v_conv7, v_conv17, v_conv27)
+
+Time: 1.320 sec (SMT: 1.237 sec)

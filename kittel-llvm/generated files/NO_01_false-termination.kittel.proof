@@ -1,0 +1,27 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_if.else_in()
+	eval_main_if.else_in() -> eval_main_if.end_in()
+	eval_main_if.end_in() -> eval_main_while.cond.17_in(0)
+	eval_main_while.cond.17_in(v_i.3) -> eval_main_while.body.19_in(v_i.3) [ v_i.3 < 103 ]
+	eval_main_while.cond.17_in(v_i.3) -> eval_main_if.end.23_in() [ v_i.3 >= 103 ]
+	eval_main_while.body.19_in(v_i.3) -> eval_main_while.cond.17_in(v_i.3)
+	eval_main_if.end.23_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond.17_in(v_i.3) -> eval_main_while.body.19_in(v_i.3) [ v_i.3 < 103 ]
+	eval_main_while.body.19_in(v_i.3) -> eval_main_while.cond.17_in(v_i.3)
+
+By chaining the rule eval_main_while.cond.17_in(v_i.3) -> eval_main_while.body.19_in(v_i.3) [ v_i.3 < 103 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond.17_in(v_i.3) -> eval_main_while.cond.17_in(v_i.3) [ v_i.3 < 103 ]
+We thus obtain the following problem:
+3:	eval_main_while.body.19_in(v_i.3) -> eval_main_while.cond.17_in(v_i.3)
+	eval_main_while.cond.17_in(v_i.3) -> eval_main_while.cond.17_in(v_i.3) [ v_i.3 < 103 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond.17_in(v_i.3) -> eval_main_while.cond.17_in(v_i.3) [ v_i.3 < 103 ]
+
+The following termination problem could not be handled:
+eval_main_while.cond.17_in(v_i.3) -> eval_main_while.cond.17_in(v_i.3) [ v_i.3 < 103 ]
+
+Time: 0.334 sec (SMT: 0.324 sec)

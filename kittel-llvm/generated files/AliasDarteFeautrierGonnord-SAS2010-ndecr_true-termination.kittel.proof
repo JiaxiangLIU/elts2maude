@@ -1,0 +1,17 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0)
+	eval_main_while.cond_in(v_call.sink) -> eval_main_while.cond_in(v_call.sink - 1) [ v_call.sink - 1 > 1 ]
+	eval_main_while.cond_in(v_call.sink) -> eval_main_while.end_in() [ v_call.sink - 1 <= 1 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_call.sink) -> eval_main_while.cond_in(v_call.sink - 1) [ v_call.sink - 1 > 1 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = X_1
+removes all rules from problem 2.
+
+Termination successfully shown!
+
+Time: 0.161 sec (SMT: 0.158 sec)

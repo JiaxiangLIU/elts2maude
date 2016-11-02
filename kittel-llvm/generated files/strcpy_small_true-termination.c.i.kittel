@@ -1,0 +1,8 @@
+///*** 1_strcpy ***///
+eval_strcpy_start() -> eval_strcpy_entry_in()
+eval_strcpy_entry_in() -> eval_strcpy_while.cond_in()
+eval_strcpy_while.cond_in() -> eval_strcpy_while.cond_in()
+eval_strcpy_while.cond_in() -> eval_strcpy_while.end_in()
+eval_strcpy_while.end_in() -> eval_strcpy_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

@@ -1,0 +1,24 @@
+///*** 1_foo ***///
+eval_foo_start() -> eval_foo_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_if.then.4_in(nondef.0, 0)
+eval_main_entry_in() -> eval_main_if.end.6_in(nondef.0, 0)
+eval_main_entry_in() -> eval_main_if.then.4_in(nondef.0, 1)
+eval_main_entry_in() -> eval_main_if.end.6_in(nondef.0, 1)
+eval_main_if.then.4_in(v_call, v_sub.) -> eval_main_if.end.6_in(v_call, v_sub.)
+eval_main_if.end.6_in(v_call, v_sub.) -> eval_main_if.then.9_in(v_call, v_sub.)
+eval_main_if.end.6_in(v_call, v_sub.) -> eval_main_if.end.11_in(v_call, v_sub.)
+eval_main_if.then.9_in(v_call, v_sub.) -> eval_main_if.end.11_in(v_call, v_sub.)
+eval_main_if.end.11_in(v_call, v_sub.) -> eval_main_if.then.14_in(v_call, v_sub.)
+eval_main_if.end.11_in(v_call, v_sub.) -> eval_main_if.end.16_in(v_call, v_sub.)
+eval_main_if.then.14_in(v_call, v_sub.) -> eval_main_if.end.16_in(v_call, v_sub.)
+eval_main_if.end.16_in(v_call, v_sub.) -> eval_main_if.then.19_in(v_call, v_sub.)
+eval_main_if.end.16_in(v_call, v_sub.) -> eval_main_if.end.21_in(v_call, v_sub.)
+eval_main_if.then.19_in(v_call, v_sub.) -> eval_main_if.end.21_in(v_call, v_sub.)
+eval_main_if.end.21_in(v_call, v_sub.) -> eval_main_while.cond_in(v_sub. - 1, v_call)
+eval_main_if.end.21_in(v_call, v_sub.) -> eval_main_while.cond_in(v_sub., v_call)
+eval_main_while.cond_in(v_sub25.sub., v_x.0) -> eval_main_while.body_in(v_sub25.sub., v_x.0) [ v_x.0 > 0 ]
+eval_main_while.cond_in(v_sub25.sub., v_x.0) -> eval_main_while.end_in() [ v_x.0 <= 0 ]
+eval_main_while.body_in(v_sub25.sub., v_x.0) -> eval_main_while.cond_in(v_sub25.sub., v_x.0 - v_sub25.sub.)
+eval_main_while.end_in() -> eval_main_stop()

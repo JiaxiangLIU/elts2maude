@@ -1,0 +1,95 @@
+termination-crafted/Pure3Phase_true-termination.c : timeout : transformed well, pb of kittel
+
+termination-crafted/4NestedWith3Variables_true-termination.c : success
+
+termination-crafted/NestedRecursion_2c_true-termination.c : timeout : calling function is transformed not well
+
+termination-crafted/Benghazi_true-termination.c : success
+
+termination-crafted/NestedRecursion_1b_true-termination.c : timeout : transformed not accurately
+
+termination-crafted/TelAviv-Amir-Minimum_true-termination.c : timeout : transformed well, but with conflicted conditions; pb of kittel.
+
+termination-crafted/MutualRecursion_1b_true-termination.c : timeout : cannot find kittel files
+
+termination-crafted/Toulouse-MultiBranchesToLoop_true-termination.c : timeout : trans OK, pb of kittel
+
+termination-crafted/aaron2_true-termination.c : success
+
+termination-crafted/2Nested_true-termination.c : success
+
+termination-crafted/easy1_true-termination.c : success
+
+termination-crafted/Ackermann_true-termination.c : timeout : trans as usual, rec cannot be modeled well.
+
+termination-crafted/Toulouse-BranchesToLoop_true-termination.c : timeout : trans well; pb of kittel
+
+termination-crafted/easy2_true-termination.c : success
+
+termination-crafted/McCarthy91_Recursion_true-termination.c : timeout : trans as usual, rec cannot be modeled well
+
+termination-crafted/LexIndexValue-Pointer_true-termination.c : failed : commands relating to pointer are *totally* modeled by no-op
+
+termination-crafted/Benghazi_nondet_true-termination.c : success
+
+termination-crafted/Gothenburg_true-termination.c : timeout : "a==b" is not encoded, because rw-rules are context-free. Is it possible to encode it? TO BE tested, e.g., using non-liear rhs.
+Possibility: try to consider "a==b" when transforming
+potential pb: this may work when a,b are not changed, but what to do when they are modified?
+
+termination-crafted/Mysore_true-termination.c : success
+
+termination-crafted/SyntaxSupportPointer01_true-termination.c : failed : commands relating to pointer are *totally* modeled by no-op
+
+termination-crafted/Gothenburg_v2_true-termination.c : timeout : trans OK. but invar "a == b+1" is not encoded. same as Gothenburg_true-termination.c
+
+termination-crafted/Lobnya-Boolean-Reordered_true-termination.c : success
+
+termination-crafted/Thun_true-termination.c : success
+
+termination-crafted/Copenhagen_true-termination.c : success
+
+termination-crafted/RecursiveMultiplication_true-termination.c : success
+
+termination-crafted/NestedRecursion_1d_true-termination.c : timeout : trans as usual, rec not well
+
+termination-crafted/Piecewise_true-termination.c : success
+
+termination-crafted/Singapore_true-termination.c : timeout : trans OK; invar is not encoded
+Is it possible to encode invars via rw-rules???
+
+termination-crafted/Arrays03-ValueRestictsIndex_true-termination.c : timeout : commands relating to arrays are *totally* modeled by no-op
+
+termination-crafted/WhileFalse_true-termination.c : success
+
+termination-crafted/aaron3_true-termination.c : success
+
+termination-crafted/Bangalore_v4_true-termination.c : timeout : trans OK; but invar "y > x" is not encoded
+
+termination-crafted/McCarthy91_Iteration_true-termination.c : success : but with duplicated and conflicted conditions
+
+termination-crafted/4BitCounterPointer_true-termination.c : failed : commands relating to pointer are *totally* modeled by no-op
+
+termination-crafted/Parallel_true-termination.c : success : but with duplicated and conflicted conditions
+
+termination-crafted/Nyala-2lex_true-termination.c : success : but the rule 6 is wrong, the value of y should be modified into y - 1.
+
+termination-crafted/Stockholm_true-termination.c : timeout : trans OK; invar a==b is not encoded
+
+termination-crafted/NestedRecursion_1c_true-termination.c : timeout : trans as usual, rec not well
+
+termination-crafted/Waldkirch_true-termination.c : success
+
+termination-crafted/Arrays01-EquivalentConstantIndices_true-termination.c : failed : commands relating to arrays are *totally* modeled by no-op
+
+termination-crafted/LexIndexValue-Array_true-termination.c : failed : commands relating to arrays are *totally* modeled by no-op
+
+termination-crafted/Bangalore_true-termination.c : timeout : trans OK; invar y >= 1 is not encoded
+
+termination-crafted/Pure2Phase_true-termination.c : success : how does it know that y would be assigned to sub?
+
+termination-crafted/Copenhagen_disj_true-termination.c : timeout : trans OK; pb of kittel
+
+termination-crafted/MenloPark_true-termination.c : timeout : trans OK; pb of kittel; needs a good invar
+
+termination-crafted/Cairo_true-termination.c : timeout : trans OK; pb of kittel; needs invar
+

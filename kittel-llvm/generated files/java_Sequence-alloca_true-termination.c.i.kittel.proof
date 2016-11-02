@@ -1,0 +1,32 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_for.cond_in()
+	eval_main_for.cond_in() -> eval_main_for.body_in()
+	eval_main_for.cond_in() -> eval_main_for.end_in()
+	eval_main_for.body_in() -> eval_main_for.cond_in()
+	eval_main_for.end_in() -> eval_main_for.cond.1_in()
+	eval_main_for.cond.1_in() -> eval_main_for.body.3_in()
+	eval_main_for.cond.1_in() -> eval_main_for.end.7_in()
+	eval_main_for.body.3_in() -> eval_main_for.cond.1_in()
+	eval_main_for.end.7_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_main_for.cond.1_in() -> eval_main_for.body.3_in()
+	eval_main_for.body.3_in() -> eval_main_for.cond.1_in()
+
+3:	eval_main_for.cond_in() -> eval_main_for.body_in()
+	eval_main_for.body_in() -> eval_main_for.cond_in()
+
+By chaining the rule eval_main_for.cond.1_in() -> eval_main_for.body.3_in() with all rule in problem 2, the following new rules are obtained:
+	eval_main_for.cond.1_in() -> eval_main_for.cond.1_in()
+We thus obtain the following problem:
+4:	eval_main_for.body.3_in() -> eval_main_for.cond.1_in()
+	eval_main_for.cond.1_in() -> eval_main_for.cond.1_in()
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_main_for.cond.1_in() -> eval_main_for.cond.1_in()
+
+The following termination problem could not be handled:
+eval_main_for.cond.1_in() -> eval_main_for.cond.1_in()
+
+Time: 0.410 sec (SMT: 0.399 sec)

@@ -1,0 +1,10 @@
+///*** 1_hanoi ***///
+eval_hanoi_start(v_n) -> eval_hanoi_entry_in(v_n)
+eval_hanoi_entry_in(v_n) -> eval_hanoi_return_in() [ v_n = 1 ]
+eval_hanoi_entry_in(v_n) -> eval_hanoi_if.end_in(v_n) [ v_n < 1 ]
+eval_hanoi_entry_in(v_n) -> eval_hanoi_if.end_in(v_n) [ v_n > 1 ]
+eval_hanoi_if.end_in(v_n) -> eval_hanoi_start(v_n - 1)
+eval_hanoi_if.end_in(v_n) -> eval_hanoi_return_in()
+eval_hanoi_return_in() -> eval_hanoi_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

@@ -1,0 +1,12 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0, nondef.2) [ nondef.0 <= 10000 /\ nondef.0 >= -10000 /\ nondef.1 <= 10000 /\ nondef.2 <= 10000 ]
+eval_main_entry_in() -> eval_main_if.end_in()
+eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.body_in(v_y.0, v_x.0, v_z.0) [ v_y.0 >= 1 ]
+eval_main_while.cond_in(v_y.0, v_x.0, v_z.0) -> eval_main_if.end_in() [ v_y.0 < 1 ]
+eval_main_while.body_in(v_y.0, v_x.0, v_z.0) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.0 - 1, v_z.0)
+eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 < v_z.1 ]
+eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) [ v_y.0 >= v_z.1 ]
+eval_main_while.body.11_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond.9_in(v_y.0, v_x.0, v_z.0, v_x.1 + 1, v_z.1 - 1)
+eval_main_while.end_in(v_y.0, v_x.0, v_z.0, v_x.1, v_z.1) -> eval_main_while.cond_in(v_x.1 + v_y.0, v_x.1, v_z.1)
+eval_main_if.end_in() -> eval_main_stop()

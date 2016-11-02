@@ -1,0 +1,36 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, 23)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 >= 0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end_in() [ v_x.0 < 0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - v_y.0, v_y.0 + 1)
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 >= 0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - v_y.0, v_y.0 + 1)
+
+By chaining the rule eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 >= 0 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - v_y.0, v_y.0 + 1) [ v_x.0 >= 0 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - v_y.0, v_y.0 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - v_y.0, v_y.0 + 1) [ v_x.0 >= 0 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - v_y.0, v_y.0 + 1) [ v_x.0 >= 0 ]
+
+By chaining the rule eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - v_y.0, v_y.0 + 1) [ v_x.0 >= 0 ] with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2*v_y.0 - 1, v_y.0 + 2) [ v_x.0 >= 0 /\ v_x.0 - v_y.0 >= 0 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2*v_y.0 - 1, v_y.0 + 2) [ v_x.0 >= 0 /\ v_x.0 - v_y.0 >= 0 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2*v_y.0 - 1, v_y.0 + 2) [ v_x.0 >= 0 /\ v_x.0 - v_y.0 >= 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = 2*X_1 - 2*X_2 + X_2^2
+removes all rules from problem 6.
+
+Termination successfully shown!
+
+Time: 0.354 sec (SMT: 0.337 sec)

@@ -1,0 +1,12 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0)
+	eval_main_while.cond_in(v_y.0, v_x.0) -> eval_main_while.cond_in(v_x.0, v_y.0) [ v_x.0 > v_y.0 ]
+	eval_main_while.cond_in(v_y.0, v_x.0) -> eval_main_while.end_in() [ v_x.0 <= v_y.0 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.148 sec (SMT: 0.147 sec)

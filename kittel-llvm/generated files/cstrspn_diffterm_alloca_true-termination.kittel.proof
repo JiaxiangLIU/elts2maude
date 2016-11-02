@@ -1,0 +1,137 @@
+Initial termination problem:
+1:	eval_cstrspn_start() -> eval_cstrspn_entry_in()
+	eval_cstrspn_entry_in() -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_for.body_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_for.end_in()
+	eval_cstrspn_for.body_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_land.rhs_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_if.then_in()
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_if.then_in() -> eval_cstrspn_return_in()
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.end_in() -> eval_cstrspn_return_in()
+	eval_cstrspn_return_in() -> eval_cstrspn_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_cstrspn_for.cond_in() -> eval_cstrspn_for.body_in()
+	eval_cstrspn_for.body_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_land.rhs_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+
+By chaining the rule eval_cstrspn_for.cond_in() -> eval_cstrspn_for.body_in() with all rule in problem 2, the following new rules are obtained:
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+We thus obtain the following problem:
+3:	eval_cstrspn_for.body_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_land.rhs_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_land.rhs_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+
+By chaining the rule eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_land.rhs_in(v_conv2, v_conv8) with all rules in problem 4, the following new rules are obtained:
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+We thus obtain the following problem:
+5:	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_land.rhs_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8)
+
+By chaining the rule eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.end_in(v_conv2, v_conv8) with all rule in problem 6, the following new rules are obtained:
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+We thus obtain the following problem:
+7:	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_while.end_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+
+By chaining the rule eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(v_conv2, v_conv8) with all rules in problem 8, the following new rules are obtained:
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+We thus obtain the following problem:
+9:	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in()
+	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+
+By chaining the rule eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_for.cond_in() with all rule in problem 10, the following new rules are obtained:
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+We thus obtain the following problem:
+11:	eval_cstrspn_for.cond_in() -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+	eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+	eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+
+The following termination problem could not be handled:
+eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+eval_cstrspn_while.cond_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_while.body_in(v_conv2, v_conv8)
+eval_cstrspn_while.body_in(v_conv2, v_conv8) -> eval_cstrspn_for.inc_in(v_conv2, v_conv8)
+eval_cstrspn_for.inc_in(v_conv2, v_conv8) -> eval_cstrspn_while.cond_in(nondef.1, nondef.1)
+
+Time: 1.074 sec (SMT: 1.033 sec)

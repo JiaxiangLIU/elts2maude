@@ -1,0 +1,36 @@
+Initial termination problem:
+1:	eval_strlcpy_start(v_siz) -> eval_strlcpy_entry_in(v_siz)
+	eval_strlcpy_entry_in(v_siz) -> eval_strlcpy_land.lhs.true_in(v_siz) [ v_siz < 0 ]
+	eval_strlcpy_entry_in(v_siz) -> eval_strlcpy_land.lhs.true_in(v_siz) [ v_siz > 0 ]
+	eval_strlcpy_entry_in(v_siz) -> eval_strlcpy_if.end.9_in(v_siz, v_siz) [ v_siz = 0 ]
+	eval_strlcpy_land.lhs.true_in(v_siz) -> eval_strlcpy_do.body_in(v_siz, v_siz - 1) [ v_siz - 1 < 0 ]
+	eval_strlcpy_land.lhs.true_in(v_siz) -> eval_strlcpy_do.body_in(v_siz, v_siz - 1) [ v_siz - 1 > 0 ]
+	eval_strlcpy_land.lhs.true_in(v_siz) -> eval_strlcpy_if.end.9_in(v_siz, v_siz - 1) [ v_siz - 1 = 0 ]
+	eval_strlcpy_do.body_in(v_siz, v_n.0) -> eval_strlcpy_if.end.9_in(v_siz, v_n.0)
+	eval_strlcpy_do.body_in(v_siz, v_n.0) -> eval_strlcpy_do.cond_in(v_siz, v_n.0)
+	eval_strlcpy_do.cond_in(v_siz, v_n.0) -> eval_strlcpy_do.body_in(v_siz, v_n.0 - 1) [ v_n.0 - 1 < 0 ]
+	eval_strlcpy_do.cond_in(v_siz, v_n.0) -> eval_strlcpy_do.body_in(v_siz, v_n.0 - 1) [ v_n.0 - 1 > 0 ]
+	eval_strlcpy_do.cond_in(v_siz, v_n.0) -> eval_strlcpy_if.end.9_in(v_siz, v_n.0 - 1) [ v_n.0 - 1 = 0 ]
+	eval_strlcpy_if.end.9_in(v_siz, v_n.2) -> eval_strlcpy_if.then.12_in(v_siz) [ v_n.2 = 0 ]
+	eval_strlcpy_if.end.9_in(v_siz, v_n.2) -> eval_strlcpy_if.end.18_in() [ v_n.2 < 0 ]
+	eval_strlcpy_if.end.9_in(v_siz, v_n.2) -> eval_strlcpy_if.end.18_in() [ v_n.2 > 0 ]
+	eval_strlcpy_if.then.12_in(v_siz) -> eval_strlcpy_if.then.15_in() [ v_siz < 0 ]
+	eval_strlcpy_if.then.12_in(v_siz) -> eval_strlcpy_if.then.15_in() [ v_siz > 0 ]
+	eval_strlcpy_if.then.12_in(v_siz) -> eval_strlcpy_while.cond_in() [ v_siz = 0 ]
+	eval_strlcpy_if.then.15_in() -> eval_strlcpy_while.cond_in()
+	eval_strlcpy_while.cond_in() -> eval_strlcpy_while.cond_in()
+	eval_strlcpy_while.cond_in() -> eval_strlcpy_if.end.18_in()
+	eval_strlcpy_if.end.18_in() -> eval_strlcpy_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_strlcpy_while.cond_in() -> eval_strlcpy_while.cond_in()
+
+3:	eval_strlcpy_do.body_in(v_siz, v_n.0) -> eval_strlcpy_do.cond_in(v_siz, v_n.0)
+	eval_strlcpy_do.cond_in(v_siz, v_n.0) -> eval_strlcpy_do.body_in(v_siz, v_n.0 - 1) [ v_n.0 - 1 < 0 ]
+	eval_strlcpy_do.cond_in(v_siz, v_n.0) -> eval_strlcpy_do.body_in(v_siz, v_n.0 - 1) [ v_n.0 - 1 > 0 ]
+
+The following termination problem could not be handled:
+eval_strlcpy_while.cond_in() -> eval_strlcpy_while.cond_in()
+
+Time: 0.946 sec (SMT: 0.932 sec)

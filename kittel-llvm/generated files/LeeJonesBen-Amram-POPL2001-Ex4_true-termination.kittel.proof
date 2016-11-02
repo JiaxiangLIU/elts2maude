@@ -1,0 +1,56 @@
+Initial termination problem:
+1:	eval_p_start(v_m, v_n, v_r) -> eval_p_entry_in(v_m, v_n, v_r)
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.then_in(v_m, v_n, v_r) [ v_r > 0 ]
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.else_in(v_m, v_n, v_r) [ v_r <= 0 ]
+	eval_p_if.then_in(v_m, v_n, v_r) -> eval_p_start(v_m, v_r - 1, v_n)
+	eval_p_if.then_in(v_m, v_n, v_r) -> eval_p_return_in()
+	eval_p_if.else_in(v_m, v_n, v_r) -> eval_p_if.then.2_in(v_m, v_n, v_r) [ v_n > 0 ]
+	eval_p_if.else_in(v_m, v_n, v_r) -> eval_p_return_in() [ v_n <= 0 ]
+	eval_p_if.then.2_in(v_m, v_n, v_r) -> eval_p_start(v_r, v_n - 1, v_m)
+	eval_p_if.then.2_in(v_m, v_n, v_r) -> eval_p_return_in()
+	eval_p_return_in() -> eval_p_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_p_start(v_m, v_n, v_r) -> eval_p_entry_in(v_m, v_n, v_r)
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.then_in(v_m, v_n, v_r) [ v_r > 0 ]
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.else_in(v_m, v_n, v_r) [ v_r <= 0 ]
+	eval_p_if.then_in(v_m, v_n, v_r) -> eval_p_start(v_m, v_r - 1, v_n)
+	eval_p_if.else_in(v_m, v_n, v_r) -> eval_p_if.then.2_in(v_m, v_n, v_r) [ v_n > 0 ]
+	eval_p_if.then.2_in(v_m, v_n, v_r) -> eval_p_start(v_r, v_n - 1, v_m)
+
+A polynomial interpretation with
+	Pol(eval_p_start) = 2*X_1^2 + 2*X_2^2 + 2*X_3^2
+	Pol(eval_p_entry_in) = 2*X_1^2 + 2*X_2^2 + 2*X_3^2
+	Pol(eval_p_if.then_in) = -4*X_3 + 2*X_1^2 + 2*X_2^2 + 2*X_3^2 + 4
+	Pol(eval_p_if.else_in) = 2*X_1^2 + 2*X_2^2 + 2*X_3^2
+	Pol(eval_p_if.then.2_in) = -4*X_2 + 2*X_1^2 + 2*X_2^2 + 2*X_3^2 + 3
+removes the following rule from problem 2:
+	eval_p_if.else_in(v_m, v_n, v_r) -> eval_p_if.then.2_in(v_m, v_n, v_r) [ v_n > 0 ]
+We thus obtain the following problem:
+3:	eval_p_start(v_m, v_n, v_r) -> eval_p_entry_in(v_m, v_n, v_r)
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.then_in(v_m, v_n, v_r) [ v_r > 0 ]
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.else_in(v_m, v_n, v_r) [ v_r <= 0 ]
+	eval_p_if.then_in(v_m, v_n, v_r) -> eval_p_start(v_m, v_r - 1, v_n)
+	eval_p_if.then.2_in(v_m, v_n, v_r) -> eval_p_start(v_r, v_n - 1, v_m)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_p_start(v_m, v_n, v_r) -> eval_p_entry_in(v_m, v_n, v_r)
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.then_in(v_m, v_n, v_r) [ v_r > 0 ]
+	eval_p_if.then_in(v_m, v_n, v_r) -> eval_p_start(v_m, v_r - 1, v_n)
+
+A polynomial interpretation with
+	Pol(eval_p_start) = 3*X_2^2 + 3*X_3^2 - 2
+	Pol(eval_p_entry_in) = 3*X_2^2 + 3*X_3^2 - 3
+	Pol(eval_p_if.then_in) = -6*X_3 + 3*X_2^2 + 3*X_3^2 + 2
+removes the following rule from problem 4:
+	eval_p_entry_in(v_m, v_n, v_r) -> eval_p_if.then_in(v_m, v_n, v_r) [ v_r > 0 ]
+We thus obtain the following problem:
+5:	eval_p_start(v_m, v_n, v_r) -> eval_p_entry_in(v_m, v_n, v_r)
+	eval_p_if.then_in(v_m, v_n, v_r) -> eval_p_start(v_m, v_r - 1, v_n)
+
+The termination graph of problem 5 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.428 sec (SMT: 0.409 sec)

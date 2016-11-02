@@ -1,0 +1,71 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 + v_y.0 > 0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end_in() [ v_x.0 + v_y.0 <= 0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.then_in(v_x.0, v_y.0) [ v_x.0 > v_y.0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.else_in(v_x.0, v_y.0) [ v_x.0 <= v_y.0 ]
+	eval_main_if.then_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0)
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0) [ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 - 1) [ v_x.0 = v_y.0 /\ v_x.0 < v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 - 1) [ v_x.0 = v_y.0 /\ v_x.0 > v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0) [ v_x.0 < v_y.0 /\ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0) [ v_x.0 > v_y.0 /\ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 < v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 < v_y.0 /\ v_x.0 > v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 > v_y.0 /\ v_x.0 < v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 > v_y.0 ]
+	eval_main_if.end.8_in(v_x.0, v_y.0, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2, v_y.2)
+	eval_main_while.end_in() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 - 1) [ v_x.0 = v_y.0 /\ v_x.0 < v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 - 1) [ v_x.0 = v_y.0 /\ v_x.0 > v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0) [ v_x.0 < v_y.0 /\ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0) [ v_x.0 > v_y.0 /\ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 < v_y.0 /\ v_x.0 > v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 > v_y.0 /\ v_x.0 < v_y.0 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 + v_y.0 > 0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end_in() [ v_x.0 + v_y.0 <= 0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.then_in(v_x.0, v_y.0) [ v_x.0 > v_y.0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.else_in(v_x.0, v_y.0) [ v_x.0 <= v_y.0 ]
+	eval_main_if.then_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0)
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0) [ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 < v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 > v_y.0 ]
+	eval_main_if.end.8_in(v_x.0, v_y.0, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2, v_y.2)
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 + v_y.0 > 0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.then_in(v_x.0, v_y.0) [ v_x.0 > v_y.0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.else_in(v_x.0, v_y.0) [ v_x.0 <= v_y.0 ]
+	eval_main_if.then_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0)
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0) [ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 < v_y.0 ]
+	eval_main_if.end.8_in(v_x.0, v_y.0, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2, v_y.2)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = X_1 + X_2
+	Pol(eval_main_while.body_in) = X_1 + X_2 - 1
+	Pol(eval_main_if.then_in) = X_1 + X_2 - 1
+	Pol(eval_main_if.else_in) = X_1 + X_2 - 1
+	Pol(eval_main_if.end.8_in) = X_3 + X_4
+removes the following rule from problem 3:
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 + v_y.0 > 0 ]
+We thus obtain the following problem:
+4:	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.then_in(v_x.0, v_y.0) [ v_x.0 > v_y.0 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.else_in(v_x.0, v_y.0) [ v_x.0 <= v_y.0 ]
+	eval_main_if.then_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0)
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0) [ v_x.0 = v_y.0 ]
+	eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_x.0 < v_y.0 ]
+	eval_main_if.end.8_in(v_x.0, v_y.0, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2, v_y.2)
+
+The termination graph of problem 4 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.647 sec (SMT: 0.636 sec)

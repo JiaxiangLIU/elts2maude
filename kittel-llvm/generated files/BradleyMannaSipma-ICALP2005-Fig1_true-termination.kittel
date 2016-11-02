@@ -1,0 +1,12 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.cond_in(nondef.2, nondef.1, nondef.0) [ nondef.2 < 536870912 /\ nondef.0 < 536870912 /\ nondef.1 < 536870912 /\ nondef.0 >= -1073741824 /\ nondef.0 + nondef.1 >= 0 ]
+eval_main_entry_in() -> eval_main_if.end.18_in()
+eval_main_entry_in() -> eval_main_if.end.18_in() [ nondef.0 + nondef.1 < 0 ]
+eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.body_in(v_call2, v_y.0, v_x.0) [ v_x.0 <= v_call2 ]
+eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_if.end.18_in() [ v_x.0 > v_call2 ]
+eval_main_while.body_in(v_call2, v_y.0, v_x.0) -> eval_main_if.then.13_in(v_call2, v_y.0, v_x.0)
+eval_main_while.body_in(v_call2, v_y.0, v_x.0) -> eval_main_if.else_in(v_call2, v_y.0, v_x.0)
+eval_main_if.then.13_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0)
+eval_main_if.else_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0, v_x.0 + 1)
+eval_main_if.end.18_in() -> eval_main_stop()

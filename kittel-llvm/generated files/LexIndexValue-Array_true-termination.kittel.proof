@@ -1,0 +1,64 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(0)
+	eval_main_while.cond_in(v_k.0) -> eval_main_while.body_in(v_k.0) [ v_k.0 < 1048 ]
+	eval_main_while.cond_in(v_k.0) -> eval_main_while.end_in()
+	eval_main_while.cond_in(v_k.0) -> eval_main_while.end_in() [ v_k.0 >= 1048 ]
+	eval_main_while.body_in(v_k.0) -> eval_main_if.then_in(v_k.0)
+	eval_main_while.body_in(v_k.0) -> eval_main_if.else_in(v_k.0)
+	eval_main_if.then_in(v_k.0) -> eval_main_while.cond_in(v_k.0 + 1)
+	eval_main_if.else_in(v_k.0) -> eval_main_while.cond_in(v_k.0)
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_k.0) -> eval_main_while.body_in(v_k.0) [ v_k.0 < 1048 ]
+	eval_main_while.body_in(v_k.0) -> eval_main_if.then_in(v_k.0)
+	eval_main_while.body_in(v_k.0) -> eval_main_if.else_in(v_k.0)
+	eval_main_if.then_in(v_k.0) -> eval_main_while.cond_in(v_k.0 + 1)
+	eval_main_if.else_in(v_k.0) -> eval_main_while.cond_in(v_k.0)
+
+By chaining the rule eval_main_while.cond_in(v_k.0) -> eval_main_while.body_in(v_k.0) [ v_k.0 < 1048 ] with all rules in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.then_in(v_k.0) [ v_k.0 < 1048 ]
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_k.0) -> eval_main_if.then_in(v_k.0)
+	eval_main_while.body_in(v_k.0) -> eval_main_if.else_in(v_k.0)
+	eval_main_if.then_in(v_k.0) -> eval_main_while.cond_in(v_k.0 + 1)
+	eval_main_if.else_in(v_k.0) -> eval_main_while.cond_in(v_k.0)
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.then_in(v_k.0) [ v_k.0 < 1048 ]
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_if.then_in(v_k.0) -> eval_main_while.cond_in(v_k.0 + 1)
+	eval_main_if.else_in(v_k.0) -> eval_main_while.cond_in(v_k.0)
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.then_in(v_k.0) [ v_k.0 < 1048 ]
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.then_in) = -2*X_1 + 2093
+	Pol(eval_main_while.cond_in) = -2*X_1 + 2094
+	Pol(eval_main_if.else_in) = -2*X_1 + 2094
+removes the following rule from problem 4:
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.then_in(v_k.0) [ v_k.0 < 1048 ]
+We thus obtain the following problem:
+5:	eval_main_if.then_in(v_k.0) -> eval_main_while.cond_in(v_k.0 + 1)
+	eval_main_if.else_in(v_k.0) -> eval_main_while.cond_in(v_k.0)
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_if.else_in(v_k.0) -> eval_main_while.cond_in(v_k.0)
+	eval_main_while.cond_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+
+By chaining the rule eval_main_if.else_in(v_k.0) -> eval_main_while.cond_in(v_k.0) with all rule in problem 6, the following new rules are obtained:
+	eval_main_if.else_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+We thus obtain the following problem:
+7:	eval_main_while.cond_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+	eval_main_if.else_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_if.else_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+
+The following termination problem could not be handled:
+eval_main_if.else_in(v_k.0) -> eval_main_if.else_in(v_k.0) [ v_k.0 < 1048 ]
+
+Time: 0.591 sec (SMT: 0.571 sec)

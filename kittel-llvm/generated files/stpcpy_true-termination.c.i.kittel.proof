@@ -1,0 +1,15 @@
+Initial termination problem:
+1:	eval_stpcpy_start() -> eval_stpcpy_entry_in()
+	eval_stpcpy_entry_in() -> eval_stpcpy_while.cond_in()
+	eval_stpcpy_while.cond_in() -> eval_stpcpy_while.cond_in()
+	eval_stpcpy_while.cond_in() -> eval_stpcpy_while.end_in()
+	eval_stpcpy_while.end_in() -> eval_stpcpy_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_stpcpy_while.cond_in() -> eval_stpcpy_while.cond_in()
+
+The following termination problem could not be handled:
+eval_stpcpy_while.cond_in() -> eval_stpcpy_while.cond_in()
+
+Time: 0.194 sec (SMT: 0.188 sec)

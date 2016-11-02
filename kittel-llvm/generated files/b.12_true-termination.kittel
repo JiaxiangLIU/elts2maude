@@ -1,0 +1,13 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.1)
+eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 > 0 ]
+eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_y.0 > 0 ]
+eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end_in() [ v_x.0 <= 0 /\ v_y.0 <= 0 ]
+eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.then_in(v_x.0, v_y.0) [ v_x.0 > 0 ]
+eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_if.else_in(v_x.0, v_y.0) [ v_x.0 <= 0 ]
+eval_main_if.then_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0)
+eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0 - 1) [ v_y.0 > 0 ]
+eval_main_if.else_in(v_x.0, v_y.0) -> eval_main_if.end.8_in(v_x.0, v_y.0, v_x.0, v_y.0) [ v_y.0 <= 0 ]
+eval_main_if.end.8_in(v_x.0, v_y.0, v_x.1, v_y.2) -> eval_main_while.cond_in(v_x.1, v_y.2)
+eval_main_while.end_in() -> eval_main_stop()

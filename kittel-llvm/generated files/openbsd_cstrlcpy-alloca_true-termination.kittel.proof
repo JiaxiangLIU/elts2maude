@@ -1,0 +1,33 @@
+Initial termination problem:
+1:	eval_cstrlcpy_start(v_siz) -> eval_cstrlcpy_entry_in(v_siz)
+	eval_cstrlcpy_entry_in(v_siz) -> eval_cstrlcpy_while.cond_in(v_siz, v_siz) [ v_siz < 0 ]
+	eval_cstrlcpy_entry_in(v_siz) -> eval_cstrlcpy_while.cond_in(v_siz, v_siz) [ v_siz > 0 ]
+	eval_cstrlcpy_entry_in(v_siz) -> eval_cstrlcpy_if.end.6_in(v_siz, v_siz) [ v_siz = 0 ]
+	eval_cstrlcpy_while.cond_in(v_siz, v_n.0) -> eval_cstrlcpy_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ v_n.0 - 1 < 0 ]
+	eval_cstrlcpy_while.cond_in(v_siz, v_n.0) -> eval_cstrlcpy_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ v_n.0 - 1 > 0 ]
+	eval_cstrlcpy_while.cond_in(v_siz, v_n.0) -> eval_cstrlcpy_if.end.6_in(v_siz, v_n.0 - 1) [ v_n.0 - 1 = 0 ]
+	eval_cstrlcpy_while.body_in(v_siz, v_n.0, v_dec) -> eval_cstrlcpy_if.end.6_in(v_siz, v_dec)
+	eval_cstrlcpy_while.body_in(v_siz, v_n.0, v_dec) -> eval_cstrlcpy_while.cond_in(v_siz, v_dec)
+	eval_cstrlcpy_if.end.6_in(v_siz, v_n.1) -> eval_cstrlcpy_if.then.9_in(v_siz) [ v_n.1 = 0 ]
+	eval_cstrlcpy_if.end.6_in(v_siz, v_n.1) -> eval_cstrlcpy_if.end.18_in() [ v_n.1 < 0 ]
+	eval_cstrlcpy_if.end.6_in(v_siz, v_n.1) -> eval_cstrlcpy_if.end.18_in() [ v_n.1 > 0 ]
+	eval_cstrlcpy_if.then.9_in(v_siz) -> eval_cstrlcpy_if.then.12_in() [ v_siz < 0 ]
+	eval_cstrlcpy_if.then.9_in(v_siz) -> eval_cstrlcpy_if.then.12_in() [ v_siz > 0 ]
+	eval_cstrlcpy_if.then.9_in(v_siz) -> eval_cstrlcpy_while.cond.14_in() [ v_siz = 0 ]
+	eval_cstrlcpy_if.then.12_in() -> eval_cstrlcpy_while.cond.14_in()
+	eval_cstrlcpy_while.cond.14_in() -> eval_cstrlcpy_while.cond.14_in()
+	eval_cstrlcpy_while.cond.14_in() -> eval_cstrlcpy_if.end.18_in()
+	eval_cstrlcpy_if.end.18_in() -> eval_cstrlcpy_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_cstrlcpy_while.cond.14_in() -> eval_cstrlcpy_while.cond.14_in()
+
+3:	eval_cstrlcpy_while.cond_in(v_siz, v_n.0) -> eval_cstrlcpy_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ v_n.0 - 1 < 0 ]
+	eval_cstrlcpy_while.cond_in(v_siz, v_n.0) -> eval_cstrlcpy_while.body_in(v_siz, v_n.0, v_n.0 - 1) [ v_n.0 - 1 > 0 ]
+	eval_cstrlcpy_while.body_in(v_siz, v_n.0, v_dec) -> eval_cstrlcpy_while.cond_in(v_siz, v_dec)
+
+The following termination problem could not be handled:
+eval_cstrlcpy_while.cond.14_in() -> eval_cstrlcpy_while.cond.14_in()
+
+Time: 0.942 sec (SMT: 0.928 sec)

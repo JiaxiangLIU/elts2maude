@@ -1,0 +1,94 @@
+Initial termination problem:
+1:	eval_f_start(v_d) -> eval_f_entry_in()
+	eval_f_entry_in() -> eval_f_while.end.11_in()
+	eval_f_entry_in() -> eval_f_L1_in()
+	eval_f_L1_in() -> eval_f_while.cond_in(nondef.1)
+	eval_f_while.cond_in(v_11) -> eval_f_while.body_in(v_11)
+	eval_f_while.cond_in(v_11) -> eval_f_L2_in()
+	eval_f_while.body_in(v_11) -> eval_f_while.cond_in(v_11)
+	eval_f_L2_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_land.rhs_in()
+	eval_f_while.cond.2_in() -> eval_f_while.end.11_in()
+	eval_f_land.rhs_in() -> eval_f_while.body.5_in()
+	eval_f_land.rhs_in() -> eval_f_while.end.11_in()
+	eval_f_while.body.5_in() -> eval_f_P1_in()
+	eval_f_while.body.5_in() -> eval_f_if.else_in()
+	eval_f_P1_in() -> eval_f_while.cond.2_in()
+	eval_f_if.else_in() -> eval_f_while.cond.2_in()
+	eval_f_while.end.11_in() -> eval_f_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_f_while.cond.2_in() -> eval_f_land.rhs_in()
+	eval_f_land.rhs_in() -> eval_f_while.body.5_in()
+	eval_f_while.body.5_in() -> eval_f_P1_in()
+	eval_f_while.body.5_in() -> eval_f_if.else_in()
+	eval_f_P1_in() -> eval_f_while.cond.2_in()
+	eval_f_if.else_in() -> eval_f_while.cond.2_in()
+
+3:	eval_f_while.cond_in(v_11) -> eval_f_while.body_in(v_11)
+	eval_f_while.body_in(v_11) -> eval_f_while.cond_in(v_11)
+
+By chaining the rule eval_f_while.cond.2_in() -> eval_f_land.rhs_in() with all rule in problem 2, the following new rules are obtained:
+	eval_f_while.cond.2_in() -> eval_f_while.body.5_in()
+We thus obtain the following problem:
+4:	eval_f_land.rhs_in() -> eval_f_while.body.5_in()
+	eval_f_while.body.5_in() -> eval_f_P1_in()
+	eval_f_while.body.5_in() -> eval_f_if.else_in()
+	eval_f_P1_in() -> eval_f_while.cond.2_in()
+	eval_f_if.else_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.body.5_in()
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_f_while.body.5_in() -> eval_f_P1_in()
+	eval_f_while.body.5_in() -> eval_f_if.else_in()
+	eval_f_P1_in() -> eval_f_while.cond.2_in()
+	eval_f_if.else_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.body.5_in()
+
+By chaining the rule eval_f_while.body.5_in() -> eval_f_P1_in() with all rule in problem 5, the following new rules are obtained:
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+We thus obtain the following problem:
+6:	eval_f_while.body.5_in() -> eval_f_if.else_in()
+	eval_f_P1_in() -> eval_f_while.cond.2_in()
+	eval_f_if.else_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.body.5_in()
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_f_while.body.5_in() -> eval_f_if.else_in()
+	eval_f_if.else_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.body.5_in()
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+
+By chaining the rule eval_f_while.body.5_in() -> eval_f_if.else_in() with all rule in problem 7, the following new rules are obtained:
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+We thus obtain the following problem:
+8:	eval_f_if.else_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.body.5_in()
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_f_while.cond.2_in() -> eval_f_while.body.5_in()
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+
+By chaining the rule eval_f_while.cond.2_in() -> eval_f_while.body.5_in() with all rules in problem 9, the following new rules are obtained:
+	eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+We thus obtain the following problem:
+10:	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+	eval_f_while.body.5_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+
+The termination graph of problem 10 contains 1 nontrivial SCC:
+11:	eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+	eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+
+The following termination problem could not be handled:
+eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+eval_f_while.cond.2_in() -> eval_f_while.cond.2_in()
+
+Time: 0.988 sec (SMT: 0.963 sec)

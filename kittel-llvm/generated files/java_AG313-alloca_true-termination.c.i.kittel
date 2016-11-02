@@ -1,0 +1,12 @@
+///*** 1_quot ***///
+eval_quot_start(v_x, v_y) -> eval_quot_entry_in()
+eval_quot_entry_in() -> eval_quot_return_in()
+eval_quot_entry_in() -> eval_quot_if.end_in()
+eval_quot_if.end_in() -> eval_quot_while.cond_in(nondef.1)
+eval_quot_while.cond_in(v_7) -> eval_quot_while.body_in(v_7) [ v_7 > 0 ]
+eval_quot_while.cond_in(v_7) -> eval_quot_return_in()
+eval_quot_while.cond_in(v_7) -> eval_quot_return_in() [ v_7 <= 0 ]
+eval_quot_while.body_in(v_7) -> eval_quot_while.cond_in(v_7)
+eval_quot_return_in() -> eval_quot_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

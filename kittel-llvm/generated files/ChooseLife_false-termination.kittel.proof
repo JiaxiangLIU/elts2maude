@@ -1,0 +1,103 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(17, 13)
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.body_in(v_death.0, v_life.0) [ v_life.0 < v_death.0 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.end_in() [ v_life.0 >= v_death.0 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ 2 < v_death.0 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ 2 < v_life.0 + 1 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, v_death.0) [ 2 >= v_death.0 /\ 2 >= v_life.0 + 1 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.body_in(v_death.0, v_life.0) [ v_life.0 < v_death.0 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ 2 < v_death.0 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ 2 < v_life.0 + 1 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, v_death.0) [ 2 >= v_death.0 /\ 2 >= v_life.0 + 1 ]
+
+By chaining the rule eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.body_in(v_death.0, v_life.0) [ v_life.0 < v_death.0 ] with all rules in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, v_death.0) [ v_life.0 < v_death.0 /\ 2 >= v_death.0 /\ 2 >= v_life.0 + 1 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ 2 < v_death.0 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ 2 < v_life.0 + 1 ]
+	eval_main_while.body_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, v_death.0) [ 2 >= v_death.0 /\ 2 >= v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, v_death.0) [ v_life.0 < v_death.0 /\ 2 >= v_death.0 /\ 2 >= v_life.0 + 1 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 ]
+
+By chaining the rule eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 ] with all rules in problem 4, the following new rules are obtained:
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+
+By chaining the rule eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(v_life.0 + 1, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 ] with all rules in problem 6, the following new rules are obtained:
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+We thus obtain the following problem:
+7:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+
+By chaining the rule eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 ] with all rules in problem 8, the following new rules are obtained:
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+We thus obtain the following problem:
+9:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+	eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+
+The following termination problem could not be handled:
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+eval_main_while.cond_in(v_death.0, v_life.0) -> eval_main_while.cond_in(3, 2) [ v_life.0 < v_death.0 /\ 2 < v_death.0 /\ 2 < v_life.0 + 1 /\ 2 < 3 ]
+
+Time: 2.719 sec (SMT: 2.613 sec)

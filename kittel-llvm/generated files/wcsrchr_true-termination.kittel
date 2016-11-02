@@ -1,0 +1,9 @@
+///*** 1_wcsrchr ***///
+eval_wcsrchr_start(v_wc) -> eval_wcsrchr_entry_in()
+eval_wcsrchr_entry_in() -> eval_wcsrchr_for.cond_in()
+eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.body_in()
+eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.end_in()
+eval_wcsrchr_for.body_in() -> eval_wcsrchr_for.cond_in()
+eval_wcsrchr_for.end_in() -> eval_wcsrchr_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

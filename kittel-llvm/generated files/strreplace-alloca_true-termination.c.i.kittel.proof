@@ -1,0 +1,91 @@
+Initial termination problem:
+1:	eval_cstrreplace_start(v_old, v_new) -> eval_cstrreplace_entry_in(v_old)
+	eval_cstrreplace_entry_in(v_old) -> eval_cstrreplace_while.cond_in(v_old)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.body_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.end_in()
+	eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_while.end_in() -> eval_cstrreplace_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.body_in(v_conv3)
+	eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+
+By chaining the rule eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.body_in(v_conv3) with all rules in problem 2, the following new rules are obtained:
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+We thus obtain the following problem:
+3:	eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.body_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+
+By chaining the rule eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3) with all rule in problem 4, the following new rules are obtained:
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+We thus obtain the following problem:
+5:	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+
+By chaining the rule eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3) with all rules in problem 6, the following new rules are obtained:
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+We thus obtain the following problem:
+7:	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+
+By chaining the rule eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3) with all rule in problem 8, the following new rules are obtained:
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+We thus obtain the following problem:
+9:	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+	eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+	eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+
+The following termination problem could not be handled:
+eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+eval_cstrreplace_if.then_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.then_in(v_conv3)
+eval_cstrreplace_if.end_in(v_conv3) -> eval_cstrreplace_if.end_in(v_conv3)
+eval_cstrreplace_while.cond_in(v_conv3) -> eval_cstrreplace_while.cond_in(v_conv3)
+
+Time: 0.708 sec (SMT: 0.681 sec)

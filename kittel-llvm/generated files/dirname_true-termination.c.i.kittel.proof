@@ -1,0 +1,52 @@
+Initial termination problem:
+1:	eval_strrchr_start(v_c) -> eval_strrchr_entry_in()
+	eval_strrchr_entry_in() -> eval_strrchr_for.cond_in()
+	eval_strrchr_for.cond_in() -> eval_strrchr_if.end.5_in()
+	eval_strrchr_for.cond_in() -> eval_strrchr_if.then.4_in()
+	eval_strrchr_if.end.5_in() -> eval_strrchr_for.cond_in()
+	eval_strrchr_if.then.4_in() -> eval_strrchr_stop()
+	eval_dirname_start() -> eval_dirname_entry_in()
+	eval_dirname_entry_in() -> eval_dirname_return_in()
+	eval_dirname_entry_in() -> eval_dirname_for.cond_in()
+	eval_dirname_for.cond_in() -> eval_dirname_if.end.2_in()
+	eval_dirname_for.cond_in() -> eval_dirname_return_in()
+	eval_dirname_if.end.2_in() -> eval_dirname_while.cond_in()
+	eval_dirname_if.end.2_in() -> eval_dirname_if.end.13_in()
+	eval_dirname_while.cond_in() -> eval_dirname_while.body_in()
+	eval_dirname_while.cond_in() -> eval_dirname_for.cond_in()
+	eval_dirname_while.body_in() -> eval_dirname_while.cond_in()
+	eval_dirname_if.end.13_in() -> eval_dirname_while.cond.17_in()
+	eval_dirname_if.end.13_in() -> eval_dirname_if.else_in()
+	eval_dirname_while.cond.17_in() -> eval_dirname_while.body.25_in()
+	eval_dirname_while.cond.17_in() -> eval_dirname_return_in()
+	eval_dirname_while.body.25_in() -> eval_dirname_while.cond.17_in()
+	eval_dirname_if.else_in() -> eval_dirname_return_in()
+	eval_dirname_return_in() -> eval_dirname_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 3 nontrivial SCCs:
+2:	eval_strrchr_for.cond_in() -> eval_strrchr_if.end.5_in()
+	eval_strrchr_if.end.5_in() -> eval_strrchr_for.cond_in()
+
+3:	eval_dirname_while.cond.17_in() -> eval_dirname_while.body.25_in()
+	eval_dirname_while.body.25_in() -> eval_dirname_while.cond.17_in()
+
+4:	eval_dirname_for.cond_in() -> eval_dirname_if.end.2_in()
+	eval_dirname_if.end.2_in() -> eval_dirname_while.cond_in()
+	eval_dirname_while.cond_in() -> eval_dirname_while.body_in()
+	eval_dirname_while.cond_in() -> eval_dirname_for.cond_in()
+	eval_dirname_while.body_in() -> eval_dirname_while.cond_in()
+
+By chaining the rule eval_strrchr_for.cond_in() -> eval_strrchr_if.end.5_in() with all rule in problem 2, the following new rules are obtained:
+	eval_strrchr_for.cond_in() -> eval_strrchr_for.cond_in()
+We thus obtain the following problem:
+5:	eval_strrchr_if.end.5_in() -> eval_strrchr_for.cond_in()
+	eval_strrchr_for.cond_in() -> eval_strrchr_for.cond_in()
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_strrchr_for.cond_in() -> eval_strrchr_for.cond_in()
+
+The following termination problem could not be handled:
+eval_strrchr_for.cond_in() -> eval_strrchr_for.cond_in()
+
+Time: 0.830 sec (SMT: 0.816 sec)

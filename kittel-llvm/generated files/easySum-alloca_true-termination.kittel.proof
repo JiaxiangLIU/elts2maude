@@ -1,0 +1,26 @@
+Initial termination problem:
+1:	eval_iterate_start(v_bound) -> eval_iterate_entry_in()
+	eval_iterate_entry_in() -> eval_iterate_for.cond_in(nondef.0)
+	eval_iterate_for.cond_in(v_6) -> eval_iterate_for.body_in(v_6)
+	eval_iterate_for.cond_in(v_6) -> eval_iterate_for.end_in()
+	eval_iterate_for.body_in(v_6) -> eval_iterate_for.cond_in(v_6)
+	eval_iterate_for.end_in() -> eval_iterate_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_iterate_for.cond_in(v_6) -> eval_iterate_for.body_in(v_6)
+	eval_iterate_for.body_in(v_6) -> eval_iterate_for.cond_in(v_6)
+
+By chaining the rule eval_iterate_for.cond_in(v_6) -> eval_iterate_for.body_in(v_6) with all rule in problem 2, the following new rules are obtained:
+	eval_iterate_for.cond_in(v_6) -> eval_iterate_for.cond_in(v_6)
+We thus obtain the following problem:
+3:	eval_iterate_for.body_in(v_6) -> eval_iterate_for.cond_in(v_6)
+	eval_iterate_for.cond_in(v_6) -> eval_iterate_for.cond_in(v_6)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_iterate_for.cond_in(v_6) -> eval_iterate_for.cond_in(v_6)
+
+The following termination problem could not be handled:
+eval_iterate_for.cond_in(v_6) -> eval_iterate_for.cond_in(v_6)
+
+Time: 0.291 sec (SMT: 0.281 sec)

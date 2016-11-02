@@ -1,0 +1,40 @@
+Initial termination problem:
+1:	eval_mlog_start(v_x) -> eval_mlog_entry_in()
+	eval_mlog_entry_in() -> eval_mlog_while.cond_in()
+	eval_mlog_while.cond_in() -> eval_mlog_while.body_in()
+	eval_mlog_while.cond_in() -> eval_mlog_while.end_in()
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in()
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in() [ nondef.1 > 0 /\ nondef.2 >= 0 /\ nondef.2 < nondef.1 ]
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in() [ nondef.1 < 0 /\ nondef.2 <= 0 /\ nondef.2 > nondef.1 ]
+	eval_mlog_while.end_in() -> eval_mlog_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_mlog_while.cond_in() -> eval_mlog_while.body_in()
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in()
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in() [ nondef.1 > 0 /\ nondef.2 >= 0 /\ nondef.2 < nondef.1 ]
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in() [ nondef.1 < 0 /\ nondef.2 <= 0 /\ nondef.2 > nondef.1 ]
+
+By chaining the rule eval_mlog_while.cond_in() -> eval_mlog_while.body_in() with all rules in problem 2, the following new rules are obtained:
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in()
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 > 0 /\ nondef.2 >= 0 /\ nondef.2 < nondef.1 ]
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 < 0 /\ nondef.2 <= 0 /\ nondef.2 > nondef.1 ]
+We thus obtain the following problem:
+3:	eval_mlog_while.body_in() -> eval_mlog_while.cond_in()
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in() [ nondef.1 > 0 /\ nondef.2 >= 0 /\ nondef.2 < nondef.1 ]
+	eval_mlog_while.body_in() -> eval_mlog_while.cond_in() [ nondef.1 < 0 /\ nondef.2 <= 0 /\ nondef.2 > nondef.1 ]
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in()
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 > 0 /\ nondef.2 >= 0 /\ nondef.2 < nondef.1 ]
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 < 0 /\ nondef.2 <= 0 /\ nondef.2 > nondef.1 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in()
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 > 0 /\ nondef.2 >= 0 /\ nondef.2 < nondef.1 ]
+	eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 < 0 /\ nondef.2 <= 0 /\ nondef.2 > nondef.1 ]
+
+The following termination problem could not be handled:
+eval_mlog_while.cond_in() -> eval_mlog_while.cond_in()
+eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 > 0 /\ nondef.2 >= 0 /\ nondef.2 < nondef.1 ]
+eval_mlog_while.cond_in() -> eval_mlog_while.cond_in() [ nondef.1 < 0 /\ nondef.2 <= 0 /\ nondef.2 > nondef.1 ]
+
+Time: 0.734 sec (SMT: 0.719 sec)

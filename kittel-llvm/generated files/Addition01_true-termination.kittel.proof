@@ -1,0 +1,49 @@
+Initial termination problem:
+1:	eval_addition_start(v_m, v_n) -> eval_addition_entry_in(v_m, v_n)
+	eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end.9_in() [ v_n = 0 ]
+	eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n < 0 ]
+	eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n > 0 ]
+	eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.then.2_in(v_m, v_n) [ v_n > 0 ]
+	eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.end.3_in(v_m, v_n) [ v_n <= 0 ]
+	eval_addition_if.then.2_in(v_m, v_n) -> eval_addition_start(v_m + 1, v_n - 1)
+	eval_addition_if.then.2_in(v_m, v_n) -> eval_addition_if.end.9_in()
+	eval_addition_if.end.3_in(v_m, v_n) -> eval_addition_if.then.5_in(v_m, v_n) [ v_n < 0 ]
+	eval_addition_if.end.3_in(v_m, v_n) -> eval_addition_if.end.9_in() [ v_n >= 0 ]
+	eval_addition_if.then.5_in(v_m, v_n) -> eval_addition_start(v_m - 1, v_n + 1)
+	eval_addition_if.then.5_in(v_m, v_n) -> eval_addition_if.end.9_in()
+	eval_addition_if.end.9_in() -> eval_addition_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_addition_start(v_m, v_n) -> eval_addition_entry_in(v_m, v_n)
+	eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n < 0 ]
+	eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n > 0 ]
+	eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.then.2_in(v_m, v_n) [ v_n > 0 ]
+	eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.end.3_in(v_m, v_n) [ v_n <= 0 ]
+	eval_addition_if.then.2_in(v_m, v_n) -> eval_addition_start(v_m + 1, v_n - 1)
+	eval_addition_if.end.3_in(v_m, v_n) -> eval_addition_if.then.5_in(v_m, v_n) [ v_n < 0 ]
+	eval_addition_if.then.5_in(v_m, v_n) -> eval_addition_start(v_m - 1, v_n + 1)
+
+A polynomial interpretation with
+	Pol(eval_addition_start) = 3*X_2^2 + 2
+	Pol(eval_addition_entry_in) = 3*X_2^2 + 2
+	Pol(eval_addition_if.end_in) = 3*X_2^2 + 1
+	Pol(eval_addition_if.then.2_in) = -6*X_2 + 3*X_2^2 + 6
+	Pol(eval_addition_if.end.3_in) = 3*X_2^2
+	Pol(eval_addition_if.then.5_in) = 6*X_2 + 3*X_2^2 + 6
+removes the following rules from problem 2:
+	eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n < 0 ]
+	eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n > 0 ]
+	eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.then.2_in(v_m, v_n) [ v_n > 0 ]
+	eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.end.3_in(v_m, v_n) [ v_n <= 0 ]
+We thus obtain the following problem:
+3:	eval_addition_start(v_m, v_n) -> eval_addition_entry_in(v_m, v_n)
+	eval_addition_if.then.2_in(v_m, v_n) -> eval_addition_start(v_m + 1, v_n - 1)
+	eval_addition_if.end.3_in(v_m, v_n) -> eval_addition_if.then.5_in(v_m, v_n) [ v_n < 0 ]
+	eval_addition_if.then.5_in(v_m, v_n) -> eval_addition_start(v_m - 1, v_n + 1)
+
+The termination graph of problem 3 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.490 sec (SMT: 0.477 sec)

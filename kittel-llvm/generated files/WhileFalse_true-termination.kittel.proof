@@ -1,0 +1,8 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.013 sec (SMT: 0.013 sec)

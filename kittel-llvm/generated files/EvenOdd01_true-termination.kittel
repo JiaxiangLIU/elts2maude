@@ -1,0 +1,33 @@
+///*** 1_isOdd_isEven ***///
+eval_isOdd_start(v_n) -> eval_isOdd_entry_in(v_n)
+eval_isOdd_entry_in(v_n) -> eval_isOdd_NodeBlock_in(v_n)
+eval_isOdd_NodeBlock_in(v_n) -> eval_isOdd_LeafBlock_in(v_n) [ v_n < 1 ]
+eval_isOdd_NodeBlock_in(v_n) -> eval_isOdd_LeafBlock.1_in(v_n) [ v_n >= 1 ]
+eval_isOdd_LeafBlock_in(v_n) -> eval_isOdd_return_in() [ v_n = 0 ]
+eval_isOdd_LeafBlock_in(v_n) -> eval_isOdd_NewDefault_in(v_n) [ v_n < 0 ]
+eval_isOdd_LeafBlock_in(v_n) -> eval_isOdd_NewDefault_in(v_n) [ v_n > 0 ]
+eval_isOdd_LeafBlock.1_in(v_n) -> eval_isOdd_if.then.2_in() [ v_n = 1 ]
+eval_isOdd_LeafBlock.1_in(v_n) -> eval_isOdd_NewDefault_in(v_n) [ v_n < 1 ]
+eval_isOdd_LeafBlock.1_in(v_n) -> eval_isOdd_NewDefault_in(v_n) [ v_n > 1 ]
+eval_isOdd_if.then.2_in() -> eval_isOdd_return_in()
+eval_isOdd_NewDefault_in(v_n) -> eval_isOdd_if.else.3_in(v_n)
+eval_isOdd_if.else.3_in(v_n) -> eval_isEven_start(v_n - 1)
+eval_isOdd_if.else.3_in(v_n) -> eval_isOdd_return_in()
+eval_isOdd_return_in() -> eval_isOdd_stop()
+eval_isEven_start(v_n) -> eval_isEven_entry_in(v_n)
+eval_isEven_entry_in(v_n) -> eval_isEven_NodeBlock_in(v_n)
+eval_isEven_NodeBlock_in(v_n) -> eval_isEven_LeafBlock_in(v_n) [ v_n < 1 ]
+eval_isEven_NodeBlock_in(v_n) -> eval_isEven_LeafBlock.1_in(v_n) [ v_n >= 1 ]
+eval_isEven_LeafBlock_in(v_n) -> eval_isEven_return_in() [ v_n = 0 ]
+eval_isEven_LeafBlock_in(v_n) -> eval_isEven_NewDefault_in(v_n) [ v_n < 0 ]
+eval_isEven_LeafBlock_in(v_n) -> eval_isEven_NewDefault_in(v_n) [ v_n > 0 ]
+eval_isEven_LeafBlock.1_in(v_n) -> eval_isEven_if.then.2_in() [ v_n = 1 ]
+eval_isEven_LeafBlock.1_in(v_n) -> eval_isEven_NewDefault_in(v_n) [ v_n < 1 ]
+eval_isEven_LeafBlock.1_in(v_n) -> eval_isEven_NewDefault_in(v_n) [ v_n > 1 ]
+eval_isEven_if.then.2_in() -> eval_isEven_return_in()
+eval_isEven_NewDefault_in(v_n) -> eval_isEven_if.else.3_in(v_n)
+eval_isEven_if.else.3_in(v_n) -> eval_isOdd_start(v_n - 1)
+eval_isEven_if.else.3_in(v_n) -> eval_isEven_return_in()
+eval_isEven_return_in() -> eval_isEven_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

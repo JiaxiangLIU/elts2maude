@@ -1,0 +1,120 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0)
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 10 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.end_in() [ v_i.0 <= 10 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 = 25 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 < 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 < 25 /\ v_i.0 > 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 > 25 /\ v_i.0 > 30 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rule from problem 1:
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 < 25 /\ v_i.0 > 30 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0)
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 10 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.end_in() [ v_i.0 <= 10 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 = 25 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 < 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 > 25 /\ v_i.0 > 30 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 10 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 = 25 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 < 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 > 25 /\ v_i.0 > 30 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 10 ] with all rules in problem 3, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 > 10 /\ v_i.0 = 25 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 < 25 /\ v_i.0 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 > 30 ]
+We thus obtain the following problem:
+4:	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 = 25 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 < 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 > 25 /\ v_i.0 > 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 > 10 /\ v_i.0 = 25 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 < 25 /\ v_i.0 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(20) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 > 30 ]
+
+The termination graph of problem 4 contains 2 nontrivial SCCs:
+5:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 > 10 /\ v_i.0 = 25 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 ]
+
+6:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 < 25 /\ v_i.0 <= 30 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 > 10 /\ v_i.0 = 25 ] with all rules in problem 5, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 = 25 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+We thus obtain the following problem:
+7:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(29) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 = 25 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 ] with all rules in problem 8, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 2) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+We thus obtain the following problem:
+9:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 2) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 2) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ] with all rules in problem 10, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 = 25 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(26) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 = 25 ]
+We thus obtain the following problem:
+11:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 2) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 = 25 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(26) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 = 25 ]
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 2) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(26) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 2) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 ] with all rules in problem 12, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 4) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 > 25 /\ v_i.0 - 3 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(26) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 ]
+We thus obtain the following problem:
+13:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(26) [ v_i.0 > 10 /\ v_i.0 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 4) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 > 25 /\ v_i.0 - 3 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(26) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 ]
+
+The termination graph of problem 13 contains 1 nontrivial SCC:
+14:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 ] with all rule in problem 14, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 /\ 26 > 10 /\ 26 > 25 /\ 26 <= 30 /\ 25 > 10 /\ 25 = 25 ]
+We thus obtain the following problem:
+15:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 /\ 26 > 10 /\ 26 > 25 /\ 26 <= 30 /\ 25 > 10 /\ 25 = 25 ]
+
+The termination graph of problem 15 contains 1 nontrivial SCC:
+16:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 /\ 26 > 10 /\ 26 > 25 /\ 26 <= 30 /\ 25 > 10 /\ 25 = 25 ]
+
+The following termination problem could not be handled:
+eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(28) [ v_i.0 > 10 /\ v_i.0 > 25 /\ v_i.0 <= 30 /\ v_i.0 - 1 > 10 /\ v_i.0 - 1 > 25 /\ v_i.0 - 1 <= 30 /\ v_i.0 - 2 > 10 /\ v_i.0 - 2 > 25 /\ v_i.0 - 2 <= 30 /\ v_i.0 - 3 > 10 /\ v_i.0 - 3 = 25 /\ 29 > 10 /\ 29 > 25 /\ 29 <= 30 /\ 28 > 10 /\ 28 > 25 /\ 28 <= 30 /\ 27 > 10 /\ 27 > 25 /\ 27 <= 30 /\ 26 > 10 /\ 26 > 25 /\ 26 <= 30 /\ 25 > 10 /\ 25 = 25 ]
+
+Time: 2.313 sec (SMT: 2.253 sec)

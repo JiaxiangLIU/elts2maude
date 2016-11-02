@@ -1,0 +1,724 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 >= 2 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end.23_in() [ v_x.0 < 2 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1)
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.end.23_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 >= 2 ]
+	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1)
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+
+By chaining the rule eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body_in(v_x.0, v_y.0) [ v_x.0 >= 2 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1)
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+
+By chaining the rule eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ] with all rules in problem 4, the following new rules are obtained:
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_land.rhs_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1)
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+
+By chaining the rule eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 < v_x.1 + 1 ] with all rule in problem 6, the following new rules are obtained:
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+We thus obtain the following problem:
+7:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1)
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+
+By chaining the rule eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) with all rules in problem 8, the following new rules are obtained:
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+We thus obtain the following problem:
+9:	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+
+By chaining the rule eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ] with all rules in problem 10, the following new rules are obtained:
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+We thus obtain the following problem:
+11:	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+
+By chaining the rule eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 < v_x.2 + 3 ] with all rule in problem 12, the following new rules are obtained:
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+We thus obtain the following problem:
+13:	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+
+The termination graph of problem 13 contains 1 nontrivial SCC:
+14:	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+
+By chaining the rule eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) with all rule in problem 14, the following new rules are obtained:
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+We thus obtain the following problem:
+15:	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+
+The termination graph of problem 15 contains 1 nontrivial SCC:
+16:	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+
+By chaining the rule eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) with all rule in problem 16, the following new rules are obtained:
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+We thus obtain the following problem:
+17:	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+
+The termination graph of problem 17 contains 1 nontrivial SCC:
+18:	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+
+By chaining the rule eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) with all rules in problem 18, the following new rules are obtained:
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+We thus obtain the following problem:
+19:	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+
+The termination graph of problem 19 contains 1 nontrivial SCC:
+20:	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+
+By chaining the rule eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) with all rules in problem 20, the following new rules are obtained:
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+We thus obtain the following problem:
+21:	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+
+The termination graph of problem 21 contains 1 nontrivial SCC:
+22:	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1)
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+
+By chaining the rule eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) with all rule in problem 22, the following new rules are obtained:
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+We thus obtain the following problem:
+23:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+
+The termination graph of problem 23 contains 1 nontrivial SCC:
+24:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+
+By chaining the rule eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 ] with all rules in problem 24, the following new rules are obtained:
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2, v_y.0 + 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 < v_x.0 ]
+We thus obtain the following problem:
+25:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2, v_y.0 + 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 < v_x.0 ]
+
+The termination graph of problem 25 contains 1 nontrivial SCC:
+26:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2, v_y.0 + 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 < v_x.0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.2_in) = 15*X_3 + 22*X_4 + 1
+	Pol(eval_main_while.body.7_in) = 15*X_3 + 22*X_4
+	Pol(eval_main_while.end.20_in) = 15*X_3 + 22*X_4
+	Pol(eval_main_while.cond_in) = 37*X_1 + 22*X_2 - 36
+	Pol(eval_main_land.rhs.12_in) = 15*X_5 + 22*X_6 - 6
+	Pol(eval_main_while.end_in) = 15*X_5 + 22*X_6 + 15
+	Pol(eval_main_while.cond.9_in) = 15*X_5 + 22*X_6 + 21
+	Pol(eval_main_while.body.16_in) = 15*X_5 + 22*X_6 + 20
+removes the following rules from problem 26:
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.0 - 1, v_y.0 + v_x.0 - 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 >= v_x.0 ]
+We thus obtain the following problem:
+27:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond_in(v_x.1 - 1, v_y.1 - v_x.1 + 1) [ v_y.1 < v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond_in(v_x.2 - 1, v_y.2 - v_x.2) [ v_y.2 - 1 < v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2, v_y.0 + 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 < v_x.0 ]
+
+The termination graph of problem 27 contains 2 nontrivial SCCs:
+28:	eval_main_while.cond_in(v_x.0, v_y.0) -> eval_main_while.cond_in(v_x.0 - 2, v_y.0 + 1) [ v_x.0 >= 2 /\ v_y.0 + v_x.0 - 1 < v_x.0 ]
+
+29:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -X_2
+removes all rules from problem 28.
+
+By chaining the rule eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ] with all rules in problem 29, the following new rules are obtained:
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+We thus obtain the following problem:
+30:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+
+The termination graph of problem 30 contains 1 nontrivial SCC:
+31:	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+
+By chaining the rule eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) [ v_y.1 >= v_x.1 + 1 ] with all rule in problem 31, the following new rules are obtained:
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_x.1 - 1 >= 2 ]
+We thus obtain the following problem:
+32:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_x.1 - 1 >= 2 ]
+
+The termination graph of problem 32 contains 1 nontrivial SCC:
+33:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_x.1 - 1 >= 2 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.body.7_in) = 8*X_4 - 33
+	Pol(eval_main_land.rhs.12_in) = 8*X_6 - 26
+	Pol(eval_main_while.end_in) = 8*X_6 - 40
+	Pol(eval_main_while.cond.9_in) = 8*X_6 - 11
+	Pol(eval_main_while.body.16_in) = 8*X_6 - 55
+	Pol(eval_main_while.cond.2_in) = 8*X_4 - 32
+	Pol(eval_main_while.end.20_in) = 8*X_4 - 39
+removes the following rule from problem 33:
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_x.1 - 1 >= 2 ]
+We thus obtain the following problem:
+34:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+
+The termination graph of problem 34 contains 1 nontrivial SCC:
+35:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.body.7_in) = -7*X_3 + 7*X_4 - 28
+	Pol(eval_main_land.rhs.12_in) = -7*X_5 + 7*X_6 - 31
+	Pol(eval_main_while.end_in) = -7*X_5 + 7*X_6 - 23
+	Pol(eval_main_while.cond.9_in) = -7*X_5 + 7*X_6 - 22
+	Pol(eval_main_while.body.16_in) = -7*X_5 + 7*X_6 - 43
+	Pol(eval_main_while.cond.2_in) = -7*X_3 + 7*X_4 - 24
+	Pol(eval_main_while.end.20_in) = -7*X_3 + 7*X_4 - 17
+removes the following rule from problem 35:
+	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 >= v_x.1 + 3 ]
+We thus obtain the following problem:
+36:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+
+The termination graph of problem 36 contains 1 nontrivial SCC:
+37:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.body.7_in) = -7*X_3 + 7*X_4 - 8
+	Pol(eval_main_while.end_in) = -7*X_5 + 7*X_6 - 3
+	Pol(eval_main_while.cond.9_in) = -7*X_5 + 7*X_6 + 1
+	Pol(eval_main_while.body.16_in) = -7*X_5 + 7*X_6
+	Pol(eval_main_while.cond.2_in) = -7*X_3 + 7*X_4 - 7
+	Pol(eval_main_land.rhs.12_in) = -7*X_5 + 7*X_6 - 13
+	Pol(eval_main_while.end.20_in) = -7*X_3 + 7*X_4 + 2
+removes the following rules from problem 37:
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2) [ v_y.2 - 2 >= v_x.2 + 4 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.body.7_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end.20_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 - 1 >= v_x.2 + 1 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 >= v_x.1 + 3 ]
+	eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 >= v_x.1 + 1 /\ v_y.1 - 1 < v_x.1 + 3 ]
+We thus obtain the following problem:
+38:	eval_main_while.body.7_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.1, v_y.1 - 1) [ v_y.1 - 1 < v_x.1 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.end_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) [ v_y.2 >= v_x.2 + 3 ]
+	eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1) [ v_y.2 < v_x.2 + 3 ]
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.9_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2 + 1, v_y.2 - 2)
+	eval_main_land.rhs.12_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2, v_y.2 - 1)
+	eval_main_while.body.16_in(v_x.0, v_y.0, v_x.1, v_y.1, v_x.2, v_y.2) -> eval_main_while.cond.2_in(v_x.0, v_y.0, v_x.2 + 1, v_y.2 - 3) [ v_y.2 - 2 < v_x.2 + 4 ]
+	eval_main_while.end.20_in(v_x.0, v_y.0, v_x.1, v_y.1) -> eval_main_while.cond.2_in(v_x.1 - 1, v_y.1 - v_x.1 + 1, v_x.1 - 2, v_y.1 - 1) [ v_x.1 - 1 >= 2 ]
+
+The termination graph of problem 38 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 7.148 sec (SMT: 6.133 sec)

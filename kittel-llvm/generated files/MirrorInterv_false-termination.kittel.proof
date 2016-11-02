@@ -1,0 +1,108 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, 20)
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_while.body_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_while.end_in() [ -v_range.0 > v_i.0 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_while.end_in() [ v_i.0 > v_range.0 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ v_range.0 - v_i.0 < 5 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ v_range.0 + v_i.0 < 5 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_while.cond_in(-v_i.0, v_range.0)
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, -1) [ v_i.0 - 1 = 0 ]
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 < 0 ]
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 > 0 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_while.body_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ v_range.0 - v_i.0 < 5 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ v_range.0 + v_i.0 < 5 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_while.cond_in(-v_i.0, v_range.0)
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 < 0 ]
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 > 0 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_while.body_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ] with all rules in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ v_range.0 - v_i.0 < 5 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ v_range.0 + v_i.0 < 5 ]
+	eval_main_while.body_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_while.cond_in(-v_i.0, v_range.0)
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 < 0 ]
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 > 0 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_while.cond_in(-v_i.0, v_range.0)
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 < 0 ]
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 > 0 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+
+By chaining the rule eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_while.cond_in(-v_i.0, v_range.0) with all rules in problem 4, the following new rules are obtained:
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.else_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 >= 5 /\ v_range.0 - v_i.0 >= 5 ]
+We thus obtain the following problem:
+5:	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 < 0 ]
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 > 0 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.else_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 >= 5 /\ v_range.0 - v_i.0 >= 5 ]
+
+The termination graph of problem 5 contains 2 nontrivial SCCs:
+6:	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+
+7:	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 < 0 ]
+	eval_main_if.else_in(v_i.0, v_range.0) -> eval_main_while.cond_in(v_i.0 - 1, v_range.0 + 1) [ v_i.0 - 1 > 0 ]
+	eval_main_while.cond_in(v_i.0, v_range.0) -> eval_main_if.else_in(v_i.0, v_range.0) [ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 >= 5 /\ v_range.0 + v_i.0 >= 5 ]
+
+By chaining the rule eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ] with all rules in problem 6, the following new rules are obtained:
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+We thus obtain the following problem:
+8:	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+
+By chaining the rule eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ] with all rules in problem 9, the following new rules are obtained:
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+We thus obtain the following problem:
+10:	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+
+The termination graph of problem 10 contains 1 nontrivial SCC:
+11:	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+	eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+
+The following termination problem could not be handled:
+eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 ]
+eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 /\ v_range.0 + v_i.0 < 5 ]
+eval_main_if.then_in(v_i.0, v_range.0) -> eval_main_if.then_in(-v_i.0, v_range.0) [ -v_range.0 <= -v_i.0 /\ -v_i.0 <= v_range.0 /\ v_range.0 - v_i.0 < 5 /\ -v_range.0 <= v_i.0 /\ v_i.0 <= v_range.0 ]
+
+Time: 18.505 sec (SMT: 2.149 sec)

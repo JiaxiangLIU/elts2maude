@@ -1,0 +1,50 @@
+Initial termination problem:
+1:	eval_cstrncmp_start(v_n) -> eval_cstrncmp_entry_in(v_n)
+	eval_cstrncmp_entry_in(v_n) -> eval_cstrncmp_return_in() [ v_n = 0 ]
+	eval_cstrncmp_entry_in(v_n) -> eval_cstrncmp_while.cond_in(v_n) [ v_n < 0 ]
+	eval_cstrncmp_entry_in(v_n) -> eval_cstrncmp_while.cond_in(v_n) [ v_n > 0 ]
+	eval_cstrncmp_while.cond_in(v_n.addr.0) -> eval_cstrncmp_land.rhs_in(v_n.addr.0, v_n.addr.0 - 1) [ v_n.addr.0 > 0 ]
+	eval_cstrncmp_while.cond_in(v_n.addr.0) -> eval_cstrncmp_while.end_in() [ v_n.addr.0 <= 0 ]
+	eval_cstrncmp_land.rhs_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.body_in(v_n.addr.0, v_dec)
+	eval_cstrncmp_land.rhs_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.end_in()
+	eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_return_in() [ v_dec = 0 ]
+	eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec < 0 ]
+	eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec > 0 ]
+	eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) -> eval_cstrncmp_return_in()
+	eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) -> eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec)
+	eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.cond_in(v_dec)
+	eval_cstrncmp_while.end_in() -> eval_cstrncmp_return_in()
+	eval_cstrncmp_while.end_in() -> eval_cstrncmp_cond.false_in(nondef.3, nondef.4) [ nondef.3 >= nondef.4 ]
+	eval_cstrncmp_cond.false_in(v_3, v_4) -> eval_cstrncmp_return_in() [ v_3 <= v_4 ]
+	eval_cstrncmp_cond.false_in(v_3, v_4) -> eval_cstrncmp_return_in() [ v_3 > v_4 ]
+	eval_cstrncmp_return_in() -> eval_cstrncmp_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_cstrncmp_while.cond_in(v_n.addr.0) -> eval_cstrncmp_land.rhs_in(v_n.addr.0, v_n.addr.0 - 1) [ v_n.addr.0 > 0 ]
+	eval_cstrncmp_land.rhs_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.body_in(v_n.addr.0, v_dec)
+	eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec < 0 ]
+	eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec > 0 ]
+	eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) -> eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec)
+	eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.cond_in(v_dec)
+
+A polynomial interpretation with
+	Pol(eval_cstrncmp_while.cond_in) = 2*X_1 + 1
+	Pol(eval_cstrncmp_land.rhs_in) = 2*X_2 + 2
+	Pol(eval_cstrncmp_while.body_in) = 2*X_2 + 2
+	Pol(eval_cstrncmp_lor.lhs.false_in) = 2*X_2 + 1
+	Pol(eval_cstrncmp_if.end.11_in) = 2*X_2 + 1
+removes the following rule from problem 2:
+	eval_cstrncmp_while.cond_in(v_n.addr.0) -> eval_cstrncmp_land.rhs_in(v_n.addr.0, v_n.addr.0 - 1) [ v_n.addr.0 > 0 ]
+We thus obtain the following problem:
+3:	eval_cstrncmp_land.rhs_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.body_in(v_n.addr.0, v_dec)
+	eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec < 0 ]
+	eval_cstrncmp_while.body_in(v_n.addr.0, v_dec) -> eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) [ v_dec > 0 ]
+	eval_cstrncmp_lor.lhs.false_in(v_n.addr.0, v_dec) -> eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec)
+	eval_cstrncmp_if.end.11_in(v_n.addr.0, v_dec) -> eval_cstrncmp_while.cond_in(v_dec)
+
+The termination graph of problem 3 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.693 sec (SMT: 0.683 sec)

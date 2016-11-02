@@ -1,0 +1,29 @@
+Initial termination problem:
+1:	eval_quot_start(v_x, v_y) -> eval_quot_entry_in()
+	eval_quot_entry_in() -> eval_quot_return_in()
+	eval_quot_entry_in() -> eval_quot_if.end_in()
+	eval_quot_if.end_in() -> eval_quot_while.cond_in(nondef.1)
+	eval_quot_while.cond_in(v_7) -> eval_quot_while.body_in(v_7) [ v_7 > 0 ]
+	eval_quot_while.cond_in(v_7) -> eval_quot_return_in()
+	eval_quot_while.cond_in(v_7) -> eval_quot_return_in() [ v_7 <= 0 ]
+	eval_quot_while.body_in(v_7) -> eval_quot_while.cond_in(v_7)
+	eval_quot_return_in() -> eval_quot_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_quot_while.cond_in(v_7) -> eval_quot_while.body_in(v_7) [ v_7 > 0 ]
+	eval_quot_while.body_in(v_7) -> eval_quot_while.cond_in(v_7)
+
+By chaining the rule eval_quot_while.cond_in(v_7) -> eval_quot_while.body_in(v_7) [ v_7 > 0 ] with all rule in problem 2, the following new rules are obtained:
+	eval_quot_while.cond_in(v_7) -> eval_quot_while.cond_in(v_7) [ v_7 > 0 ]
+We thus obtain the following problem:
+3:	eval_quot_while.body_in(v_7) -> eval_quot_while.cond_in(v_7)
+	eval_quot_while.cond_in(v_7) -> eval_quot_while.cond_in(v_7) [ v_7 > 0 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_quot_while.cond_in(v_7) -> eval_quot_while.cond_in(v_7) [ v_7 > 0 ]
+
+The following termination problem could not be handled:
+eval_quot_while.cond_in(v_7) -> eval_quot_while.cond_in(v_7) [ v_7 > 0 ]
+
+Time: 0.410 sec (SMT: 0.399 sec)

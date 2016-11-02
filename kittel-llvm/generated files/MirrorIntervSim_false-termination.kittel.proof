@@ -1,0 +1,58 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0)
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 0 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 0 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.end_in() [ v_i.0 = 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(0) [ -5 > v_i.0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(0) [ v_i.0 > 35 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_while.cond_in(-5) [ v_i.0 < 0 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_if.else_in(v_i.0) [ v_i.0 >= 0 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(35) [ v_i.0 > 30 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 <= 30 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 0 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_while.cond_in(-5) [ v_i.0 < 0 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_if.else_in(v_i.0) [ v_i.0 >= 0 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(35) [ v_i.0 > 30 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 <= 30 ]
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 0 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ v_i.0 < 0 /\ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+We thus obtain the following problem:
+3:	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_while.cond_in(-5) [ v_i.0 < 0 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_if.else_in(v_i.0) [ v_i.0 >= 0 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(35) [ v_i.0 > 30 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 <= 30 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ v_i.0 < 0 /\ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+
+The termination graph of problem 3 contains 2 nontrivial SCCs:
+4:	eval_main_if.then_in(v_i.0) -> eval_main_while.cond_in(-5) [ v_i.0 < 0 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ v_i.0 < 0 /\ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+
+5:	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_if.else_in(v_i.0) [ v_i.0 >= 0 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(35) [ v_i.0 > 30 ]
+	eval_main_if.else_in(v_i.0) -> eval_main_while.cond_in(v_i.0 - 1) [ v_i.0 <= 30 ]
+
+By chaining the rule eval_main_if.then_in(v_i.0) -> eval_main_while.cond_in(-5) [ v_i.0 < 0 ] with all rule in problem 4, the following new rules are obtained:
+	eval_main_if.then_in(v_i.0) -> eval_main_if.then_in(-5) [ v_i.0 < 0 /\ -5 < 0 /\ -5 <= -5 /\ -5 <= 35 ]
+We thus obtain the following problem:
+6:	eval_main_while.cond_in(v_i.0) -> eval_main_if.then_in(v_i.0) [ v_i.0 < 0 /\ -5 <= v_i.0 /\ v_i.0 <= 35 ]
+	eval_main_if.then_in(v_i.0) -> eval_main_if.then_in(-5) [ v_i.0 < 0 /\ -5 < 0 /\ -5 <= -5 /\ -5 <= 35 ]
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_main_if.then_in(v_i.0) -> eval_main_if.then_in(-5) [ v_i.0 < 0 /\ -5 < 0 /\ -5 <= -5 /\ -5 <= 35 ]
+
+The following termination problem could not be handled:
+eval_main_if.then_in(v_i.0) -> eval_main_if.then_in(-5) [ v_i.0 < 0 /\ -5 < 0 /\ -5 <= -5 /\ -5 <= 35 ]
+
+Time: 0.843 sec (SMT: 0.819 sec)

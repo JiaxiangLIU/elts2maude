@@ -1,0 +1,52 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.2, nondef.1)
+	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.body_in(v_q.0, v_b.0, v_a.0) [ v_q.0 > 0 ]
+	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.end_in() [ v_q.0 <= 0 ]
+	eval_main_while.body_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + v_a.0 - 1, 4*v_a.0 + 3*v_b.0, 3*v_a.0 - 4*v_b.0)
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.body_in(v_q.0, v_b.0, v_a.0) [ v_q.0 > 0 ]
+	eval_main_while.body_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + v_a.0 - 1, 4*v_a.0 + 3*v_b.0, 3*v_a.0 - 4*v_b.0)
+
+By chaining the rule eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.body_in(v_q.0, v_b.0, v_a.0) [ v_q.0 > 0 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + v_a.0 - 1, 4*v_a.0 + 3*v_b.0, 3*v_a.0 - 4*v_b.0) [ v_q.0 > 0 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + v_a.0 - 1, 4*v_a.0 + 3*v_b.0, 3*v_a.0 - 4*v_b.0)
+	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + v_a.0 - 1, 4*v_a.0 + 3*v_b.0, 3*v_a.0 - 4*v_b.0) [ v_q.0 > 0 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + v_a.0 - 1, 4*v_a.0 + 3*v_b.0, 3*v_a.0 - 4*v_b.0) [ v_q.0 > 0 ]
+
+By chaining the rule eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + v_a.0 - 1, 4*v_a.0 + 3*v_b.0, 3*v_a.0 - 4*v_b.0) [ v_q.0 > 0 ] with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + 4*v_a.0 - 4*v_b.0 - 2, 24*v_a.0 - 7*v_b.0, -7*v_a.0 - 24*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + 4*v_a.0 - 4*v_b.0 - 2, 24*v_a.0 - 7*v_b.0, -7*v_a.0 - 24*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + 4*v_a.0 - 4*v_b.0 - 2, 24*v_a.0 - 7*v_b.0, -7*v_a.0 - 24*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 ]
+
+By chaining the rule eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + 4*v_a.0 - 4*v_b.0 - 2, 24*v_a.0 - 7*v_b.0, -7*v_a.0 - 24*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 ] with all rule in problem 6, the following new rules are obtained:
+	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 - 120*v_a.0 - 72*v_b.0 - 4, -336*v_a.0 - 527*v_b.0, -527*v_a.0 + 336*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 /\ v_q.0 + 4*v_a.0 - 4*v_b.0 - 2 > 0 /\ v_q.0 - 3*v_a.0 - 28*v_b.0 - 3 > 0 ]
+We thus obtain the following problem:
+7:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 - 120*v_a.0 - 72*v_b.0 - 4, -336*v_a.0 - 527*v_b.0, -527*v_a.0 + 336*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 /\ v_q.0 + 4*v_a.0 - 4*v_b.0 - 2 > 0 /\ v_q.0 - 3*v_a.0 - 28*v_b.0 - 3 > 0 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 - 120*v_a.0 - 72*v_b.0 - 4, -336*v_a.0 - 527*v_b.0, -527*v_a.0 + 336*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 /\ v_q.0 + 4*v_a.0 - 4*v_b.0 - 2 > 0 /\ v_q.0 - 3*v_a.0 - 28*v_b.0 - 3 > 0 ]
+
+By chaining the rule eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 - 120*v_a.0 - 72*v_b.0 - 4, -336*v_a.0 - 527*v_b.0, -527*v_a.0 + 336*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 /\ v_q.0 + 4*v_a.0 - 4*v_b.0 - 2 > 0 /\ v_q.0 - 3*v_a.0 - 28*v_b.0 - 3 > 0 ] with all rule in problem 8, the following new rules are obtained:
+	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + 87312*v_a.0 - 2448*v_b.0 - 8, 354144*v_a.0 + 164833*v_b.0, 164833*v_a.0 - 354144*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 /\ v_q.0 + 4*v_a.0 - 4*v_b.0 - 2 > 0 /\ v_q.0 - 3*v_a.0 - 28*v_b.0 - 3 > 0 /\ v_q.0 - 120*v_a.0 - 72*v_b.0 - 4 > 0 /\ v_q.0 - 647*v_a.0 + 264*v_b.0 - 5 > 0 /\ v_q.0 - 884*v_a.0 + 3380*v_b.0 - 6 > 0 /\ v_q.0 + 10869*v_a.0 + 13676*v_b.0 - 7 > 0 ]
+We thus obtain the following problem:
+9:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + 87312*v_a.0 - 2448*v_b.0 - 8, 354144*v_a.0 + 164833*v_b.0, 164833*v_a.0 - 354144*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 /\ v_q.0 + 4*v_a.0 - 4*v_b.0 - 2 > 0 /\ v_q.0 - 3*v_a.0 - 28*v_b.0 - 3 > 0 /\ v_q.0 - 120*v_a.0 - 72*v_b.0 - 4 > 0 /\ v_q.0 - 647*v_a.0 + 264*v_b.0 - 5 > 0 /\ v_q.0 - 884*v_a.0 + 3380*v_b.0 - 6 > 0 /\ v_q.0 + 10869*v_a.0 + 13676*v_b.0 - 7 > 0 ]
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_main_while.cond_in(v_q.0, v_b.0, v_a.0) -> eval_main_while.cond_in(v_q.0 + 87312*v_a.0 - 2448*v_b.0 - 8, 354144*v_a.0 + 164833*v_b.0, 164833*v_a.0 - 354144*v_b.0) [ v_q.0 > 0 /\ v_q.0 + v_a.0 - 1 > 0 /\ v_q.0 + 4*v_a.0 - 4*v_b.0 - 2 > 0 /\ v_q.0 - 3*v_a.0 - 28*v_b.0 - 3 > 0 /\ v_q.0 - 120*v_a.0 - 72*v_b.0 - 4 > 0 /\ v_q.0 - 647*v_a.0 + 264*v_b.0 - 5 > 0 /\ v_q.0 - 884*v_a.0 + 3380*v_b.0 - 6 > 0 /\ v_q.0 + 10869*v_a.0 + 13676*v_b.0 - 7 > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = 15720*X_1 - 3144*X_2 - 1572*X_3
+removes all rules from problem 10.
+
+Termination successfully shown!
+
+Time: 0.566 sec (SMT: 0.505 sec)

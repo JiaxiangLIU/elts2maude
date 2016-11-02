@@ -1,0 +1,15 @@
+///*** 1_average ***///
+eval_average_start(v_x, v_y) -> eval_average_entry_in(v_x, v_y)
+eval_average_entry_in(v_x, v_y) -> eval_average_if.then_in(v_x, v_y) [ v_x > 0 ]
+eval_average_entry_in(v_x, v_y) -> eval_average_if.else_in(v_x, v_y) [ v_x <= 0 ]
+eval_average_if.then_in(v_x, v_y) -> eval_average_start(v_x - 1, v_y + 1)
+eval_average_if.then_in(v_x, v_y) -> eval_average_return_in()
+eval_average_if.else_in(v_x, v_y) -> eval_average_if.then.2_in(v_x, v_y) [ v_y > 2 ]
+eval_average_if.else_in(v_x, v_y) -> eval_average_return_in() [ v_y <= 2 ]
+eval_average_if.then.2_in(v_x, v_y) -> eval_average_start(v_x + 1, v_y - 2)
+eval_average_if.then.2_in(v_x, v_y) -> eval_average_return_in()
+eval_average_return_in() -> eval_average_stop()
+///*** 2_random ***///
+eval_random_start() -> eval_random_stop()
+///*** 3_main ***///
+eval_main_start() -> eval_main_stop()

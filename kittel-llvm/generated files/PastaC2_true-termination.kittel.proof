@@ -1,0 +1,52 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0)
+	eval_main_while.cond_in(v_x.0) -> eval_main_while.body_in(v_x.0) [ v_x.0 >= 0 ]
+	eval_main_while.cond_in(v_x.0) -> eval_main_while.end.5_in() [ v_x.0 < 0 ]
+	eval_main_while.body_in(v_x.0) -> eval_main_while.cond.1_in(v_x.0, v_x.0 + 1, 1)
+	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.body.3_in(v_x.0, v_add, v_y.0) [ v_add >= v_y.0 ]
+	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.end_in(v_x.0, v_add, v_y.0) [ v_add < v_y.0 ]
+	eval_main_while.body.3_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond.1_in(v_x.0, v_add, v_y.0 + 1)
+	eval_main_while.end_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond_in(v_add - 2)
+	eval_main_while.end.5_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_x.0) -> eval_main_while.body_in(v_x.0) [ v_x.0 >= 0 ]
+	eval_main_while.body_in(v_x.0) -> eval_main_while.cond.1_in(v_x.0, v_x.0 + 1, 1)
+	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.body.3_in(v_x.0, v_add, v_y.0) [ v_add >= v_y.0 ]
+	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.end_in(v_x.0, v_add, v_y.0) [ v_add < v_y.0 ]
+	eval_main_while.body.3_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond.1_in(v_x.0, v_add, v_y.0 + 1)
+	eval_main_while.end_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond_in(v_add - 2)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = X_1
+	Pol(eval_main_while.body_in) = X_1 - 1
+	Pol(eval_main_while.cond.1_in) = X_2 - 2
+	Pol(eval_main_while.body.3_in) = X_2 - 2
+	Pol(eval_main_while.end_in) = X_2 - 2
+removes the following rule from problem 2:
+	eval_main_while.cond_in(v_x.0) -> eval_main_while.body_in(v_x.0) [ v_x.0 >= 0 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_x.0) -> eval_main_while.cond.1_in(v_x.0, v_x.0 + 1, 1)
+	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.body.3_in(v_x.0, v_add, v_y.0) [ v_add >= v_y.0 ]
+	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.end_in(v_x.0, v_add, v_y.0) [ v_add < v_y.0 ]
+	eval_main_while.body.3_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond.1_in(v_x.0, v_add, v_y.0 + 1)
+	eval_main_while.end_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond_in(v_add - 2)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.body.3_in(v_x.0, v_add, v_y.0) [ v_add >= v_y.0 ]
+	eval_main_while.body.3_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond.1_in(v_x.0, v_add, v_y.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.1_in) = 2*X_2 - 2*X_3 + 1
+	Pol(eval_main_while.body.3_in) = 2*X_2 - 2*X_3
+removes the following rule from problem 4:
+	eval_main_while.cond.1_in(v_x.0, v_add, v_y.0) -> eval_main_while.body.3_in(v_x.0, v_add, v_y.0) [ v_add >= v_y.0 ]
+We thus obtain the following problem:
+5:	eval_main_while.body.3_in(v_x.0, v_add, v_y.0) -> eval_main_while.cond.1_in(v_x.0, v_add, v_y.0 + 1)
+
+The termination graph of problem 5 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.334 sec (SMT: 0.327 sec)

@@ -1,0 +1,31 @@
+FULLNAME=$1
+BASENAME=`basename $1 .c`
+
+shift
+
+echo "Calling clang"
+/usr/local/bin/clang -Wall -Wextra -c -emit-llvm -O0 $FULLNAME -o $BASENAME.bc
+if [ $? != 0 ]
+then
+  exit 1
+fi
+
+echo "Calling llvm2kittel"
+./llvm2kittel $BASENAME.bc $* > $BASENAME.kittel
+if [ $? != 0 ]
+then
+  rm -f $BASENAME.kittel
+  exit 2
+fi
+
+echo "Calling kittel"
+echo -ne $BASENAME.kittel": "
+./kittel.native -smt-solver z3 $BASENAME.kittel > $BASENAME.kittel.proof
+if [ $? != 0 ]
+then
+  echo "failed"
+  exit 3
+else
+  echo "shown"
+fi
+

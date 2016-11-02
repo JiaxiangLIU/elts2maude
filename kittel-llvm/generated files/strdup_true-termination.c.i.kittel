@@ -1,0 +1,12 @@
+///*** 1_strlen ***///
+eval_strlen_start() -> eval_strlen_entry_in()
+eval_strlen_entry_in() -> eval_strlen_for.cond_in()
+eval_strlen_entry_in() -> eval_strlen_return_in()
+eval_strlen_for.cond_in() -> eval_strlen_for.body_in()
+eval_strlen_for.cond_in() -> eval_strlen_return_in()
+eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+eval_strlen_return_in() -> eval_strlen_stop()
+///*** 2_strdup ***///
+eval_strdup_start() -> eval_strdup_stop()
+///*** 3_main ***///
+eval_main_start() -> eval_main_stop()

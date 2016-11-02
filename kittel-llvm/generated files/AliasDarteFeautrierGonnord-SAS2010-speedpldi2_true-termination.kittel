@@ -1,0 +1,11 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0, 0) [ nondef.0 >= 0 /\ nondef.1 > 0 ]
+eval_main_entry_in() -> eval_main_if.end.6_in()
+eval_main_while.cond_in(v_call1, v_v1.0, v_v2.0) -> eval_main_while.body_in(v_call1, v_v1.0, v_v2.0) [ v_v1.0 > 0 ]
+eval_main_while.cond_in(v_call1, v_v1.0, v_v2.0) -> eval_main_if.end.6_in() [ v_v1.0 <= 0 ]
+eval_main_while.body_in(v_call1, v_v1.0, v_v2.0) -> eval_main_while.cond_in(v_call1, v_v1.0 - 1, v_v2.0 + 1) [ v_v2.0 < v_call1 /\ v_v2.0 < v_call1 ]
+eval_main_while.body_in(v_call1, v_v1.0, v_v2.0) -> eval_main_while.cond_in(v_call1, v_v1.0 - 1, 0) [ v_v2.0 < v_call1 /\ v_v2.0 >= v_call1 ]
+eval_main_while.body_in(v_call1, v_v1.0, v_v2.0) -> eval_main_while.cond_in(v_call1, v_v1.0, v_v2.0 + 1) [ v_v2.0 >= v_call1 /\ v_v2.0 < v_call1 ]
+eval_main_while.body_in(v_call1, v_v1.0, v_v2.0) -> eval_main_while.cond_in(v_call1, v_v1.0, 0) [ v_v2.0 >= v_call1 /\ v_v2.0 >= v_call1 ]
+eval_main_if.end.6_in() -> eval_main_stop()

@@ -1,0 +1,31 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, 0)
+	eval_main_while.cond_in(v_call, v_x.0) -> eval_main_while.body_in(v_call, v_x.0) [ v_x.0 < 40 ]
+	eval_main_while.cond_in(v_call, v_x.0) -> eval_main_while.end_in() [ v_x.0 >= 40 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 1) [ v_call = 0 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 2) [ v_call < 0 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 2) [ v_call > 0 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_call, v_x.0) -> eval_main_while.body_in(v_call, v_x.0) [ v_x.0 < 40 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 1) [ v_call = 0 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 2) [ v_call < 0 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 2) [ v_call > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -2*X_2 + 78
+	Pol(eval_main_while.body_in) = -2*X_2 + 77
+removes the following rule from problem 2:
+	eval_main_while.cond_in(v_call, v_x.0) -> eval_main_while.body_in(v_call, v_x.0) [ v_x.0 < 40 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 1) [ v_call = 0 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 2) [ v_call < 0 ]
+	eval_main_while.body_in(v_call, v_x.0) -> eval_main_while.cond_in(v_call, v_x.0 + 2) [ v_call > 0 ]
+
+The termination graph of problem 3 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.294 sec (SMT: 0.290 sec)

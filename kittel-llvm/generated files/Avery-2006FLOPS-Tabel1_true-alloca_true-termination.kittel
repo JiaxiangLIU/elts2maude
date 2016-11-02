@@ -1,0 +1,17 @@
+///*** 1_subxy ***///
+eval_subxy_start(v_x, v_y) -> eval_subxy_entry_in()
+eval_subxy_entry_in() -> eval_subxy_return_in()
+eval_subxy_entry_in() -> eval_subxy_lor.lhs.false_in()
+eval_subxy_lor.lhs.false_in() -> eval_subxy_return_in()
+eval_subxy_lor.lhs.false_in() -> eval_subxy_while.cond_in()
+eval_subxy_while.cond_in() -> eval_subxy_while.body_in()
+eval_subxy_while.cond_in() -> eval_subxy_while.end_in()
+eval_subxy_while.body_in() -> eval_subxy_while.cond_in()
+eval_subxy_while.end_in() -> eval_subxy_while.cond.3_in(nondef.6)
+eval_subxy_while.cond.3_in(v_14) -> eval_subxy_while.body.5_in(v_14)
+eval_subxy_while.cond.3_in(v_14) -> eval_subxy_while.end.8_in()
+eval_subxy_while.body.5_in(v_14) -> eval_subxy_while.cond.3_in(v_14)
+eval_subxy_while.end.8_in() -> eval_subxy_return_in()
+eval_subxy_return_in() -> eval_subxy_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

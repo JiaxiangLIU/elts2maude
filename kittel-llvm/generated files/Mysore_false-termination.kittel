@@ -1,0 +1,8 @@
+///*** 1_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.cond_in(nondef.0, nondef.1) [ nondef.1 < 0 ]
+eval_main_entry_in() -> eval_main_if.end_in()
+eval_main_while.cond_in(v_x.0, v_c.0) -> eval_main_while.body_in(v_x.0, v_c.0) [ v_x.0 + v_c.0 >= 0 ]
+eval_main_while.cond_in(v_x.0, v_c.0) -> eval_main_if.end_in() [ v_x.0 + v_c.0 < 0 ]
+eval_main_while.body_in(v_x.0, v_c.0) -> eval_main_while.cond_in(v_x.0 - v_c.0, v_c.0 - 1)
+eval_main_if.end_in() -> eval_main_stop()

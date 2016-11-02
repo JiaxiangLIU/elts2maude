@@ -1,0 +1,25 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(0)
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 100 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.end_in() [ v_i.0 >= 100 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0)
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 100 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0)
+
+By chaining the rule eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 100 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0) [ v_i.0 < 100 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_i.0) -> eval_main_while.cond_in(v_i.0)
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0) [ v_i.0 < 100 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0) [ v_i.0 < 100 ]
+
+The following termination problem could not be handled:
+eval_main_while.cond_in(v_i.0) -> eval_main_while.cond_in(v_i.0) [ v_i.0 < 100 ]
+
+Time: 0.278 sec (SMT: 0.268 sec)

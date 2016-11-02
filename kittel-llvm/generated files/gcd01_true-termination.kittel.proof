@@ -1,0 +1,50 @@
+Initial termination problem:
+1:	eval_gcd_start(v_y1, v_y2) -> eval_gcd_entry_in(v_y1, v_y2)
+	eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_return_in() [ v_y1 <= 0 ]
+	eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_return_in() [ v_y2 <= 0 ]
+	eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_if.end_in(v_y1, v_y2) [ v_y1 > 0 /\ v_y2 > 0 ]
+	eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_return_in() [ v_y1 = v_y2 ]
+	eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 < v_y2 ]
+	eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+	eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.then.6_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+	eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.end.7_in(v_y1, v_y2) [ v_y1 <= v_y2 ]
+	eval_gcd_if.then.6_in(v_y1, v_y2) -> eval_gcd_start(v_y1 - v_y2, v_y2)
+	eval_gcd_if.then.6_in(v_y1, v_y2) -> eval_gcd_return_in()
+	eval_gcd_if.end.7_in(v_y1, v_y2) -> eval_gcd_start(v_y1, v_y2 - v_y1)
+	eval_gcd_if.end.7_in(v_y1, v_y2) -> eval_gcd_return_in()
+	eval_gcd_return_in() -> eval_gcd_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_gcd_start(v_y1, v_y2) -> eval_gcd_entry_in(v_y1, v_y2)
+	eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_if.end_in(v_y1, v_y2) [ v_y1 > 0 /\ v_y2 > 0 ]
+	eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 < v_y2 ]
+	eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+	eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.then.6_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+	eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.end.7_in(v_y1, v_y2) [ v_y1 <= v_y2 ]
+	eval_gcd_if.then.6_in(v_y1, v_y2) -> eval_gcd_start(v_y1 - v_y2, v_y2)
+	eval_gcd_if.end.7_in(v_y1, v_y2) -> eval_gcd_start(v_y1, v_y2 - v_y1)
+
+A polynomial interpretation with
+	Pol(eval_gcd_start) = -8*X_1 - 8*X_2 + 8*X_1^2 + 8*X_1*X_2 + 8*X_2^2 - 7
+	Pol(eval_gcd_entry_in) = -8*X_1 - 8*X_2 + 8*X_1^2 + 8*X_1*X_2 + 8*X_2^2 - 8
+	Pol(eval_gcd_if.end_in) = -4*X_1 - 4*X_2 + 8*X_1^2 - 8*X_1*X_2 + 8*X_2^2 - 5
+	Pol(eval_gcd_if.end.4_in) = -4*X_1 - 4*X_2 + 8*X_1^2 - 8*X_1*X_2 + 8*X_2^2 - 5
+	Pol(eval_gcd_if.then.6_in) = -8*X_1 + 8*X_1^2 - 8*X_1*X_2 + 8*X_2^2 - 6
+	Pol(eval_gcd_if.end.7_in) = -8*X_2 + 8*X_1^2 - 8*X_1*X_2 + 8*X_2^2 - 6
+removes the following rule from problem 2:
+	eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_if.end_in(v_y1, v_y2) [ v_y1 > 0 /\ v_y2 > 0 ]
+We thus obtain the following problem:
+3:	eval_gcd_start(v_y1, v_y2) -> eval_gcd_entry_in(v_y1, v_y2)
+	eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 < v_y2 ]
+	eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+	eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.then.6_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+	eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.end.7_in(v_y1, v_y2) [ v_y1 <= v_y2 ]
+	eval_gcd_if.then.6_in(v_y1, v_y2) -> eval_gcd_start(v_y1 - v_y2, v_y2)
+	eval_gcd_if.end.7_in(v_y1, v_y2) -> eval_gcd_start(v_y1, v_y2 - v_y1)
+
+The termination graph of problem 3 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.564 sec (SMT: 0.545 sec)

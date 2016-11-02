@@ -1,0 +1,17 @@
+///*** 1_bsearch ***///
+eval_bsearch_start(v_i, v_j) -> eval_bsearch_entry_in(v_i, v_j)
+eval_bsearch_entry_in(v_i, v_j) -> eval_bsearch_return_in() [ v_i >= v_j ]
+eval_bsearch_entry_in(v_i, v_j) -> eval_bsearch_if.end_in(v_i, v_j) [ v_i < v_j ]
+eval_bsearch_if.end_in(v_i, v_j) -> eval_bsearch_if.then.1_in(v_i, v_j, nondef.0) [ v_i + v_j = 0 /\ nondef.0 = 0 ]
+eval_bsearch_if.end_in(v_i, v_j) -> eval_bsearch_if.then.1_in(v_i, v_j, nondef.0) [ v_i + v_j > 0 /\ nondef.0 >= 0 /\ nondef.0 < v_i + v_j ]
+eval_bsearch_if.end_in(v_i, v_j) -> eval_bsearch_if.then.1_in(v_i, v_j, nondef.0) [ v_i + v_j < 0 /\ nondef.0 <= 0 /\ nondef.0 > v_i + v_j ]
+eval_bsearch_if.end_in(v_i, v_j) -> eval_bsearch_if.end.3_in(v_i, v_j, nondef.0) [ v_i + v_j = 0 /\ nondef.0 = 0 ]
+eval_bsearch_if.end_in(v_i, v_j) -> eval_bsearch_if.end.3_in(v_i, v_j, nondef.0) [ v_i + v_j > 0 /\ nondef.0 >= 0 /\ nondef.0 < v_i + v_j ]
+eval_bsearch_if.end_in(v_i, v_j) -> eval_bsearch_if.end.3_in(v_i, v_j, nondef.0) [ v_i + v_j < 0 /\ nondef.0 <= 0 /\ nondef.0 > v_i + v_j ]
+eval_bsearch_if.then.1_in(v_i, v_j, v_div) -> eval_bsearch_start(v_i, v_div)
+eval_bsearch_if.then.1_in(v_i, v_j, v_div) -> eval_bsearch_return_in()
+eval_bsearch_if.end.3_in(v_i, v_j, v_div) -> eval_bsearch_start(v_div + 1, v_j)
+eval_bsearch_if.end.3_in(v_i, v_j, v_div) -> eval_bsearch_return_in()
+eval_bsearch_return_in() -> eval_bsearch_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

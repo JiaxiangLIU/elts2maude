@@ -1,0 +1,60 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_for.cond_in(nondef.0, 1, 0)
+	eval_main_entry_in() -> eval_main_return_in()
+	eval_main_entry_in() -> eval_main_for.cond_in(nondef.0, nondef.1, 0) [ nondef.1 >= 1 ]
+	eval_main_for.cond_in(v_call, v_.call1, v_i.0) -> eval_main_for.body_in(v_call, v_.call1, v_i.0) [ v_i.0 < v_.call1 ]
+	eval_main_for.cond_in(v_call, v_.call1, v_i.0) -> eval_main_for.cond.11_in(v_call, v_.call1, 0) [ v_i.0 >= v_.call1 ]
+	eval_main_for.body_in(v_call, v_.call1, v_i.0) -> eval_main_for.cond_in(v_call, v_.call1, v_i.0 + 1)
+	eval_main_for.cond.11_in(v_call, v_.call1, v_j.0) -> eval_main_for.body.14_in(v_call, v_.call1, v_j.0) [ v_j.0 < v_.call1 ]
+	eval_main_for.cond.11_in(v_call, v_.call1, v_j.0) -> eval_main_return_in() [ v_j.0 >= v_.call1 ]
+	eval_main_for.body.14_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.body_in(v_call, v_.call1, v_j.0)
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_for.inc.22_in(v_call, v_.call1, v_j.0)
+	eval_main_while.body_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+	eval_main_for.inc.22_in(v_call, v_.call1, v_j.0) -> eval_main_for.cond.11_in(v_call, v_.call1, v_j.0 + 1)
+	eval_main_return_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_main_for.cond.11_in(v_call, v_.call1, v_j.0) -> eval_main_for.body.14_in(v_call, v_.call1, v_j.0) [ v_j.0 < v_.call1 ]
+	eval_main_for.body.14_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.body_in(v_call, v_.call1, v_j.0)
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_for.inc.22_in(v_call, v_.call1, v_j.0)
+	eval_main_while.body_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+	eval_main_for.inc.22_in(v_call, v_.call1, v_j.0) -> eval_main_for.cond.11_in(v_call, v_.call1, v_j.0 + 1)
+
+3:	eval_main_for.cond_in(v_call, v_.call1, v_i.0) -> eval_main_for.body_in(v_call, v_.call1, v_i.0) [ v_i.0 < v_.call1 ]
+	eval_main_for.body_in(v_call, v_.call1, v_i.0) -> eval_main_for.cond_in(v_call, v_.call1, v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_for.cond.11_in) = X_2 - X_3
+	Pol(eval_main_for.body.14_in) = X_2 - X_3 - 1
+	Pol(eval_main_while.cond_in) = X_2 - X_3 - 1
+	Pol(eval_main_while.body_in) = X_2 - X_3 - 1
+	Pol(eval_main_for.inc.22_in) = X_2 - X_3 - 1
+removes the following rule from problem 2:
+	eval_main_for.cond.11_in(v_call, v_.call1, v_j.0) -> eval_main_for.body.14_in(v_call, v_.call1, v_j.0) [ v_j.0 < v_.call1 ]
+We thus obtain the following problem:
+4:	eval_main_for.body.14_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.body_in(v_call, v_.call1, v_j.0)
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_for.inc.22_in(v_call, v_.call1, v_j.0)
+	eval_main_while.body_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+	eval_main_for.inc.22_in(v_call, v_.call1, v_j.0) -> eval_main_for.cond.11_in(v_call, v_.call1, v_j.0 + 1)
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.body_in(v_call, v_.call1, v_j.0)
+	eval_main_while.body_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+
+By chaining the rule eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.body_in(v_call, v_.call1, v_j.0) with all rule in problem 5, the following new rules are obtained:
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+We thus obtain the following problem:
+6:	eval_main_while.body_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+
+The following termination problem could not be handled:
+eval_main_while.cond_in(v_call, v_.call1, v_j.0) -> eval_main_while.cond_in(v_call, v_.call1, v_j.0)
+
+Time: 0.623 sec (SMT: 0.605 sec)

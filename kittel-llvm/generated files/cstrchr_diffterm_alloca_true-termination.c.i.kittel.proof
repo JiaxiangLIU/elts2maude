@@ -1,0 +1,40 @@
+Initial termination problem:
+1:	eval_cstrchr_start(v_c) -> eval_cstrchr_entry_in(v_c)
+	eval_cstrchr_entry_in(v_c) -> eval_cstrchr_while.cond_in(v_c)
+	eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_land.rhs_in(v_conv4)
+	eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_while.end_in()
+	eval_cstrchr_land.rhs_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+	eval_cstrchr_land.rhs_in(v_conv4) -> eval_cstrchr_while.end_in()
+	eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.cond_in(v_conv4)
+	eval_cstrchr_while.end_in() -> eval_cstrchr_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_land.rhs_in(v_conv4)
+	eval_cstrchr_land.rhs_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+	eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.cond_in(v_conv4)
+
+By chaining the rule eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_land.rhs_in(v_conv4) with all rule in problem 2, the following new rules are obtained:
+	eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+We thus obtain the following problem:
+3:	eval_cstrchr_land.rhs_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+	eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.cond_in(v_conv4)
+	eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.cond_in(v_conv4)
+	eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+
+By chaining the rule eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.cond_in(v_conv4) with all rule in problem 4, the following new rules are obtained:
+	eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+We thus obtain the following problem:
+5:	eval_cstrchr_while.cond_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+	eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+
+The following termination problem could not be handled:
+eval_cstrchr_while.body_in(v_conv4) -> eval_cstrchr_while.body_in(v_conv4)
+
+Time: 0.419 sec (SMT: 0.405 sec)

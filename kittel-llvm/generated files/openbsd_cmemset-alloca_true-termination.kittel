@@ -1,0 +1,12 @@
+///*** 1_cmemset ***///
+eval_cmemset_start(v_c, v_n) -> eval_cmemset_entry_in(v_n)
+eval_cmemset_entry_in(v_n) -> eval_cmemset_if.then_in(v_n) [ v_n < 0 ]
+eval_cmemset_entry_in(v_n) -> eval_cmemset_if.then_in(v_n) [ v_n > 0 ]
+eval_cmemset_entry_in(v_n) -> eval_cmemset_if.end_in() [ v_n = 0 ]
+eval_cmemset_if.then_in(v_n) -> eval_cmemset_do.body_in(v_n)
+eval_cmemset_do.body_in(v_n.addr.0) -> eval_cmemset_do.body_in(v_n.addr.0 - 1) [ v_n.addr.0 - 1 < 0 ]
+eval_cmemset_do.body_in(v_n.addr.0) -> eval_cmemset_do.body_in(v_n.addr.0 - 1) [ v_n.addr.0 - 1 > 0 ]
+eval_cmemset_do.body_in(v_n.addr.0) -> eval_cmemset_if.end_in() [ v_n.addr.0 - 1 = 0 ]
+eval_cmemset_if.end_in() -> eval_cmemset_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

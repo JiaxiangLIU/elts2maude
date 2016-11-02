@@ -1,0 +1,58 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0) [ nondef.1 > 0 ]
+	eval_main_entry_in() -> eval_main_if.end.5_in()
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 < v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 > v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_if.end.5_in() [ v_x.0 = v_call1 ]
+	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, v_x.0 + 1) [ v_x.0 <= v_call1 ]
+	eval_main_if.end.5_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 < v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 > v_call1 ]
+	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, v_x.0 + 1) [ v_x.0 <= v_call1 ]
+
+By chaining the rule eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 < v_call1 ] with all rules in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 < v_call1 /\ v_x.0 > v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, v_x.0 + 1) [ v_x.0 < v_call1 /\ v_x.0 <= v_call1 ]
+We thus obtain the following problem:
+3:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 > v_call1 ]
+	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, v_x.0 + 1) [ v_x.0 <= v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 < v_call1 /\ v_x.0 > v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, v_x.0 + 1) [ v_x.0 < v_call1 /\ v_x.0 <= v_call1 ]
+
+The termination graph of problem 3 contains 2 nontrivial SCCs:
+4:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, v_x.0 + 1) [ v_x.0 < v_call1 /\ v_x.0 <= v_call1 ]
+
+5:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 > v_call1 ]
+	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = X_1 - X_2
+removes all rules from problem 4.
+
+By chaining the rule eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.body_in(v_call1, v_x.0) [ v_x.0 > v_call1 ] with all rule in problem 5, the following new rules are obtained:
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+We thus obtain the following problem:
+6:	eval_main_while.body_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ]
+
+By chaining the rule eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 ] with all rule in problem 7, the following new rules are obtained:
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 /\ 0 > v_call1 ]
+We thus obtain the following problem:
+8:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 /\ 0 > v_call1 ]
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 /\ 0 > v_call1 ]
+
+The following termination problem could not be handled:
+eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond_in(v_call1, 0) [ v_x.0 > v_call1 /\ 0 > v_call1 ]
+
+Time: 0.793 sec (SMT: 0.757 sec)

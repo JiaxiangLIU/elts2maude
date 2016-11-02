@@ -1,0 +1,71 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.body_in()
+	eval_main_while.cond_in() -> eval_main_while.end.4_in()
+	eval_main_while.body_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.body.3_in()
+	eval_main_while.cond.1_in() -> eval_main_while.end_in()
+	eval_main_while.body.3_in() -> eval_main_while.cond.1_in()
+	eval_main_while.end_in() -> eval_main_while.cond_in()
+	eval_main_while.end.4_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in() -> eval_main_while.body_in()
+	eval_main_while.body_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.body.3_in()
+	eval_main_while.cond.1_in() -> eval_main_while.end_in()
+	eval_main_while.body.3_in() -> eval_main_while.cond.1_in()
+	eval_main_while.end_in() -> eval_main_while.cond_in()
+
+By chaining the rule eval_main_while.cond_in() -> eval_main_while.body_in() with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+We thus obtain the following problem:
+3:	eval_main_while.body_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.body.3_in()
+	eval_main_while.cond.1_in() -> eval_main_while.end_in()
+	eval_main_while.body.3_in() -> eval_main_while.cond.1_in()
+	eval_main_while.end_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond.1_in() -> eval_main_while.body.3_in()
+	eval_main_while.cond.1_in() -> eval_main_while.end_in()
+	eval_main_while.body.3_in() -> eval_main_while.cond.1_in()
+	eval_main_while.end_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+
+By chaining the rule eval_main_while.cond.1_in() -> eval_main_while.body.3_in() with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.cond.1_in() -> eval_main_while.cond.1_in()
+We thus obtain the following problem:
+5:	eval_main_while.cond.1_in() -> eval_main_while.end_in()
+	eval_main_while.body.3_in() -> eval_main_while.cond.1_in()
+	eval_main_while.end_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.cond.1_in()
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond.1_in() -> eval_main_while.end_in()
+	eval_main_while.end_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.cond.1_in()
+
+By chaining the rule eval_main_while.cond.1_in() -> eval_main_while.end_in() with all rule in problem 6, the following new rules are obtained:
+	eval_main_while.cond.1_in() -> eval_main_while.cond_in()
+We thus obtain the following problem:
+7:	eval_main_while.end_in() -> eval_main_while.cond_in()
+	eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.cond_in()
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.cond.1_in()
+	eval_main_while.cond.1_in() -> eval_main_while.cond_in()
+
+The following termination problem could not be handled:
+eval_main_while.cond_in() -> eval_main_while.cond.1_in()
+eval_main_while.cond.1_in() -> eval_main_while.cond.1_in()
+eval_main_while.cond.1_in() -> eval_main_while.cond_in()
+
+Time: 0.591 sec (SMT: 0.573 sec)

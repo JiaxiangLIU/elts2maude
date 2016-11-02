@@ -1,0 +1,26 @@
+Initial termination problem:
+1:	eval_wcsrchr_start(v_wc) -> eval_wcsrchr_entry_in()
+	eval_wcsrchr_entry_in() -> eval_wcsrchr_for.cond_in()
+	eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.body_in()
+	eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.end_in()
+	eval_wcsrchr_for.body_in() -> eval_wcsrchr_for.cond_in()
+	eval_wcsrchr_for.end_in() -> eval_wcsrchr_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.body_in()
+	eval_wcsrchr_for.body_in() -> eval_wcsrchr_for.cond_in()
+
+By chaining the rule eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.body_in() with all rule in problem 2, the following new rules are obtained:
+	eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.cond_in()
+We thus obtain the following problem:
+3:	eval_wcsrchr_for.body_in() -> eval_wcsrchr_for.cond_in()
+	eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.cond_in()
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.cond_in()
+
+The following termination problem could not be handled:
+eval_wcsrchr_for.cond_in() -> eval_wcsrchr_for.cond_in()
+
+Time: 0.284 sec (SMT: 0.276 sec)

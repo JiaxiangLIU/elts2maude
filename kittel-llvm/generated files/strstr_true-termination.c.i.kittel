@@ -1,0 +1,38 @@
+///*** 1_strlen ***///
+eval_strlen_start() -> eval_strlen_entry_in()
+eval_strlen_entry_in() -> eval_strlen_for.cond_in()
+eval_strlen_entry_in() -> eval_strlen_return_in()
+eval_strlen_for.cond_in() -> eval_strlen_for.body_in()
+eval_strlen_for.cond_in() -> eval_strlen_return_in()
+eval_strlen_for.body_in() -> eval_strlen_for.cond_in()
+eval_strlen_return_in() -> eval_strlen_stop()
+///*** 2_memcmp ***///
+eval_memcmp_start(v_count) -> eval_memcmp_entry_in(v_count)
+eval_memcmp_entry_in(v_count) -> eval_memcmp_while.cond_in(v_count + 1)
+eval_memcmp_while.cond_in(v_count.addr.0) -> eval_memcmp_while.body_in(v_count.addr.0, v_count.addr.0 - 1) [ v_count.addr.0 - 1 < 0 ]
+eval_memcmp_while.cond_in(v_count.addr.0) -> eval_memcmp_while.body_in(v_count.addr.0, v_count.addr.0 - 1) [ v_count.addr.0 - 1 > 0 ]
+eval_memcmp_while.cond_in(v_count.addr.0) -> eval_memcmp_return_in() [ v_count.addr.0 - 1 = 0 ]
+eval_memcmp_while.body_in(v_count.addr.0, v_dec) -> eval_memcmp_return_in() [ nondef.0 - nondef.1 < 0 ]
+eval_memcmp_while.body_in(v_count.addr.0, v_dec) -> eval_memcmp_return_in() [ nondef.0 - nondef.1 > 0 ]
+eval_memcmp_while.body_in(v_count.addr.0, v_dec) -> eval_memcmp_if.end_in(v_count.addr.0, v_dec) [ nondef.0 - nondef.1 = 0 ]
+eval_memcmp_if.end_in(v_count.addr.0, v_dec) -> eval_memcmp_while.cond_in(v_dec)
+eval_memcmp_return_in() -> eval_memcmp_stop()
+///*** 3_strstr ***///
+eval_strstr_start() -> eval_strstr_entry_in()
+eval_strstr_entry_in() -> eval_strstr_if.end_in(nondef.0, nondef.1) [ nondef.0 < 0 ]
+eval_strstr_entry_in() -> eval_strstr_if.end_in(nondef.0, nondef.1) [ nondef.0 > 0 ]
+eval_strstr_entry_in() -> eval_strstr_return_in()
+eval_strstr_if.end_in(v_call, v_call1) -> eval_strstr_return_in() [ v_call > v_call1 ]
+eval_strstr_if.end_in(v_call, v_call1) -> eval_strstr_if.end.3_in(v_call, v_call1) [ v_call <= v_call1 ]
+eval_strstr_if.end.3_in(v_call, v_call1) -> eval_strstr_for.cond_in(v_call1 - v_call + 1)
+eval_strstr_for.cond_in(v_i.0) -> eval_strstr_for.body_in(v_i.0) [ v_i.0 < 0 ]
+eval_strstr_for.cond_in(v_i.0) -> eval_strstr_for.body_in(v_i.0) [ v_i.0 > 0 ]
+eval_strstr_for.cond_in(v_i.0) -> eval_strstr_return_in() [ v_i.0 = 0 ]
+eval_strstr_for.body_in(v_i.0) -> eval_strstr_land.lhs.true_in(v_i.0)
+eval_strstr_for.body_in(v_i.0) -> eval_strstr_if.end.11_in(v_i.0)
+eval_strstr_land.lhs.true_in(v_i.0) -> eval_strstr_if.end.11_in(v_i.0)
+eval_strstr_land.lhs.true_in(v_i.0) -> eval_strstr_return_in()
+eval_strstr_if.end.11_in(v_i.0) -> eval_strstr_for.cond_in(v_i.0 - 1)
+eval_strstr_return_in() -> eval_strstr_stop()
+///*** 4_main ***///
+eval_main_start() -> eval_main_stop()

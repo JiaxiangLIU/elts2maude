@@ -1,0 +1,30 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(1, 0) [ nondef.0 > 10 ]
+	eval_main_entry_in() -> eval_main_while.cond_in(1, 1) [ nondef.0 > 10 /\ nondef.0 <= 10 ]
+	eval_main_entry_in() -> eval_main_while.cond_in(0, 0) [ nondef.0 <= 10 /\ nondef.0 > 10 ]
+	eval_main_entry_in() -> eval_main_while.cond_in(0, 1) [ nondef.0 <= 10 ]
+	eval_main_while.cond_in(v_., v_.1) -> eval_main_while.cond_in(v_., v_.1) [ v_. = v_.1 ]
+	eval_main_while.cond_in(v_., v_.1) -> eval_main_while.end_in() [ v_. < v_.1 ]
+	eval_main_while.cond_in(v_., v_.1) -> eval_main_while.end_in() [ v_. > v_.1 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_main_entry_in() -> eval_main_while.cond_in(1, 1) [ nondef.0 > 10 /\ nondef.0 <= 10 ]
+	eval_main_entry_in() -> eval_main_while.cond_in(0, 0) [ nondef.0 <= 10 /\ nondef.0 > 10 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(1, 0) [ nondef.0 > 10 ]
+	eval_main_entry_in() -> eval_main_while.cond_in(0, 1) [ nondef.0 <= 10 ]
+	eval_main_while.cond_in(v_., v_.1) -> eval_main_while.cond_in(v_., v_.1) [ v_. = v_.1 ]
+	eval_main_while.cond_in(v_., v_.1) -> eval_main_while.end_in() [ v_. < v_.1 ]
+	eval_main_while.cond_in(v_., v_.1) -> eval_main_while.end_in() [ v_. > v_.1 ]
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_main_while.cond_in(v_., v_.1) -> eval_main_while.cond_in(v_., v_.1) [ v_. = v_.1 ]
+
+The following termination problem could not be handled:
+eval_main_while.cond_in(v_., v_.1) -> eval_main_while.cond_in(v_., v_.1) [ v_. = v_.1 ]
+
+Time: 0.437 sec (SMT: 0.426 sec)

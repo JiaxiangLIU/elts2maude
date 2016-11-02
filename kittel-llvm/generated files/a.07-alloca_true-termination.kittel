@@ -1,0 +1,11 @@
+///*** 1_test_fun ***///
+eval_test_fun_start(v_x, v_y, v_z) -> eval_test_fun_entry_in()
+eval_test_fun_entry_in() -> eval_test_fun_while.cond_in(nondef.0, nondef.1)
+eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_land.rhs_in(v_8, v_9)
+eval_test_fun_while.cond_in(v_8, v_9) -> eval_test_fun_while.end_in()
+eval_test_fun_land.rhs_in(v_8, v_9) -> eval_test_fun_while.body_in(v_8, v_9)
+eval_test_fun_land.rhs_in(v_8, v_9) -> eval_test_fun_while.end_in()
+eval_test_fun_while.body_in(v_8, v_9) -> eval_test_fun_while.cond_in(v_8, v_9)
+eval_test_fun_while.end_in() -> eval_test_fun_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

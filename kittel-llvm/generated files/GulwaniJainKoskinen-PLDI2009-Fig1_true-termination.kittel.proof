@@ -1,0 +1,181 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_if.then_in(nondef.0, nondef.1) [ 0 <= nondef.0 /\ nondef.0 < nondef.1 ]
+	eval_main_entry_in() -> eval_main_if.end.9_in()
+	eval_main_if.then_in(v_call, v_call1) -> eval_main_while.cond_in(v_call, v_call1, v_call + 1)
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_if.end.9_in() [ v_tmp.0 = v_call ]
+	eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0)
+	eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) -> eval_main_if.end.9_in()
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+	eval_main_if.end.9_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+	eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0)
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+
+By chaining the rule eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+We thus obtain the following problem:
+3:	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+	eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0)
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+	eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0)
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+
+By chaining the rule eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ] with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+We thus obtain the following problem:
+5:	eval_main_land.rhs_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0)
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+
+By chaining the rule eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 ] with all rules in problem 6, the following new rules are obtained:
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ]
+We thus obtain the following problem:
+7:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ]
+
+By chaining the rule eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.cond_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 ] with all rules in problem 8, the following new rules are obtained:
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+We thus obtain the following problem:
+9:	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 < v_call ]
+	eval_main_while.cond_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0) [ v_tmp.0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+
+By chaining the rule eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call ] with all rules in problem 10, the following new rules are obtained:
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+We thus obtain the following problem:
+11:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+
+By chaining the rule eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 1) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call ] with all rules in problem 12, the following new rules are obtained:
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 3) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call /\ v_tmp.0 + 2 <= v_call1 /\ v_tmp.0 + 3 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call /\ v_tmp.0 + 2 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call /\ v_tmp.0 + 2 > v_call1 /\ 0 > v_call ]
+We thus obtain the following problem:
+13:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 3) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call /\ v_tmp.0 + 2 <= v_call1 /\ v_tmp.0 + 3 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call /\ v_tmp.0 + 2 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call /\ v_tmp.0 + 2 > v_call1 /\ 0 > v_call ]
+
+The termination graph of problem 13 contains 1 nontrivial SCC:
+14:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+
+By chaining the rule eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call ] with all rules in problem 14, the following new rules are obtained:
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 > v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 2) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 <= v_call1 /\ 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 > v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 2) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 > v_call /\ 1 <= v_call1 /\ 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 > v_call /\ 1 > v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 > v_call /\ 1 > v_call1 /\ 0 > v_call ]
+We thus obtain the following problem:
+15:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 > v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 2) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 <= v_call1 /\ 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 > v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 2) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 > v_call /\ 1 <= v_call1 /\ 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 > v_call /\ 1 > v_call1 ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 > v_call /\ 1 > v_call1 /\ 0 > v_call ]
+
+The termination graph of problem 15 contains 2 nontrivial SCCs:
+16:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 > v_call1 ]
+
+17:	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 < v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, v_tmp.0 + 2) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 <= v_call1 /\ v_tmp.0 + 2 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 <= v_call1 /\ v_tmp.0 + 1 > v_call /\ v_tmp.0 + 1 > v_call1 /\ 0 > v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 2) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 <= v_call1 /\ 2 < v_call ]
+	eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 <= v_call1 /\ 1 < v_call /\ 1 > v_call1 ]
+
+The following termination problem could not be handled:
+eval_main_while.body_in(v_call, v_call1, v_tmp.0) -> eval_main_while.body_in(v_call, v_call1, 0) [ v_tmp.0 > v_call1 /\ 0 < v_call /\ 0 > v_call1 ]
+
+Time: 23.032 sec (SMT: 8.917 sec)

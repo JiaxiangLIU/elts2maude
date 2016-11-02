@@ -1,0 +1,37 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.2, nondef.1, nondef.0)
+	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.body_in(v_call2, v_y.0, v_x.0) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 ]
+	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.end_in() [ v_x.0 + v_y.0 < 0 ]
+	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.end_in() [ v_x.0 > v_call2 ]
+	eval_main_while.body_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0)
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.body_in(v_call2, v_y.0, v_x.0) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 ]
+	eval_main_while.body_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0)
+
+By chaining the rule eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.body_in(v_call2, v_y.0, v_x.0) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 ] with all rule in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0)
+	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 ]
+
+By chaining the rule eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 1, 2*v_x.0 + v_y.0) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 ] with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 2, 4*v_x.0 + 3*v_y.0 + 1) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 /\ 2*v_x.0 + 2*v_y.0 + 1 >= 0 /\ 2*v_x.0 + v_y.0 <= v_call2 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 2, 4*v_x.0 + 3*v_y.0 + 1) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 /\ 2*v_x.0 + 2*v_y.0 + 1 >= 0 /\ 2*v_x.0 + v_y.0 <= v_call2 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond_in(v_call2, v_y.0, v_x.0) -> eval_main_while.cond_in(v_call2, v_y.0 + 2, 4*v_x.0 + 3*v_y.0 + 1) [ v_x.0 + v_y.0 >= 0 /\ v_x.0 <= v_call2 /\ 2*v_x.0 + 2*v_y.0 + 1 >= 0 /\ 2*v_x.0 + v_y.0 <= v_call2 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = X_1 - X_2 - 2*X_3
+removes all rules from problem 6.
+
+Termination successfully shown!
+
+Time: 0.455 sec (SMT: 0.394 sec)

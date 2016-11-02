@@ -1,0 +1,13 @@
+///*** 1_fibonacci ***///
+eval_fibonacci_start(v_n) -> eval_fibonacci_entry_in(v_n)
+eval_fibonacci_entry_in(v_n) -> eval_fibonacci_return_in() [ v_n < 1 ]
+eval_fibonacci_entry_in(v_n) -> eval_fibonacci_if.else_in(v_n) [ v_n >= 1 ]
+eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_return_in() [ v_n = 1 ]
+eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_if.else.3_in(v_n) [ v_n < 1 ]
+eval_fibonacci_if.else_in(v_n) -> eval_fibonacci_if.else.3_in(v_n) [ v_n > 1 ]
+eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 1)
+eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_start(v_n - 2)
+eval_fibonacci_if.else.3_in(v_n) -> eval_fibonacci_return_in()
+eval_fibonacci_return_in() -> eval_fibonacci_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

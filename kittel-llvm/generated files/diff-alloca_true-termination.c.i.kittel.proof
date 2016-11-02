@@ -1,0 +1,115 @@
+Initial termination problem:
+1:	eval_diff_start(v_Alen, v_Blen) -> eval_diff_entry_in(v_Alen, v_Blen)
+	eval_diff_entry_in(v_Alen, v_Blen) -> eval_diff_while.cond_in(v_Alen, v_Blen, 0)
+	eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) [ v_i.0 < v_Alen ]
+	eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.end.16_in() [ v_i.0 >= v_Alen ]
+	eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, nondef.0, 0, 0)
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 < v_Blen /\ v_found.0 = 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 >= v_Blen ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0) [ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0 + 1) [ v_0 = nondef.1 /\ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0 + 1) [ v_0 = nondef.1 /\ v_0 > nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_0 < nondef.1 /\ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_0 > nondef.1 /\ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 /\ v_0 > nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 /\ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 = 0 ]
+	eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0)
+	eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0 + 1)
+	eval_diff_while.end.16_in() -> eval_diff_stop()
+	eval_main_start() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0 + 1) [ v_0 = nondef.1 /\ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0 + 1) [ v_0 = nondef.1 /\ v_0 > nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_0 < nondef.1 /\ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_0 > nondef.1 /\ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 /\ v_0 > nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 /\ v_0 < nondef.1 ]
+We thus obtain the following problem:
+2:	eval_diff_start(v_Alen, v_Blen) -> eval_diff_entry_in(v_Alen, v_Blen)
+	eval_diff_entry_in(v_Alen, v_Blen) -> eval_diff_while.cond_in(v_Alen, v_Blen, 0)
+	eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) [ v_i.0 < v_Alen ]
+	eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.end.16_in() [ v_i.0 >= v_Alen ]
+	eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, nondef.0, 0, 0)
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 < v_Blen /\ v_found.0 = 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 >= v_Blen ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0) [ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 = 0 ]
+	eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0)
+	eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0 + 1)
+	eval_diff_while.end.16_in() -> eval_diff_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) [ v_i.0 < v_Alen ]
+	eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, nondef.0, 0, 0)
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 < v_Blen /\ v_found.0 = 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 >= v_Blen ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0) [ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 = 0 ]
+	eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0)
+	eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_diff_while.cond_in) = 2*X_1 - 2*X_3
+	Pol(eval_diff_while.body_in) = 2*X_1 - 2*X_3 - 1
+	Pol(eval_diff_while.cond.1_in) = 2*X_1 - 2*X_3 - 1
+	Pol(eval_diff_while.body.3_in) = 2*X_1 - 2*X_3 - 1
+	Pol(eval_diff_while.end_in) = 2*X_1 - 2*X_3 - 1
+	Pol(eval_diff_if.end.14_in) = 2*X_1 - 2*X_3 - 2
+	Pol(eval_diff_if.then.8_in) = 2*X_1 - 2*X_3 - 2
+removes the following rule from problem 3:
+	eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) [ v_i.0 < v_Alen ]
+We thus obtain the following problem:
+4:	eval_diff_while.body_in(v_Alen, v_Blen, v_i.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, nondef.0, 0, 0)
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 < v_Blen /\ v_found.0 = 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 >= v_Blen ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, 1, v_j.0) [ v_0 = nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 < 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 > 0 ]
+	eval_diff_while.end_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_found.0 = 0 ]
+	eval_diff_if.then.8_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0)
+	eval_diff_if.end.14_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond_in(v_Alen, v_Blen, v_i.0 + 1)
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 < v_Blen /\ v_found.0 = 0 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 ]
+
+A polynomial interpretation with
+	Pol(eval_diff_while.cond.1_in) = X_2 - X_6 + 1
+	Pol(eval_diff_while.body.3_in) = X_2 - X_6
+removes the following rule from problem 5:
+	eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) [ v_j.0 < v_Blen /\ v_found.0 = 0 ]
+We thus obtain the following problem:
+6:	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 < nondef.1 ]
+	eval_diff_while.body.3_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0) -> eval_diff_while.cond.1_in(v_Alen, v_Blen, v_i.0, v_0, v_found.0, v_j.0 + 1) [ v_0 > nondef.1 ]
+
+The termination graph of problem 6 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 1.333 sec (SMT: 1.302 sec)

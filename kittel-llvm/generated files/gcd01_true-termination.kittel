@@ -1,0 +1,17 @@
+///*** 1_gcd ***///
+eval_gcd_start(v_y1, v_y2) -> eval_gcd_entry_in(v_y1, v_y2)
+eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_return_in() [ v_y1 <= 0 ]
+eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_return_in() [ v_y2 <= 0 ]
+eval_gcd_entry_in(v_y1, v_y2) -> eval_gcd_if.end_in(v_y1, v_y2) [ v_y1 > 0 /\ v_y2 > 0 ]
+eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_return_in() [ v_y1 = v_y2 ]
+eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 < v_y2 ]
+eval_gcd_if.end_in(v_y1, v_y2) -> eval_gcd_if.end.4_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.then.6_in(v_y1, v_y2) [ v_y1 > v_y2 ]
+eval_gcd_if.end.4_in(v_y1, v_y2) -> eval_gcd_if.end.7_in(v_y1, v_y2) [ v_y1 <= v_y2 ]
+eval_gcd_if.then.6_in(v_y1, v_y2) -> eval_gcd_start(v_y1 - v_y2, v_y2)
+eval_gcd_if.then.6_in(v_y1, v_y2) -> eval_gcd_return_in()
+eval_gcd_if.end.7_in(v_y1, v_y2) -> eval_gcd_start(v_y1, v_y2 - v_y1)
+eval_gcd_if.end.7_in(v_y1, v_y2) -> eval_gcd_return_in()
+eval_gcd_return_in() -> eval_gcd_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

@@ -1,0 +1,83 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0)
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_call1, v_x.0) [ v_x.0 >= v_call1 /\ v_call1 > 0 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.end.10_in() [ v_x.0 < v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.end.10_in() [ v_call1 <= 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 < 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 > 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 = 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 - 1) [ v_ytmp.0 > 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 + 1) [ v_ytmp.0 > 0 /\ v_ytmp.0 <= 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 + 1, v_x.1 - 1) [ v_ytmp.0 <= 0 /\ v_ytmp.0 > 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 + 1, v_x.1 + 1) [ v_ytmp.0 <= 0 ]
+	eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond_in(v_call1, v_x.1)
+	eval_main_while.end.10_in() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 + 1) [ v_ytmp.0 > 0 /\ v_ytmp.0 <= 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 + 1, v_x.1 - 1) [ v_ytmp.0 <= 0 /\ v_ytmp.0 > 0 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0)
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_call1, v_x.0) [ v_x.0 >= v_call1 /\ v_call1 > 0 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.end.10_in() [ v_x.0 < v_call1 ]
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.end.10_in() [ v_call1 <= 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 < 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 > 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 = 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 - 1) [ v_ytmp.0 > 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 + 1, v_x.1 + 1) [ v_ytmp.0 <= 0 ]
+	eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond_in(v_call1, v_x.1)
+	eval_main_while.end.10_in() -> eval_main_stop()
+
+The termination graph of problem 2 contains 2 nontrivial SCCs:
+3:	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_call1, v_x.0) [ v_x.0 >= v_call1 /\ v_call1 > 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 > 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 = 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 - 1) [ v_ytmp.0 > 0 ]
+	eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond_in(v_call1, v_x.1)
+
+4:	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 < 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 + 1, v_x.1 + 1) [ v_ytmp.0 <= 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = X_2 - 1
+	Pol(eval_main_while.cond.3_in) = -X_3 + X_4 - 1
+	Pol(eval_main_while.body.5_in) = -X_3 + X_4 - 1
+	Pol(eval_main_while.end_in) = X_4 - 1
+removes the following rule from problem 3:
+	eval_main_while.cond_in(v_call1, v_x.0) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_call1, v_x.0) [ v_x.0 >= v_call1 /\ v_call1 > 0 ]
+We thus obtain the following problem:
+5:	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 > 0 ]
+	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 = 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 - 1) [ v_ytmp.0 > 0 ]
+	eval_main_while.end_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond_in(v_call1, v_x.1)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 > 0 ]
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 - 1) [ v_ytmp.0 > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.3_in) = 2*X_3 + 1
+	Pol(eval_main_while.body.5_in) = 2*X_3
+removes the following rule from problem 6:
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 - 1, v_x.1 - 1) [ v_ytmp.0 > 0 ]
+We thus obtain the following problem:
+7:	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 > 0 ]
+
+The termination graph of problem 7 contains no nontrivial SCC.
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.3_in) = -2*X_3 + 1
+	Pol(eval_main_while.body.5_in) = -2*X_3
+removes the following rule from problem 4:
+	eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0 + 1, v_x.1 + 1) [ v_ytmp.0 <= 0 ]
+We thus obtain the following problem:
+8:	eval_main_while.cond.3_in(v_call1, v_x.0, v_ytmp.0, v_x.1) -> eval_main_while.body.5_in(v_call1, v_x.0, v_ytmp.0, v_x.1) [ v_ytmp.0 < 0 ]
+
+The termination graph of problem 8 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.686 sec (SMT: 0.671 sec)

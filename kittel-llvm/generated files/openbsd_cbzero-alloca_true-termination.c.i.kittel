@@ -1,0 +1,10 @@
+///*** 1_cbzero ***///
+eval_cbzero_start(v_length) -> eval_cbzero_entry_in(v_length)
+eval_cbzero_entry_in(v_length) -> eval_cbzero_for.cond_in(v_length)
+eval_cbzero_for.cond_in(v_length.addr.0) -> eval_cbzero_for.body_in(v_length.addr.0, v_length.addr.0 - 1) [ v_length.addr.0 < 0 ]
+eval_cbzero_for.cond_in(v_length.addr.0) -> eval_cbzero_for.body_in(v_length.addr.0, v_length.addr.0 - 1) [ v_length.addr.0 > 0 ]
+eval_cbzero_for.cond_in(v_length.addr.0) -> eval_cbzero_for.end_in() [ v_length.addr.0 = 0 ]
+eval_cbzero_for.body_in(v_length.addr.0, v_dec) -> eval_cbzero_for.cond_in(v_dec)
+eval_cbzero_for.end_in() -> eval_cbzero_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

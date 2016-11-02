@@ -1,0 +1,27 @@
+Initial termination problem:
+1:	eval___VERIFIER_nondet_String_start() -> eval___VERIFIER_nondet_String_stop()
+	eval_cstrlen_start() -> eval_cstrlen_entry_in()
+	eval_cstrlen_entry_in() -> eval_cstrlen_while.cond_in()
+	eval_cstrlen_while.cond_in() -> eval_cstrlen_while.body_in()
+	eval_cstrlen_while.cond_in() -> eval_cstrlen_while.end_in()
+	eval_cstrlen_while.body_in() -> eval_cstrlen_while.cond_in()
+	eval_cstrlen_while.end_in() -> eval_cstrlen_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_cstrlen_while.cond_in() -> eval_cstrlen_while.body_in()
+	eval_cstrlen_while.body_in() -> eval_cstrlen_while.cond_in()
+
+By chaining the rule eval_cstrlen_while.cond_in() -> eval_cstrlen_while.body_in() with all rule in problem 2, the following new rules are obtained:
+	eval_cstrlen_while.cond_in() -> eval_cstrlen_while.cond_in()
+We thus obtain the following problem:
+3:	eval_cstrlen_while.body_in() -> eval_cstrlen_while.cond_in()
+	eval_cstrlen_while.cond_in() -> eval_cstrlen_while.cond_in()
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_cstrlen_while.cond_in() -> eval_cstrlen_while.cond_in()
+
+The following termination problem could not be handled:
+eval_cstrlen_while.cond_in() -> eval_cstrlen_while.cond_in()
+
+Time: 0.296 sec (SMT: 0.287 sec)

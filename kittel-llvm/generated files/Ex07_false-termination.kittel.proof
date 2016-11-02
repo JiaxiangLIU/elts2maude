@@ -1,0 +1,28 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.body_in(nondef.0)
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 0 /\ v_i.0 - 1 < 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0 - 1) [ v_i.0 > 0 /\ v_i.0 - 1 >= 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0 + 1) [ v_i.0 <= 0 /\ v_i.0 < 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 <= 0 /\ v_i.0 >= 0 ]
+
+Testing for unsatisfiable constraints removes the following rule from problem 1:
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 > 0 /\ v_i.0 - 1 < 0 ]
+We thus obtain the following problem:
+2:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.body_in(nondef.0)
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0 - 1) [ v_i.0 > 0 /\ v_i.0 - 1 >= 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0 + 1) [ v_i.0 <= 0 /\ v_i.0 < 0 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 <= 0 /\ v_i.0 >= 0 ]
+
+The termination graph of problem 2 contains 3 nontrivial SCCs:
+3:	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 <= 0 /\ v_i.0 >= 0 ]
+
+4:	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0 + 1) [ v_i.0 <= 0 /\ v_i.0 < 0 ]
+
+5:	eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0 - 1) [ v_i.0 > 0 /\ v_i.0 - 1 >= 0 ]
+
+The following termination problem could not be handled:
+eval_main_while.body_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 <= 0 /\ v_i.0 >= 0 ]
+
+Time: 0.402 sec (SMT: 0.394 sec)

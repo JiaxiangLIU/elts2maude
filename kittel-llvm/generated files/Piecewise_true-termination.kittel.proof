@@ -1,0 +1,103 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(nondef.1, nondef.0)
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.end_in() [ v_q.0 <= 0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.end_in() [ v_p.0 <= 0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.end_in() [ v_p.0 = v_q.0 ]
+	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 < v_p.0 ]
+	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 >= v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_while.cond_in(nondef.2, v_q.0 - 1)
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0, v_q.0) [ v_p.0 >= v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+	eval_main_while.end_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 ]
+	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 < v_p.0 ]
+	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 >= v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_while.cond_in(nondef.2, v_q.0 - 1)
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0, v_q.0) [ v_p.0 >= v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+
+By chaining the rule eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 ] with all rules in problem 2, the following new rules are obtained:
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 < v_p.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+We thus obtain the following problem:
+3:	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 ]
+	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 < v_p.0 ]
+	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 >= v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_while.cond_in(nondef.2, v_q.0 - 1)
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0, v_q.0) [ v_p.0 >= v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 < v_p.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 ]
+	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 < v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_while.cond_in(nondef.2, v_q.0 - 1)
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+
+By chaining the rule eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_while.body_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 ] with all rule in problem 4, the following new rules are obtained:
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 /\ v_q.0 < v_p.0 ]
+We thus obtain the following problem:
+5:	eval_main_while.body_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 < v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_while.cond_in(nondef.2, v_q.0 - 1)
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 /\ v_q.0 < v_p.0 ]
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_while.cond_in(nondef.2, v_q.0 - 1)
+	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 /\ v_q.0 < v_p.0 ]
+
+By chaining the rule eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_while.cond_in(nondef.2, v_q.0 - 1) with all rules in problem 6, the following new rules are obtained:
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.else_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 < v_q.0 - 1 /\ v_q.0 - 1 >= nondef.2 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.then_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 > v_q.0 - 1 /\ v_q.0 - 1 < nondef.2 ]
+We thus obtain the following problem:
+7:	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 /\ v_q.0 < v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.else_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 < v_q.0 - 1 /\ v_q.0 - 1 >= nondef.2 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.then_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 > v_q.0 - 1 /\ v_q.0 - 1 < nondef.2 ]
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 /\ v_q.0 < v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.else_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 < v_q.0 - 1 /\ v_q.0 - 1 >= nondef.2 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.then_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 > v_q.0 - 1 /\ v_q.0 - 1 < nondef.2 ]
+
+A polynomial interpretation with
+	Pol(eval_main_if.else_in) = 3*X_1 - 1
+	Pol(eval_main_if.then.7_in) = 3*X_1 - 2
+	Pol(eval_main_while.cond_in) = 3*X_1
+	Pol(eval_main_if.then_in) = 3*X_2
+removes the following rules from problem 8:
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.else_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 < v_q.0 /\ v_q.0 >= v_p.0 ]
+	eval_main_while.cond_in(v_p.0, v_q.0) -> eval_main_if.then_in(v_p.0, v_q.0) [ v_q.0 > 0 /\ v_p.0 > 0 /\ v_p.0 > v_q.0 /\ v_q.0 < v_p.0 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.else_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 < v_q.0 - 1 /\ v_q.0 - 1 >= nondef.2 ]
+	eval_main_if.then_in(v_p.0, v_q.0) -> eval_main_if.then_in(nondef.2, v_q.0 - 1) [ v_q.0 - 1 > 0 /\ nondef.2 > 0 /\ nondef.2 > v_q.0 - 1 /\ v_q.0 - 1 < nondef.2 ]
+We thus obtain the following problem:
+9:	eval_main_if.else_in(v_p.0, v_q.0) -> eval_main_if.then.7_in(v_p.0, v_q.0) [ v_p.0 < v_q.0 ]
+	eval_main_if.then.7_in(v_p.0, v_q.0) -> eval_main_while.cond_in(v_p.0 - 1, nondef.3)
+
+The termination graph of problem 9 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 1.208 sec (SMT: 1.121 sec)

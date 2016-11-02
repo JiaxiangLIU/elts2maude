@@ -1,0 +1,38 @@
+Initial termination problem:
+1:	eval_strlen_rec_start() -> eval_strlen_rec_entry_in()
+	eval_strlen_rec_entry_in() -> eval_strlen_rec_return_in()
+	eval_strlen_rec_entry_in() -> eval_strlen_rec_if.else_in()
+	eval_strlen_rec_if.else_in() -> eval_strlen_rec_start()
+	eval_strlen_rec_if.else_in() -> eval_strlen_rec_return_in()
+	eval_strlen_rec_return_in() -> eval_strlen_rec_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_strlen_rec_start() -> eval_strlen_rec_entry_in()
+	eval_strlen_rec_entry_in() -> eval_strlen_rec_if.else_in()
+	eval_strlen_rec_if.else_in() -> eval_strlen_rec_start()
+
+By chaining the rule eval_strlen_rec_start() -> eval_strlen_rec_entry_in() with all rule in problem 2, the following new rules are obtained:
+	eval_strlen_rec_start() -> eval_strlen_rec_if.else_in()
+We thus obtain the following problem:
+3:	eval_strlen_rec_entry_in() -> eval_strlen_rec_if.else_in()
+	eval_strlen_rec_if.else_in() -> eval_strlen_rec_start()
+	eval_strlen_rec_start() -> eval_strlen_rec_if.else_in()
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_strlen_rec_if.else_in() -> eval_strlen_rec_start()
+	eval_strlen_rec_start() -> eval_strlen_rec_if.else_in()
+
+By chaining the rule eval_strlen_rec_if.else_in() -> eval_strlen_rec_start() with all rule in problem 4, the following new rules are obtained:
+	eval_strlen_rec_if.else_in() -> eval_strlen_rec_if.else_in()
+We thus obtain the following problem:
+5:	eval_strlen_rec_start() -> eval_strlen_rec_if.else_in()
+	eval_strlen_rec_if.else_in() -> eval_strlen_rec_if.else_in()
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_strlen_rec_if.else_in() -> eval_strlen_rec_if.else_in()
+
+The following termination problem could not be handled:
+eval_strlen_rec_if.else_in() -> eval_strlen_rec_if.else_in()
+
+Time: 0.351 sec (SMT: 0.339 sec)

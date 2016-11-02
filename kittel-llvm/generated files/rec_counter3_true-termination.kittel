@@ -1,0 +1,20 @@
+///*** 1_rec ***///
+eval_rec_start(v_a) -> eval_rec_entry_in(v_a)
+eval_rec_entry_in(v_a) -> eval_rec_return_in() [ v_a = 0 ]
+eval_rec_entry_in(v_a) -> eval_rec_if.else_in(v_a) [ v_a < 0 ]
+eval_rec_entry_in(v_a) -> eval_rec_if.else_in(v_a) [ v_a > 0 ]
+eval_rec_if.else_in(v_a) -> eval_rec_start(v_a - 1)
+eval_rec_if.else_in(v_a) -> eval_rec_while.cond_in(nondef.0)
+eval_rec_while.cond_in(v_rescopy.0) -> eval_rec_while.body_in(v_rescopy.0) [ v_rescopy.0 > 0 ]
+eval_rec_while.cond_in(v_rescopy.0) -> eval_rec_while.end_in() [ v_rescopy.0 <= 0 ]
+eval_rec_while.body_in(v_rescopy.0) -> eval_rec_while.cond_in(v_rescopy.0 - 1)
+eval_rec_while.end_in() -> eval_rec_return_in()
+eval_rec_return_in() -> eval_rec_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_entry_in()
+eval_main_entry_in() -> eval_main_while.end_in()
+eval_main_entry_in() -> eval_main_if.end_in()
+eval_main_if.end_in() -> eval_main_while.cond_in(nondef.1)
+eval_main_while.cond_in(v_call1) -> eval_main_while.cond_in(v_call1) [ v_call1 < 1 ]
+eval_main_while.cond_in(v_call1) -> eval_main_while.end_in() [ v_call1 >= 1 ]
+eval_main_while.end_in() -> eval_main_stop()

@@ -1,0 +1,52 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_for.cond_in(1, 1, 0)
+	eval_main_entry_in() -> eval_main_return_in()
+	eval_main_entry_in() -> eval_main_for.cond_in(1, nondef.1, 0) [ nondef.1 >= 1 ]
+	eval_main_entry_in() -> eval_main_for.cond_in(nondef.0, 1, 0) [ nondef.0 >= 1 ]
+	eval_main_entry_in() -> eval_main_for.cond_in(nondef.0, nondef.1, 0) [ nondef.0 >= 1 /\ nondef.1 >= 1 ]
+	eval_main_for.cond_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.body_in(v_.call, v_fac.0, v_i.0) [ v_i.0 < v_.call ]
+	eval_main_for.cond_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.end_in(v_.call, v_fac.0, v_i.0) [ v_i.0 >= v_.call ]
+	eval_main_for.body_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond_in(v_.call, v_fac.0, v_i.0 + 1)
+	eval_main_for.end_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, 0) [ v_i.0 = 0 ]
+	eval_main_for.end_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, 0) [ v_.call = 1 ]
+	eval_main_for.end_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, 0) [ v_.call = -1 ]
+	eval_main_for.end_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, 0) [ v_.call > 1 /\ v_i.0 > 0 /\ nondef.3 >= 0 /\ nondef.3 < v_.call ]
+	eval_main_for.end_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, 0) [ v_.call > 1 /\ v_i.0 < 0 /\ nondef.3 <= 0 /\ nondef.3 > -v_.call ]
+	eval_main_for.end_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, 0) [ v_.call < -1 /\ v_i.0 > 0 /\ nondef.3 >= 0 /\ nondef.3 < -v_.call ]
+	eval_main_for.end_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, 0) [ v_.call < -1 /\ v_i.0 < 0 /\ nondef.3 <= 0 /\ nondef.3 > v_.call ]
+	eval_main_for.cond.14_in(v_.call, v_fac.0, v_j.0) -> eval_main_for.body.18_in(v_.call, v_fac.0, v_j.0) [ v_j.0 < v_.call*v_fac.0 ]
+	eval_main_for.cond.14_in(v_.call, v_fac.0, v_j.0) -> eval_main_return_in() [ v_j.0 >= v_.call*v_fac.0 ]
+	eval_main_for.body.18_in(v_.call, v_fac.0, v_j.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, v_j.0 + 1)
+	eval_main_return_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_main_for.cond.14_in(v_.call, v_fac.0, v_j.0) -> eval_main_for.body.18_in(v_.call, v_fac.0, v_j.0) [ v_j.0 < v_.call*v_fac.0 ]
+	eval_main_for.body.18_in(v_.call, v_fac.0, v_j.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, v_j.0 + 1)
+
+3:	eval_main_for.cond_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.body_in(v_.call, v_fac.0, v_i.0) [ v_i.0 < v_.call ]
+	eval_main_for.body_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond_in(v_.call, v_fac.0, v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_for.cond.14_in) = -2*X_3 + 2*X_1*X_2 + 1
+	Pol(eval_main_for.body.18_in) = -2*X_3 + 2*X_1*X_2
+removes the following rule from problem 2:
+	eval_main_for.cond.14_in(v_.call, v_fac.0, v_j.0) -> eval_main_for.body.18_in(v_.call, v_fac.0, v_j.0) [ v_j.0 < v_.call*v_fac.0 ]
+We thus obtain the following problem:
+4:	eval_main_for.body.18_in(v_.call, v_fac.0, v_j.0) -> eval_main_for.cond.14_in(v_.call, v_fac.0, v_j.0 + 1)
+
+The termination graph of problem 4 contains no nontrivial SCC.
+
+A polynomial interpretation with
+	Pol(eval_main_for.cond_in) = 2*X_1 - 2*X_3 + 1
+	Pol(eval_main_for.body_in) = 2*X_1 - 2*X_3
+removes the following rule from problem 3:
+	eval_main_for.cond_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.body_in(v_.call, v_fac.0, v_i.0) [ v_i.0 < v_.call ]
+We thus obtain the following problem:
+5:	eval_main_for.body_in(v_.call, v_fac.0, v_i.0) -> eval_main_for.cond_in(v_.call, v_fac.0, v_i.0 + 1)
+
+The termination graph of problem 5 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.895 sec (SMT: 0.876 sec)

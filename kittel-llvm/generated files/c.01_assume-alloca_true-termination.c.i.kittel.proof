@@ -1,0 +1,118 @@
+Initial termination problem:
+1:	eval_test_fun_start(v_x, v_y) -> eval_test_fun_entry_in()
+	eval_test_fun_entry_in() -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.body_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.end.5_in()
+	eval_test_fun_while.body_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.body.3_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.end_in(v_5)
+	eval_test_fun_while.body.3_in(v_5) -> eval_test_fun_if.then_in()
+	eval_test_fun_while.body.3_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.then_in() -> eval_test_fun_return_in()
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.end.5_in() -> eval_test_fun_return_in()
+	eval_test_fun_return_in() -> eval_test_fun_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_test_fun_while.cond_in() -> eval_test_fun_while.body_in()
+	eval_test_fun_while.body_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.body.3_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.end_in(v_5)
+	eval_test_fun_while.body.3_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.end_in(v_5) -> eval_test_fun_while.cond_in()
+
+By chaining the rule eval_test_fun_while.cond_in() -> eval_test_fun_while.body_in() with all rule in problem 2, the following new rules are obtained:
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+We thus obtain the following problem:
+3:	eval_test_fun_while.body_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.body.3_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.end_in(v_5)
+	eval_test_fun_while.body.3_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.body.3_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.end_in(v_5)
+	eval_test_fun_while.body.3_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+
+By chaining the rule eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.body.3_in(v_5) with all rule in problem 4, the following new rules are obtained:
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+We thus obtain the following problem:
+5:	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.end_in(v_5)
+	eval_test_fun_while.body.3_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+
+By chaining the rule eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.end_in(v_5) with all rule in problem 6, the following new rules are obtained:
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.cond_in()
+We thus obtain the following problem:
+7:	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.cond_in()
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5)
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.cond_in()
+
+By chaining the rule eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond.1_in(v_5) with all rules in problem 8, the following new rules are obtained:
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond_in()
+We thus obtain the following problem:
+9:	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond_in()
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond_in()
+
+By chaining the rule eval_test_fun_while.cond_in() -> eval_test_fun_while.cond.1_in(nondef.1) with all rules in problem 10, the following new rules are obtained:
+	eval_test_fun_while.cond_in() -> eval_test_fun_if.end_in(nondef.1)
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond_in()
+We thus obtain the following problem:
+11:	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_while.cond.1_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_if.end_in(nondef.1)
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond_in()
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_test_fun_if.end_in(v_5) -> eval_test_fun_if.end_in(v_5)
+	eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond_in()
+	eval_test_fun_while.cond_in() -> eval_test_fun_if.end_in(nondef.1)
+	eval_test_fun_while.cond_in() -> eval_test_fun_while.cond_in()
+
+The following termination problem could not be handled:
+eval_test_fun_if.end_in(v_5) -> eval_test_fun_if.end_in(v_5)
+eval_test_fun_if.end_in(v_5) -> eval_test_fun_while.cond_in()
+eval_test_fun_while.cond_in() -> eval_test_fun_if.end_in(nondef.1)
+eval_test_fun_while.cond_in() -> eval_test_fun_while.cond_in()
+
+Time: 0.999 sec (SMT: 0.966 sec)

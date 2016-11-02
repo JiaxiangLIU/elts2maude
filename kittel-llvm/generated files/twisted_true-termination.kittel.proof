@@ -1,0 +1,166 @@
+Initial termination problem:
+1:	eval_f_start(v_k, v_l) -> eval_f_entry_in(v_k, v_l)
+	eval_f_entry_in(v_k, v_l) -> eval_f_L1_in(v_k, v_l, 0, 0)
+	eval_f_L1_in(v_k, v_l, v_j.0, v_i.0) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.0)
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1) [ v_i.1 >= v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, 0, v_j.0) [ v_i.2 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 > 0 /\ nondef.1 >= 0 /\ nondef.1 < 2 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 < 0 /\ nondef.1 <= 0 /\ nondef.1 > -2 ]
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) [ v_j.1 < v_l ]
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.end.9_in() [ v_j.1 >= v_l ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_L1_in(v_k, v_l, v_j.1 + 1, v_i.2) [ v_rem5 = 0 ]
+	eval_f_while.end.9_in() -> eval_f_stop()
+	eval_main_start() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 > 0 ]
+We thus obtain the following problem:
+2:	eval_f_start(v_k, v_l) -> eval_f_entry_in(v_k, v_l)
+	eval_f_entry_in(v_k, v_l) -> eval_f_L1_in(v_k, v_l, 0, 0)
+	eval_f_L1_in(v_k, v_l, v_j.0, v_i.0) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.0)
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1) [ v_i.1 >= v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, 0, v_j.0) [ v_i.2 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 > 0 /\ nondef.1 >= 0 /\ nondef.1 < 2 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 < 0 /\ nondef.1 <= 0 /\ nondef.1 > -2 ]
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) [ v_j.1 < v_l ]
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.end.9_in() [ v_j.1 >= v_l ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_L1_in(v_k, v_l, v_j.1 + 1, v_i.2) [ v_rem5 = 0 ]
+	eval_f_while.end.9_in() -> eval_f_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_f_L1_in(v_k, v_l, v_j.0, v_i.0) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.0)
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1) [ v_i.1 >= v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, 0, v_j.0) [ v_i.2 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 > 0 /\ nondef.1 >= 0 /\ nondef.1 < 2 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 < 0 /\ nondef.1 <= 0 /\ nondef.1 > -2 ]
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) [ v_j.1 < v_l ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_L1_in(v_k, v_l, v_j.1 + 1, v_i.2) [ v_rem5 = 0 ]
+
+A polynomial interpretation with
+	Pol(eval_f_L1_in) = -5*X_4 - 9
+	Pol(eval_f_while.cond_in) = -5*X_5 - 9
+	Pol(eval_f_while.body_in) = -5*X_5 - 10
+	Pol(eval_f_L2_in) = -5*X_6 - 9
+	Pol(eval_f_while.cond.1_in) = -5*X_6 - 9
+	Pol(eval_f_while.body.3_in) = -5*X_6 - 9
+removes the following rule from problem 3:
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 = 0 ]
+We thus obtain the following problem:
+4:	eval_f_L1_in(v_k, v_l, v_j.0, v_i.0) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.0)
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1) [ v_i.1 >= v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, 0, v_j.0) [ v_i.2 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 > 0 /\ nondef.1 >= 0 /\ nondef.1 < 2 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 < 0 /\ nondef.1 <= 0 /\ nondef.1 > -2 ]
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) [ v_j.1 < v_l ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_L1_in(v_k, v_l, v_j.1 + 1, v_i.2) [ v_rem5 = 0 ]
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_f_L1_in(v_k, v_l, v_j.0, v_i.0) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.0)
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1) [ v_i.1 >= v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, 0, v_j.0) [ v_i.2 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 > 0 /\ nondef.1 >= 0 /\ nondef.1 < 2 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 < 0 /\ nondef.1 <= 0 /\ nondef.1 > -2 ]
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) [ v_j.1 < v_l ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_L1_in(v_k, v_l, v_j.1 + 1, v_i.2) [ v_rem5 = 0 ]
+
+A polynomial interpretation with
+	Pol(eval_f_L1_in) = 5*X_2 - 5*X_3 - 1
+	Pol(eval_f_while.cond_in) = 5*X_2 - 5*X_3 - 2
+	Pol(eval_f_while.body_in) = 5*X_2 - 5*X_3 - 2
+	Pol(eval_f_L2_in) = 5*X_2 - 5*X_3 - 3
+	Pol(eval_f_while.cond.1_in) = 5*X_2 - 5*X_8 - 4
+	Pol(eval_f_while.body.3_in) = 5*X_2 - 5*X_8 - 5
+removes the following rule from problem 5:
+	eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) [ v_j.1 < v_l ]
+We thus obtain the following problem:
+6:	eval_f_L1_in(v_k, v_l, v_j.0, v_i.0) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.0)
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1) [ v_i.1 >= v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 = 0 /\ nondef.0 = 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, 0, v_j.0) [ v_i.2 = 0 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 > 0 /\ nondef.1 >= 0 /\ nondef.1 < 2 ]
+	eval_f_L2_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, nondef.1, v_j.0) [ v_i.2 < 0 /\ nondef.1 <= 0 /\ nondef.1 > -2 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_while.cond.1_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1 + 1) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_k, v_l, v_j.0, v_i.0, v_i.1, v_i.2, v_rem5, v_j.1) -> eval_f_L1_in(v_k, v_l, v_j.1 + 1, v_i.2) [ v_rem5 = 0 ]
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+
+A polynomial interpretation with
+	Pol(eval_f_while.cond_in) = -2*X_5 + 1
+	Pol(eval_f_while.body_in) = -2*X_5
+removes the following rule from problem 7:
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 < 0 /\ nondef.0 <= 0 /\ nondef.0 > -2 /\ nondef.0 < 0 ]
+We thus obtain the following problem:
+8:	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+
+A polynomial interpretation with
+	Pol(eval_f_while.cond_in) = 2*X_1 - 2*X_5 + 1
+	Pol(eval_f_while.body_in) = 2*X_1 - 2*X_5
+removes the following rule from problem 9:
+	eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) [ v_i.1 < v_k ]
+We thus obtain the following problem:
+10:	eval_f_while.body_in(v_k, v_l, v_j.0, v_i.0, v_i.1) -> eval_f_while.cond_in(v_k, v_l, v_j.0, v_i.0, v_i.1 + 1) [ v_i.1 + 1 > 0 /\ nondef.0 >= 0 /\ nondef.0 < 2 /\ nondef.0 > 0 ]
+
+The termination graph of problem 10 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 1.131 sec (SMT: 1.093 sec)

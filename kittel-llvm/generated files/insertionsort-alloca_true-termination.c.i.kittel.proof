@@ -1,0 +1,63 @@
+Initial termination problem:
+1:	eval_insertionSort_start(v_array_size) -> eval_insertionSort_entry_in(v_array_size)
+	eval_insertionSort_entry_in(v_array_size) -> eval_insertionSort_for.cond_in(v_array_size, 1)
+	eval_insertionSort_for.cond_in(v_array_size, v_i.0) -> eval_insertionSort_for.body_in(v_array_size, v_i.0) [ v_i.0 < v_array_size ]
+	eval_insertionSort_for.cond_in(v_array_size, v_i.0) -> eval_insertionSort_for.end.15_in() [ v_i.0 >= v_array_size ]
+	eval_insertionSort_for.body_in(v_array_size, v_i.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, nondef.0, v_i.0)
+	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 > 0 ]
+	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 <= 0 ]
+	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0 - 1)
+	eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond_in(v_array_size, v_i.0 + 1)
+	eval_insertionSort_for.end.15_in() -> eval_insertionSort_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_insertionSort_for.cond_in(v_array_size, v_i.0) -> eval_insertionSort_for.body_in(v_array_size, v_i.0) [ v_i.0 < v_array_size ]
+	eval_insertionSort_for.body_in(v_array_size, v_i.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, nondef.0, v_i.0)
+	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 > 0 ]
+	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 <= 0 ]
+	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0 - 1)
+	eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond_in(v_array_size, v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_insertionSort_for.cond_in) = X_1 - X_2 - 1
+	Pol(eval_insertionSort_for.body_in) = X_1 - X_2 - 2
+	Pol(eval_insertionSort_for.cond.1_in) = X_1 - X_2 - 2
+	Pol(eval_insertionSort_land.rhs_in) = X_1 - X_2 - 2
+	Pol(eval_insertionSort_for.end_in) = X_1 - X_2 - 2
+	Pol(eval_insertionSort_for.body.6_in) = X_1 - X_2 - 2
+removes the following rule from problem 2:
+	eval_insertionSort_for.cond_in(v_array_size, v_i.0) -> eval_insertionSort_for.body_in(v_array_size, v_i.0) [ v_i.0 < v_array_size ]
+We thus obtain the following problem:
+3:	eval_insertionSort_for.body_in(v_array_size, v_i.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, nondef.0, v_i.0)
+	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 > 0 ]
+	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 <= 0 ]
+	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0 - 1)
+	eval_insertionSort_for.end_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond_in(v_array_size, v_i.0 + 1)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 > 0 ]
+	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0 - 1)
+
+A polynomial interpretation with
+	Pol(eval_insertionSort_for.cond.1_in) = 3*X_4
+	Pol(eval_insertionSort_land.rhs_in) = 3*X_4 - 1
+	Pol(eval_insertionSort_for.body.6_in) = 3*X_4 - 2
+removes the following rule from problem 4:
+	eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) [ v_j.0 > 0 ]
+We thus obtain the following problem:
+5:	eval_insertionSort_land.rhs_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0)
+	eval_insertionSort_for.body.6_in(v_array_size, v_i.0, v_0, v_j.0) -> eval_insertionSort_for.cond.1_in(v_array_size, v_i.0, v_0, v_j.0 - 1)
+
+The termination graph of problem 5 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.413 sec (SMT: 0.403 sec)

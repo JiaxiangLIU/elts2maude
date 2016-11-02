@@ -1,0 +1,300 @@
+Initial termination problem:
+1:	eval_f_start(v_k, v_l) -> eval_f_entry_in()
+	eval_f_entry_in() -> eval_f_while.cond_in(nondef.0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.body_in(v_8)
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8)
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 = 0 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 = 0 /\ nondef.4 > 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 > 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.end.9_in()
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.end.9_in() -> eval_f_stop()
+	eval_main_start() -> eval_main_stop()
+
+Testing for unsatisfiable constraints removes the following rules from problem 1:
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 = 0 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 = 0 /\ nondef.4 > 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 > 0 ]
+We thus obtain the following problem:
+2:	eval_f_start(v_k, v_l) -> eval_f_entry_in()
+	eval_f_entry_in() -> eval_f_while.cond_in(nondef.0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.body_in(v_8)
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8)
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.end.9_in()
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.end.9_in() -> eval_f_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 2 contains 1 nontrivial SCC:
+3:	eval_f_while.cond_in(v_8) -> eval_f_while.body_in(v_8)
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8)
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+
+By chaining the rule eval_f_while.cond_in(v_8) -> eval_f_while.body_in(v_8) with all rules in problem 3, the following new rules are obtained:
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+We thus obtain the following problem:
+4:	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8)
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.body_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+
+The termination graph of problem 4 contains 1 nontrivial SCC:
+5:	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+
+By chaining the rule eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) with all rules in problem 5, the following new rules are obtained:
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+We thus obtain the following problem:
+6:	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+
+The termination graph of problem 6 contains 1 nontrivial SCC:
+7:	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+
+By chaining the rule eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, 0) with all rule in problem 7, the following new rules are obtained:
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+We thus obtain the following problem:
+8:	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+
+The termination graph of problem 8 contains 1 nontrivial SCC:
+9:	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+
+By chaining the rule eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ] with all rule in problem 9, the following new rules are obtained:
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+We thus obtain the following problem:
+10:	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+
+The termination graph of problem 10 contains 1 nontrivial SCC:
+11:	eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+
+By chaining the rule eval_f_L2_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ] with all rule in problem 11, the following new rules are obtained:
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+We thus obtain the following problem:
+12:	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+
+The termination graph of problem 12 contains 1 nontrivial SCC:
+13:	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5)
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+
+By chaining the rule eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.body.3_in(v_8, v_rem5) with all rules in problem 13, the following new rules are obtained:
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+We thus obtain the following problem:
+14:	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+
+The termination graph of problem 14 contains 3 nontrivial SCCs:
+15:	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+
+16:	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 > 0 ]
+
+17:	eval_f_while.body.3_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 > 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 < 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 >= 0 /\ nondef.4 < 2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_L2_in(v_8) [ nondef.4 <= 0 /\ nondef.4 > -2 /\ nondef.4 = 0 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, 0)
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_while.cond_in(v_8) -> eval_f_while.cond.1_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, 0)
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 >= 0 /\ nondef.6 < 2 ]
+	eval_f_L2_in(v_8) -> eval_f_while.body.3_in(v_8, nondef.6) [ nondef.6 <= 0 /\ nondef.6 > -2 ]
+	eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond_in(v_8) [ v_rem5 = 0 ]
+
+The following termination problem could not be handled:
+eval_f_while.cond.1_in(v_8, v_rem5) -> eval_f_while.cond.1_in(v_8, v_rem5) [ v_rem5 < 0 ]
+
+Time: 2.896 sec (SMT: 2.811 sec)

@@ -1,0 +1,40 @@
+Initial termination problem:
+1:	eval_strchr_start(v_c) -> eval_strchr_entry_in(v_c)
+	eval_strchr_entry_in(v_c) -> eval_strchr_for.cond_in(v_c)
+	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_return_in()
+	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end_in(v_conv2)
+	eval_strchr_if.end_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+	eval_strchr_if.end_in(v_conv2) -> eval_strchr_return_in()
+	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_for.cond_in(v_conv2)
+	eval_strchr_return_in() -> eval_strchr_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end_in(v_conv2)
+	eval_strchr_if.end_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_for.cond_in(v_conv2)
+
+By chaining the rule eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end_in(v_conv2) with all rule in problem 2, the following new rules are obtained:
+	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+We thus obtain the following problem:
+3:	eval_strchr_if.end_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_for.cond_in(v_conv2)
+	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_for.cond_in(v_conv2)
+	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+
+By chaining the rule eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_for.cond_in(v_conv2) with all rule in problem 4, the following new rules are obtained:
+	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+We thus obtain the following problem:
+5:	eval_strchr_for.cond_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+
+The following termination problem could not be handled:
+eval_strchr_if.end.5_in(v_conv2) -> eval_strchr_if.end.5_in(v_conv2)
+
+Time: 0.434 sec (SMT: 0.419 sec)

@@ -1,0 +1,9 @@
+///*** 1_f ***///
+eval_f_start(v_x, v_y) -> eval_f_entry_in()
+eval_f_entry_in() -> eval_f_while.cond_in(nondef.0)
+eval_f_while.cond_in(v_8) -> eval_f_while.body_in(v_8)
+eval_f_while.cond_in(v_8) -> eval_f_while.end_in()
+eval_f_while.body_in(v_8) -> eval_f_while.cond_in(v_8)
+eval_f_while.end_in() -> eval_f_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

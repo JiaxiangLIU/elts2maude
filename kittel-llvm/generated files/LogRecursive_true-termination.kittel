@@ -1,0 +1,22 @@
+///*** 1_log ***///
+eval_log_start(v_x, v_y) -> eval_log_entry_in(v_x, v_y)
+eval_log_entry_in(v_x, v_y) -> eval_log_if.then_in(v_x, v_y) [ v_x >= v_y /\ v_y > 1 ]
+eval_log_entry_in(v_x, v_y) -> eval_log_return_in() [ v_x < v_y ]
+eval_log_entry_in(v_x, v_y) -> eval_log_return_in() [ v_y <= 1 ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_start(nondef.0, v_y) [ v_x = 0 /\ nondef.0 = 0 ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_start(nondef.0, v_y) [ v_y = 1 /\ nondef.0 = v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_start(nondef.0, v_y) [ v_y = -1 /\ nondef.0 = -v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_start(nondef.0, v_y) [ v_y > 1 /\ v_x > 0 /\ nondef.0 >= 0 /\ nondef.0 < v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_start(nondef.0, v_y) [ v_y > 1 /\ v_x < 0 /\ nondef.0 <= 0 /\ nondef.0 > v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_start(nondef.0, v_y) [ v_y < -1 /\ v_x > 0 /\ nondef.0 <= 0 /\ nondef.0 > -v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_start(nondef.0, v_y) [ v_y < -1 /\ v_x < 0 /\ nondef.0 >= 0 /\ nondef.0 < -v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_return_in() [ v_x = 0 ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_return_in() [ v_y = 1 ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_return_in() [ v_y = -1 ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_return_in() [ v_y > 1 /\ v_x > 0 /\ nondef.0 >= 0 /\ nondef.0 < v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_return_in() [ v_y > 1 /\ v_x < 0 /\ nondef.0 <= 0 /\ nondef.0 > v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_return_in() [ v_y < -1 /\ v_x > 0 /\ nondef.0 <= 0 /\ nondef.0 > -v_x ]
+eval_log_if.then_in(v_x, v_y) -> eval_log_return_in() [ v_y < -1 /\ v_x < 0 /\ nondef.0 >= 0 /\ nondef.0 < -v_x ]
+eval_log_return_in() -> eval_log_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

@@ -1,0 +1,26 @@
+Initial termination problem:
+1:	eval_sumOfThirdBytes_start(v_array_size) -> eval_sumOfThirdBytes_entry_in(v_array_size)
+	eval_sumOfThirdBytes_entry_in(v_array_size) -> eval_sumOfThirdBytes_for.cond_in(v_array_size, 0)
+	eval_sumOfThirdBytes_for.cond_in(v_array_size, v_i.0) -> eval_sumOfThirdBytes_for.body_in(v_array_size, v_i.0) [ v_i.0 < v_array_size ]
+	eval_sumOfThirdBytes_for.cond_in(v_array_size, v_i.0) -> eval_sumOfThirdBytes_for.end_in() [ v_i.0 >= v_array_size ]
+	eval_sumOfThirdBytes_for.body_in(v_array_size, v_i.0) -> eval_sumOfThirdBytes_for.cond_in(v_array_size, v_i.0 + 1)
+	eval_sumOfThirdBytes_for.end_in() -> eval_sumOfThirdBytes_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_sumOfThirdBytes_for.cond_in(v_array_size, v_i.0) -> eval_sumOfThirdBytes_for.body_in(v_array_size, v_i.0) [ v_i.0 < v_array_size ]
+	eval_sumOfThirdBytes_for.body_in(v_array_size, v_i.0) -> eval_sumOfThirdBytes_for.cond_in(v_array_size, v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_sumOfThirdBytes_for.cond_in) = 2*X_1 - 2*X_2
+	Pol(eval_sumOfThirdBytes_for.body_in) = 2*X_1 - 2*X_2 - 1
+removes the following rule from problem 2:
+	eval_sumOfThirdBytes_for.cond_in(v_array_size, v_i.0) -> eval_sumOfThirdBytes_for.body_in(v_array_size, v_i.0) [ v_i.0 < v_array_size ]
+We thus obtain the following problem:
+3:	eval_sumOfThirdBytes_for.body_in(v_array_size, v_i.0) -> eval_sumOfThirdBytes_for.cond_in(v_array_size, v_i.0 + 1)
+
+The termination graph of problem 3 contains no nontrivial SCC.
+
+Termination successfully shown!
+
+Time: 0.196 sec (SMT: 0.192 sec)

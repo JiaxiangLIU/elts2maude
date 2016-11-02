@@ -1,0 +1,16 @@
+///*** 1_addition ***///
+eval_addition_start(v_m, v_n) -> eval_addition_entry_in(v_m, v_n)
+eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end.9_in() [ v_n = 0 ]
+eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n < 0 ]
+eval_addition_entry_in(v_m, v_n) -> eval_addition_if.end_in(v_m, v_n) [ v_n > 0 ]
+eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.then.2_in(v_m, v_n) [ v_n > 0 ]
+eval_addition_if.end_in(v_m, v_n) -> eval_addition_if.end.3_in(v_m, v_n) [ v_n <= 0 ]
+eval_addition_if.then.2_in(v_m, v_n) -> eval_addition_start(v_m + 1, v_n - 1)
+eval_addition_if.then.2_in(v_m, v_n) -> eval_addition_if.end.9_in()
+eval_addition_if.end.3_in(v_m, v_n) -> eval_addition_if.then.5_in(v_m, v_n) [ v_n < 0 ]
+eval_addition_if.end.3_in(v_m, v_n) -> eval_addition_if.end.9_in() [ v_n >= 0 ]
+eval_addition_if.then.5_in(v_m, v_n) -> eval_addition_start(v_m - 1, v_n + 1)
+eval_addition_if.then.5_in(v_m, v_n) -> eval_addition_if.end.9_in()
+eval_addition_if.end.9_in() -> eval_addition_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

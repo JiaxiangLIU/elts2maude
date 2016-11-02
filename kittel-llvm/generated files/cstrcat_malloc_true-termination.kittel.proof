@@ -1,0 +1,21 @@
+Initial termination problem:
+1:	eval_cstrcat_start() -> eval_cstrcat_entry_in()
+	eval_cstrcat_entry_in() -> eval_cstrcat_while.cond_in()
+	eval_cstrcat_while.cond_in() -> eval_cstrcat_while.body_in()
+	eval_cstrcat_while.cond_in() -> eval_cstrcat_while.cond.2_in()
+	eval_cstrcat_while.body_in() -> eval_cstrcat_while.cond_in()
+	eval_cstrcat_while.cond.2_in() -> eval_cstrcat_while.cond.2_in()
+	eval_cstrcat_while.cond.2_in() -> eval_cstrcat_while.end.9_in()
+	eval_cstrcat_while.end.9_in() -> eval_cstrcat_stop()
+	eval_main_start() -> eval_main_stop()
+
+The termination graph of problem 1 contains 2 nontrivial SCCs:
+2:	eval_cstrcat_while.cond.2_in() -> eval_cstrcat_while.cond.2_in()
+
+3:	eval_cstrcat_while.cond_in() -> eval_cstrcat_while.body_in()
+	eval_cstrcat_while.body_in() -> eval_cstrcat_while.cond_in()
+
+The following termination problem could not be handled:
+eval_cstrcat_while.cond.2_in() -> eval_cstrcat_while.cond.2_in()
+
+Time: 0.291 sec (SMT: 0.286 sec)

@@ -1,0 +1,11 @@
+///*** 1_loop ***///
+eval_loop_start(v_a, v_b) -> eval_loop_entry_in(v_a, v_b)
+eval_loop_entry_in(v_a, v_b) -> eval_loop_if.then_in(v_a, v_b) [ v_a > v_b ]
+eval_loop_entry_in(v_a, v_b) -> eval_loop_if.end_in() [ v_a <= v_b ]
+eval_loop_if.then_in(v_a, v_b) -> eval_loop_start(v_a + 1, v_b + v_a)
+eval_loop_if.then_in(v_a, v_b) -> eval_loop_if.end_in()
+eval_loop_if.end_in() -> eval_loop_stop()
+///*** 2_random ***///
+eval_random_start() -> eval_random_stop()
+///*** 3_main ***///
+eval_main_start() -> eval_main_stop()

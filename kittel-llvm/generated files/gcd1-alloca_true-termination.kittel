@@ -1,0 +1,18 @@
+///*** 1_gcd ***///
+eval_gcd_start(v_x, v_y) -> eval_gcd_entry_in()
+eval_gcd_entry_in() -> eval_gcd_if.then_in()
+eval_gcd_entry_in() -> eval_gcd_if.end_in()
+eval_gcd_if.then_in() -> eval_gcd_if.end_in()
+eval_gcd_if.end_in() -> eval_gcd_if.then.2_in()
+eval_gcd_if.end_in() -> eval_gcd_while.cond_in()
+eval_gcd_if.then.2_in() -> eval_gcd_while.cond_in()
+eval_gcd_while.cond_in() -> eval_gcd_while.body_in()
+eval_gcd_while.cond_in() -> eval_gcd_while.end.10_in()
+eval_gcd_while.body_in() -> eval_gcd_while.cond.6_in(nondef.6)
+eval_gcd_while.cond.6_in(v_12) -> eval_gcd_while.body.8_in(v_12)
+eval_gcd_while.cond.6_in(v_12) -> eval_gcd_while.end_in(v_12)
+eval_gcd_while.body.8_in(v_12) -> eval_gcd_while.cond.6_in(v_12)
+eval_gcd_while.end_in(v_12) -> eval_gcd_while.cond_in()
+eval_gcd_while.end.10_in() -> eval_gcd_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

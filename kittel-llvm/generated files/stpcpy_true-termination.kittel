@@ -1,0 +1,8 @@
+///*** 1_stpcpy ***///
+eval_stpcpy_start() -> eval_stpcpy_entry_in()
+eval_stpcpy_entry_in() -> eval_stpcpy_while.cond_in()
+eval_stpcpy_while.cond_in() -> eval_stpcpy_while.cond_in()
+eval_stpcpy_while.cond_in() -> eval_stpcpy_while.end_in()
+eval_stpcpy_while.end_in() -> eval_stpcpy_stop()
+///*** 2_main ***///
+eval_main_start() -> eval_main_stop()

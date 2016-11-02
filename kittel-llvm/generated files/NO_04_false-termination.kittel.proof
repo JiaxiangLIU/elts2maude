@@ -1,0 +1,199 @@
+Initial termination problem:
+1:	eval_main_start() -> eval_main_entry_in()
+	eval_main_entry_in() -> eval_main_while.cond_in(0)
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 100 ]
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.end.29_in() [ v_i.0 >= 100 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond.1_in(v_i.0, v_i.0 + 2, 0)
+	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.body.3_in(v_i.0, v_add, v_j.0) [ v_j.0 < v_add ]
+	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.end.27_in(v_i.0, v_add, v_j.0) [ v_j.0 >= v_add ]
+	eval_main_while.body.3_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_i.0 + v_j.0 + 3)
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 >= 0 ]
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 < 0 ]
+	eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_i.0 + v_j.0 + v_k.0 + 4, 0)
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 >= v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+	eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0 - 1)
+	eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.1_in(v_i.0, v_add, v_j.0 + 1)
+	eval_main_while.end.27_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+	eval_main_while.end.29_in() -> eval_main_stop()
+
+The termination graph of problem 1 contains 1 nontrivial SCC:
+2:	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 100 ]
+	eval_main_while.body_in(v_i.0) -> eval_main_while.cond.1_in(v_i.0, v_i.0 + 2, 0)
+	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.body.3_in(v_i.0, v_add, v_j.0) [ v_j.0 < v_add ]
+	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.end.27_in(v_i.0, v_add, v_j.0) [ v_j.0 >= v_add ]
+	eval_main_while.body.3_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_i.0 + v_j.0 + 3)
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 >= 0 ]
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 < 0 ]
+	eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_i.0 + v_j.0 + v_k.0 + 4, 0)
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 >= v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+	eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0 - 1)
+	eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.1_in(v_i.0, v_add, v_j.0 + 1)
+	eval_main_while.end.27_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond_in) = -X_1 + 99
+	Pol(eval_main_while.body_in) = -X_1 + 98
+	Pol(eval_main_while.cond.1_in) = -X_1 + 98
+	Pol(eval_main_while.body.3_in) = -X_1 + 98
+	Pol(eval_main_while.end.27_in) = -X_1 + 98
+	Pol(eval_main_while.cond.6_in) = -X_1 + 98
+	Pol(eval_main_while.body.8_in) = -X_1 + 98
+	Pol(eval_main_while.end.25_in) = -X_1 + 98
+	Pol(eval_main_while.cond.12_in) = -X_1 + 98
+	Pol(eval_main_while.body.14_in) = -X_1 + 98
+	Pol(eval_main_while.end.23_in) = -X_1 + 98
+	Pol(eval_main_while.cond.19_in) = -X_1 + 98
+	Pol(eval_main_while.body.21_in) = -X_1 + 98
+	Pol(eval_main_while.end_in) = -X_1 + 98
+removes the following rule from problem 2:
+	eval_main_while.cond_in(v_i.0) -> eval_main_while.body_in(v_i.0) [ v_i.0 < 100 ]
+We thus obtain the following problem:
+3:	eval_main_while.body_in(v_i.0) -> eval_main_while.cond.1_in(v_i.0, v_i.0 + 2, 0)
+	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.body.3_in(v_i.0, v_add, v_j.0) [ v_j.0 < v_add ]
+	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.end.27_in(v_i.0, v_add, v_j.0) [ v_j.0 >= v_add ]
+	eval_main_while.body.3_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_i.0 + v_j.0 + 3)
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 >= 0 ]
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 < 0 ]
+	eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_i.0 + v_j.0 + v_k.0 + 4, 0)
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 >= v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+	eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0 - 1)
+	eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.1_in(v_i.0, v_add, v_j.0 + 1)
+	eval_main_while.end.27_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond_in(v_i.0 + 1)
+
+The termination graph of problem 3 contains 1 nontrivial SCC:
+4:	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.body.3_in(v_i.0, v_add, v_j.0) [ v_j.0 < v_add ]
+	eval_main_while.body.3_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_i.0 + v_j.0 + 3)
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 >= 0 ]
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 < 0 ]
+	eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_i.0 + v_j.0 + v_k.0 + 4, 0)
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 >= v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+	eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0 - 1)
+	eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.1_in(v_i.0, v_add, v_j.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.1_in) = X_2 - X_3 + 1
+	Pol(eval_main_while.body.3_in) = X_2 - X_3
+	Pol(eval_main_while.cond.6_in) = X_2 - X_3
+	Pol(eval_main_while.body.8_in) = X_2 - X_3
+	Pol(eval_main_while.end.25_in) = X_2 - X_3
+	Pol(eval_main_while.cond.12_in) = X_2 - X_3
+	Pol(eval_main_while.body.14_in) = X_2 - X_3
+	Pol(eval_main_while.end.23_in) = X_2 - X_3
+	Pol(eval_main_while.cond.19_in) = X_2 - X_3
+	Pol(eval_main_while.body.21_in) = X_2 - X_3
+	Pol(eval_main_while.end_in) = X_2 - X_3
+removes the following rule from problem 4:
+	eval_main_while.cond.1_in(v_i.0, v_add, v_j.0) -> eval_main_while.body.3_in(v_i.0, v_add, v_j.0) [ v_j.0 < v_add ]
+We thus obtain the following problem:
+5:	eval_main_while.body.3_in(v_i.0, v_add, v_j.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_i.0 + v_j.0 + 3)
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 >= 0 ]
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 < 0 ]
+	eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_i.0 + v_j.0 + v_k.0 + 4, 0)
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 >= v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+	eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0 - 1)
+	eval_main_while.end.25_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.1_in(v_i.0, v_add, v_j.0 + 1)
+
+The termination graph of problem 5 contains 1 nontrivial SCC:
+6:	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 >= 0 ]
+	eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_i.0 + v_j.0 + v_k.0 + 4, 0)
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 >= v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+	eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0 - 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.6_in) = 4*X_4 + 3
+	Pol(eval_main_while.body.8_in) = 4*X_4 + 2
+	Pol(eval_main_while.cond.12_in) = 4*X_4 + 1
+	Pol(eval_main_while.body.14_in) = 4*X_4 + 1
+	Pol(eval_main_while.end.23_in) = 4*X_4
+	Pol(eval_main_while.cond.19_in) = 4*X_4 + 1
+	Pol(eval_main_while.body.21_in) = 4*X_4 + 1
+	Pol(eval_main_while.end_in) = 4*X_4 + 1
+removes the following rule from problem 6:
+	eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) [ v_k.0 >= 0 ]
+We thus obtain the following problem:
+7:	eval_main_while.body.8_in(v_i.0, v_add, v_j.0, v_k.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_i.0 + v_j.0 + v_k.0 + 4, 0)
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 >= v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+	eval_main_while.end.23_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.6_in(v_i.0, v_add, v_j.0, v_k.0 - 1)
+
+The termination graph of problem 7 contains 1 nontrivial SCC:
+8:	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+
+A polynomial interpretation with
+	Pol(eval_main_while.cond.12_in) = X_5 - X_6
+	Pol(eval_main_while.body.14_in) = X_5 - X_6 - 1
+	Pol(eval_main_while.cond.19_in) = X_5 - X_6 - 1
+	Pol(eval_main_while.body.21_in) = X_5 - X_6 - 1
+	Pol(eval_main_while.end_in) = X_5 - X_6 - 1
+removes the following rule from problem 8:
+	eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) [ v_l.0 < v_add11 ]
+We thus obtain the following problem:
+9:	eval_main_while.body.14_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_i.0 + v_j.0 + v_k.0 + v_l.0 + 1000)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 < 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.end_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.12_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0 + 1)
+
+The termination graph of problem 9 contains 1 nontrivial SCC:
+10:	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+
+By chaining the rule eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ] with all rule in problem 10, the following new rules are obtained:
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+We thus obtain the following problem:
+11:	eval_main_while.body.21_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0)
+	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+
+The termination graph of problem 11 contains 1 nontrivial SCC:
+12:	eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+
+The following termination problem could not be handled:
+eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) -> eval_main_while.cond.19_in(v_i.0, v_add, v_j.0, v_k.0, v_add11, v_l.0, v_m.0) [ v_m.0 >= 0 ]
+
+Time: 0.921 sec (SMT: 0.873 sec)
