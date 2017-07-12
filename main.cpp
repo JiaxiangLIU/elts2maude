@@ -271,27 +271,41 @@ int main() {
     }
 
 
-    for (j = 0; j < moduleDeclarations.size(); j++)
-        cout << moduleDeclarations[j] << endl;
-    cout << endl;
-    for (j = 0; j < variableDeclarations.size(); j++)
-        cout << variableDeclarations[j] << endl;
-    cout << endl;
-    for (j = 0; j < locationDeclarations.size(); j++)
-        cout << locationDeclarations[j] << endl;
-    cout << endl;
-    for (j = 0; j < initialStateDeclaration.size(); j++)
-        cout << initialStateDeclaration[j] << endl;
-    cout << endl;
-    for (j = 0; j < maudeVarDeclarations.size(); j++)
-        cout << maudeVarDeclarations[j] << endl;
-    cout << endl;
-    for (j = 0; j < ruleDeclarations.size(); j++)
-        cout << ruleDeclarations[j] << endl;
+    // Generate the maude model to a maude file
+    ofstream out("result.maude");
+    if (out.is_open()) {
+        out << "(omod SYSTEM is protecting MODULE . " << endl << endl;
 
-    cout << endl;
-    cout << result << endl;
-    cout << "done" << endl;
+        for (j = 0; j < moduleDeclarations.size(); j++)
+            out << "  " << moduleDeclarations[j] << endl;
+        out << endl;
+
+        for (j = 0; j < variableDeclarations.size(); j++)
+            out << "  " << variableDeclarations[j] << endl;
+        out << endl;
+
+        for (j = 0; j < locationDeclarations.size(); j++)
+            out << "  " << locationDeclarations[j] << endl;
+        out << endl;
+
+        for (j = 0; j < initialStateDeclaration.size(); j++)
+            out << "  " << initialStateDeclaration[j] << endl;
+        out << endl;
+
+        for (j = 0; j < maudeVarDeclarations.size(); j++)
+            out << "  " << maudeVarDeclarations[j] << endl;
+        out << endl;
+
+        for (j = 0; j < ruleDeclarations.size(); j++)
+            out << "  " << ruleDeclarations[j] << endl;
+
+        out << "endom)" << endl;
+
+        out.close();
+    }
+
+    cout << endl << result << endl;
+    cout << "Done" << endl;
 
     return 0;
 }
